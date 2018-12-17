@@ -29,14 +29,43 @@ span {
 }
 
 .outline {
-  width: 110px; 
   text-align: center; 
   padding: 10px; 
   margin: 10px; 
   background: #FFF; 
   color: #cc0033; 
-
   border: 1px solid black; 
+}
+.scene {
+  width: 120px; 
+  height: 180px; 
+  perspective: 360px; 
+}
+.card {
+  width: 100%; 
+  height: 100%; 
+  position: relative; 
+  transition: transform 1s; 
+  transform-style: preserve-3d; 
+}
+
+.card__face {
+  position: absolute; 
+  height: 100%; 
+  width: 100%; 
+  backface-visibility: hidden; 
+}
+
+.card__face--front {
+  background: white; 
+}
+.card__face--back {
+  background: blue; 
+  transform: rotateY(180deg); 
+}
+
+.card.is-flipped {
+  transform: rotateY(180deg); 
 }
 
 .top{ 
