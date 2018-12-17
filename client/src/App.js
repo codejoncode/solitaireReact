@@ -14,7 +14,7 @@ class App extends Component {
     //Step 1 of creating the game solitaire building a deck.
     const cards = [
       "A",
-      " 2",
+      "2",
       "3",
       "4",
       "5",
@@ -34,16 +34,16 @@ class App extends Component {
       for (let j = 0; j < cards.length; j++) {
         switch (i) {
           case 0:
-            deck.push({ hearts: cards[j] });
+            deck.push({ suit: "hearts", value: cards[j], color: "red" });
             break;
           case 1:
-            deck.push({ clubs: cards[j] });
+            deck.push({ suit: "clubs", value: cards[j], color: "black" });
             break;
           case 2:
-            deck.push({ spades: cards[j] });
+            deck.push({ suit: "spades", value: cards[j], color: "black" });
             break;
           case 3:
-            deck.push({ diamonds: cards[j] });
+            deck.push({ suit: "diamonds", value: cards[j], color: "red" });
             break;
         }
       }
@@ -81,10 +81,14 @@ class App extends Component {
       deck[j] = temp;
     }
   };
+
   flipCard = () => {
     //this function should flip the card by taking the classname off or adding it. 
   }
 
+  goToNextCard = () => {
+
+  }
   
 
   /*
@@ -117,8 +121,12 @@ class App extends Component {
         </div> */}
         <div className="topRow">
           <div className="drawPile">
-            <div className="outline scene"></div>
-            <div className="outline scene"></div>
+            <div className="outline scene drawFrom">
+              <p>React Solitaire</p>
+            </div>
+            <div className="outline scene">
+            
+            </div>
           </div>
           <div className="finalStack">
             <div className="outline scene"></div>
