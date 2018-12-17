@@ -6,15 +6,33 @@ class App extends Component {
     deck: [],
   }
   componentWillMount () {
-    const cards = ["A", " 2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]; 
+    const cards = ["A", " 2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
     const deck = []
-    const suits = ["hearts", "diamonds", "clubs", "spades"];
-    suits.forEach(suit => {
-      cards.forEach(card => {
-        deck.push({suit: card}); 
-      });
-    });
+    const suitsLength = 4; // hearts clubs spades diamonds
+
+    for (let i = 0; i< suitsLength; i++){
+      for(let j = 0; j< cards.length; j++){
+        switch (i){
+          case 0:
+            deck.push({"hearts": cards[j]});
+            break;
+          case 1: 
+            deck.push({"clubs": cards[j]});
+            break; 
+          case 2: 
+            deck.push({"spades": cards[j]});
+            break; 
+          case 3:
+            deck.push({"diamonds": cards[j]});
+            break;
+        }
+      }
+    }
     this.setState({deck}); 
+  }
+
+  setDeckUp = () => {
+
   }
 
   shuffleDeck = () => {
