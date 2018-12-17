@@ -81,6 +81,9 @@ class App extends Component {
       deck[j] = temp;
     }
   };
+  flipCard = () => {
+    //this function should flip the card by taking the classname off or adding it. 
+  }
 
   
 
@@ -92,10 +95,10 @@ class App extends Component {
   render() {
     console.log(this.state.deck);
     return (
-      <div className="App">
-        <button onClick={this.shuffleDeck}>New Game</button>
+      <div className="container">
+        {/* <button onClick={this.shuffleDeck}>New Game</button>
         <div className="outline scene">
-          <div onClick = {} className="card">
+          <div onClick = {this.flipCard} className="card">
             <div className="card__face card__face--front">
               <div className="top">
                 {" "}
@@ -109,6 +112,31 @@ class App extends Component {
             </div>
           </div>
         </div>
+        <div>
+
+        </div> */}
+        <div className="topRow">
+          <div className="drawPile">
+            <div className="outline scene"></div>
+            <div className="outline scene"></div>
+          </div>
+          <div className="finalStack">
+            <div className="outline scene"></div>
+            <div className="outline scene"></div>
+            <div className="outline scene"></div>
+            <div className="outline scene"></div>
+          
+          </div>
+        </div>
+        <div className="bottomRow">
+          <div className="outline scene"></div>
+          <div className="outline scene"></div>
+          <div className="outline scene"></div>
+          <div className="outline scene"></div>
+          <div className="outline scene"></div>
+          <div className="outline scene"></div>
+        </div>
+
       </div>
     );
   }
