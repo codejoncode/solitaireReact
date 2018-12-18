@@ -3,11 +3,18 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    deck: []
+    deck: [],
+    shuffled: false,
+    colOne: [],
+    colTwo: [],
+    colThree: [],
+    colFour: [],
+    colFive: [],
+    colSix: [],
+    colSeven: []
   };
   componentWillMount() {
     this.setDeckUp();
-    this.shuffleDeck();
   }
 
   setDeckUp = () => {
@@ -45,11 +52,15 @@ class App extends Component {
           case 3:
             deck.push({ suit: "diamonds", value: cards[j], color: "red" });
             break;
+          default:
+            console.log("shouldn't reach this");
         }
       }
     }
-    this.setState({ deck });
-    this.shuffleDeck();
+    
+    this.setState({deck}, () => {
+      this.shuffleDeck(); 
+    })
   };
 
   shuffleDeck = () => {
@@ -74,22 +85,78 @@ class App extends Component {
     */
     //get a copy of the deck never  manipulate the state directly.
     const deck = this.state.deck.slice();
+
     for (let i = deck.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       const temp = deck[i];
       deck[i] = deck[j];
       deck[j] = temp;
     }
+
+    this.setState({ deck, shuffled: true }, () => {
+      this.generateColumns();
+    });
+  };
+
+  generateColumns = () => {
+    const deck = this.state.deck.slice(); 
+    const colOne = [];
+    const colTwo = [];
+    const colThree = [];
+    const colFour = [];
+    const colFive = [];
+    const colSix = [];
+    const colSeven = [];
+    const breakPoint = 28; //only 27 cards will go to the bottom row.
+    /*col1 = 1  col2 = 2 col3 = 3 col4 = 4 col5 = 5 col6 = 6 col7 = 7 */
+    let poppedFromList;
+    if (this.state.shuffled) {
+      for (let i = 0; i < breakPoint; i++) {
+        if (i < 1) {
+          poppedFromList = deck.pop();
+          colOne.push(poppedFromList);
+        } else if (i < 3) {
+          poppedFromList = deck.pop();
+          colTwo.push(poppedFromList);
+        } else if (i < 6) {
+          poppedFromList = deck.pop();
+          colThree.push(poppedFromList);
+        } else if (i < 10) {
+          poppedFromList = deck.pop();
+          colFour.push(poppedFromList);
+        } else if (i < 15) {
+          poppedFromList = deck.pop();
+          colFive.push(poppedFromList);
+        } else if (i < 21) {
+          poppedFromList = deck.pop();
+          colSix.push(poppedFromList);
+        } else if (i < breakPoint) {
+          poppedFromList = deck.pop();
+          colSeven.push(poppedFromList);
+        }
+      }
+    } else {
+      this.shuffleDeck();
+    }
+    
+
+    this.setState({
+      deck,
+      colOne,
+      colTwo,
+      colThree,
+      colFour,
+      colFive,
+      colSix,
+      colSeven
+    });
   };
 
   flipCard = () => {
-    //this function should flip the card by taking the classname off or adding it. 
-  }
+    //this function should flip the card by taking the classname off or adding it.
+  };
 
-  goToNextCard = () => {
-
-  }
-  
+  goToNextCard = () => {};
 
   /*
   Building the layout  one card is face up and six cards is face down next to it. 
@@ -97,7 +164,16 @@ class App extends Component {
   */
 
   render() {
-    console.log(this.state.deck);
+    const remainingDeck = this.state.deck.slice(); //starts off the entire deck but I will pull from this for the other piles.
+    const colOne = this.state.colOne.slice();
+    const colTwo = this.state.colTwo.slice();
+    const colThree = this.state.colThree.slice();
+    const colFour = this.state.colFour.slice();
+    const colFive = this.state.colFive.slice();
+    const colSix = this.state.colSix.slice();
+    const colSeven = this.state.colSeven.slice();
+    console.log(colTwo);
+
     return (
       <div className="container">
         {/* <button onClick={this.shuffleDeck}>New Game</button>
@@ -124,27 +200,24 @@ class App extends Component {
             <div className="outline scene drawFrom">
               <p>React Solitaire</p>
             </div>
-            <div className="outline scene">
-            
-            </div>
+            <div className="outline scene" />
           </div>
           <div className="finalStack">
-            <div className="outline scene"></div>
-            <div className="outline scene"></div>
-            <div className="outline scene"></div>
-            <div className="outline scene"></div>
-          
+            <div className="outline scene" />
+            <div className="outline scene" />
+            <div className="outline scene" />
+            <div className="outline scene" />
           </div>
         </div>
         <div className="bottomRow">
-          <div className="outline scene"></div>
-          <div className="outline scene"></div>
-          <div className="outline scene"></div>
-          <div className="outline scene"></div>
-          <div className="outline scene"></div>
-          <div className="outline scene"></div>
+          <div className="outline scene" />
+          <div className="outline scene" />
+          <div className="outline scene" />
+          <div className="outline scene" />
+          <div className="outline scene" />
+          <div className="outline scene" />
+          <div className="outline scene" />
         </div>
-
       </div>
     );
   }
