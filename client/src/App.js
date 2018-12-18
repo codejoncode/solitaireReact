@@ -11,7 +11,9 @@ class App extends Component {
     colFour: [],
     colFive: [],
     colSix: [],
-    colSeven: []
+    colSeven: [],
+
+    remainingDeckIndex: 0, 
   };
   componentWillMount() {
     this.setDeckUp();
@@ -148,7 +150,8 @@ class App extends Component {
       colFour,
       colFive,
       colSix,
-      colSeven
+      colSeven,
+      remainingDeckIndex: deck.length -1,
     });
   };
 
@@ -156,7 +159,12 @@ class App extends Component {
     //this function should flip the card by taking the classname off or adding it.
   };
 
-  goToNextCard = () => {};
+  goToNextCard = () => {
+    /* Click the deck of remaining cards and this will increment and take the deck to the next position uses the modulo operator */
+    const remainingDeckIndex = (this.state.remainingDeckIndex + 1) % this.state.deck.length; 
+    console.log(this.state.deck[remainingDeckIndex]);
+    this.setState({remainingDeckIndex});
+  };
 
   /*
   Building the layout  one card is face up and six cards is face down next to it. 
@@ -172,7 +180,7 @@ class App extends Component {
     const colFive = this.state.colFive.slice();
     const colSix = this.state.colSix.slice();
     const colSeven = this.state.colSeven.slice();
-    console.log(colTwo);
+    console.log(this.state.remainingDeckIndex);
 
     return (
       <div className="container">
@@ -184,7 +192,7 @@ class App extends Component {
                 {" "}
                 <span>A</span> <span>&#x2666;</span>{" "}
               </div>
-              <h1>&#x2666;</h1>
+               <h1 className = {remainingDeck[remainingDeck.length-1].color}>&#x2666;</h1>
               <div className="bottom">
                 <span>A</span> <span>&#x2666;</span>
               </div>
@@ -196,12 +204,23 @@ class App extends Component {
 
         </div> */}
         <div className="topRow">
-          <div className="drawPile">
-            <div className="outline scene drawFrom">
+          <div  className="drawPile">
+            <div onClick = {this.goToNextCard} className="outline scene drawFrom">
               <p>React Solitaire</p>
             </div>
-            <div className="outline scene" />
-          </div>
+            <div className="outline scene">
+              <div className={"top " + remainingDeck[this.state.remainingDeckIndex].color}>
+                <span>{remainingDeck[this.state.remainingDeckIndex].value}</span> {remainingDeck[this.state.remainingDeckIndex].suit === 'hearts' ? <span>&hearts;</span> :  remainingDeck[this.state.remainingDeckIndex].suit === 'spades' ? <span>&spades;</span> :remainingDeck[this.state.remainingDeckIndex].suit === 'clubs' ? <span>&clubs;</span>: <span>&#x2666;</span> }
+              </div>
+              {remainingDeck[this.state.remainingDeckIndex].suit === 'hearts' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&hearts;</h1> :  remainingDeck[this.state.remainingDeckIndex].suit === 'spades' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&spades;</h1> :remainingDeck[this.state.remainingDeckIndex].suit === 'clubs' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&clubs;</h1>:  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&#x2666;</h1>}
+              
+              <div className={"bottom " + remainingDeck[this.state.remainingDeckIndex].color}>
+                <span>{remainingDeck[this.state.remainingDeckIndex].value}</span> {remainingDeck[this.state.remainingDeckIndex].suit === 'hearts' ? <span>&hearts;</span> :  remainingDeck[this.state.remainingDeckIndex].suit === 'spades' ? <span>&spades;</span> :remainingDeck[this.state.remainingDeckIndex].suit === 'clubs' ? <span>&clubs;</span>: <span>&#x2666;</span> }
+              </div>
+            
+            </div>
+              
+            </div>
           <div className="finalStack">
             <div className="outline scene" />
             <div className="outline scene" />
