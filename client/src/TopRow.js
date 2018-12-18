@@ -1,5 +1,5 @@
 import React, { Component, Proptypes } from "react";
-
+import FinalStack from './FinalStack'
 class TopRow extends Component {
   state = {
     index: 0
@@ -76,6 +76,7 @@ class TopRow extends Component {
               </div>
             </div>
           </div>
+          <FinalStack />
         </div>
       );
     } else {

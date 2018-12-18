@@ -1,5 +1,5 @@
 import React, {Component, Proptypes} from 'react'; 
-
+import FinalDropZone from './FinalDropZone'
 class FinalStack extends Component {
     state = {
 
@@ -8,7 +8,10 @@ class FinalStack extends Component {
     render () {
         return (
             <div className = "finalStack">
-
+                <FinalDropZone />
+                <FinalDropZone />
+                <FinalDropZone />
+                <FinalDropZone />
             </div>
         )
     }
