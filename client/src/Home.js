@@ -6,7 +6,7 @@ class Home extends Component {
     }
     render () {
         return (
-            <TopRow />
+            <TopRow deck = {this.props.deck}/>
         )
     }
 }
