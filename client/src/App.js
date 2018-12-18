@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 
+let dragSrc = null; 
+
 class App extends Component {
   state = {
     deck: [],
@@ -162,9 +164,50 @@ class App extends Component {
   goToNextCard = () => {
     /* Click the deck of remaining cards and this will increment and take the deck to the next position uses the modulo operator */
     const remainingDeckIndex = (this.state.remainingDeckIndex + 1) % this.state.deck.length; 
-    console.log(this.state.deck[remainingDeckIndex]);
     this.setState({remainingDeckIndex});
   };
+
+  /* Drag and drop functions*/
+  handleDragStart = event => {
+    event.target.style.opacity = ".35";
+    dragSrc = event.target; 
+
+    event.dataTransfer.setData("text/html", event.target.innerHTML);
+  }
+
+  handleDragOver = event => {
+    if (event.preventDefault){
+      event.preventDefault();
+    }
+    event.dataTransfer.dropEffect = "move";
+  }
+
+  handleDragEnter = event => {
+    event.target.classList.add("over");
+  }
+
+  handleDragLeave = event => {
+    event.target.classList.remove("over");
+  }
+
+  handleDrop = event => {
+    if (event.stopPropagation) {
+      event.stopPropagation();
+    }
+    if (dragSrc !== event.target){
+      dragSrc.innerHTML = event.target.innerHTML; 
+      event.target.innerHTML = event.dataTransfer.getData("text/html");
+    }
+    return false; 
+  }
+
+  handleDragEnd = () => {
+    const columns = document.querySelectorAll(".column");
+    columns.forEach(column => {
+      column.classList.remove("over");
+      column.style.opacity = 1; 
+    })
+  }
 
   /*
   Building the layout  one card is face up and six cards is face down next to it. 
@@ -208,34 +251,35 @@ class App extends Component {
             <div onClick = {this.goToNextCard} className="outline scene drawFrom">
               <p>React Solitaire</p>
             </div>
-            <div className="outline scene">
+            <div onDragStart={this.handleDragStart} draggable="true" onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column">
+            {/* onDrop={this.handleDrop}  */}
               <div className={"top " + remainingDeck[this.state.remainingDeckIndex].color}>
                 <span>{remainingDeck[this.state.remainingDeckIndex].value}</span> {remainingDeck[this.state.remainingDeckIndex].suit === 'hearts' ? <span>&hearts;</span> :  remainingDeck[this.state.remainingDeckIndex].suit === 'spades' ? <span>&spades;</span> :remainingDeck[this.state.remainingDeckIndex].suit === 'clubs' ? <span>&clubs;</span>: <span>&#x2666;</span> }
               </div>
               {remainingDeck[this.state.remainingDeckIndex].suit === 'hearts' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&hearts;</h1> :  remainingDeck[this.state.remainingDeckIndex].suit === 'spades' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&spades;</h1> :remainingDeck[this.state.remainingDeckIndex].suit === 'clubs' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&clubs;</h1>:  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&#x2666;</h1>}
               
               <div className={"bottom " + remainingDeck[this.state.remainingDeckIndex].color}>
-                <span>{remainingDeck[this.state.remainingDeckIndex].value}</span> {remainingDeck[this.state.remainingDeckIndex].suit === 'hearts' ? <span>&hearts;</span> :  remainingDeck[this.state.remainingDeckIndex].suit === 'spades' ? <span>&spades;</span> :remainingDeck[this.state.remainingDeckIndex].suit === 'clubs' ? <span>&clubs;</span>: <span>&#x2666;</span> }
+                {remainingDeck[this.state.remainingDeckIndex].suit === 'hearts' ? <span>&hearts;</span> :  remainingDeck[this.state.remainingDeckIndex].suit === 'spades' ? <span>&spades;</span> :remainingDeck[this.state.remainingDeckIndex].suit === 'clubs' ? <span>&clubs;</span>: <span>&#x2666;</span> }<span>{remainingDeck[this.state.remainingDeckIndex].value}</span> 
               </div>
             
             </div>
               
             </div>
           <div className="finalStack">
-            <div className="outline scene" />
-            <div className="outline scene" />
-            <div className="outline scene" />
-            <div className="outline scene" />
+            <div onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
+            <div className="outline scene column"></div>
+            <div className="outline scene column"></div>
+            <div className="outline scene column"></div>
           </div>
         </div>
         <div className="bottomRow">
-          <div className="outline scene" />
-          <div className="outline scene" />
-          <div className="outline scene" />
-          <div className="outline scene" />
-          <div className="outline scene" />
-          <div className="outline scene" />
-          <div className="outline scene" />
+          <div className="outline scene column"></div>
+          <div className="outline scene column"></div>
+          <div className="outline scene column"></div>
+          <div className="outline scene column"></div>
+          <div className="outline scene column"></div>
+          <div className="outline scene column"></div>
+          <div className="outline scene column"></div>
         </div>
       </div>
     );
