@@ -30,33 +30,33 @@ class TopRow extends Component {
             <div className="outline scene drawFrom" onClick={this.deckClick}>
               <p>React Solitaire</p>
             </div>
-            <div className="outline scene column">
+            <div draggable = "true" className="outline scene column">
               <div className={"top " + this.props.deck[this.state.index].color}>
-                <span>{this.props.deck[this.state.index].value}</span>{" "}
+                <span draggable = "false">{this.props.deck[this.state.index].value}</span>{" "}
                 {this.props.deck[this.state.index].suit === "hearts" ? (
                   <span>&hearts;</span>
                 ) : this.props.deck[this.state.index].suit === "spades" ? (
-                  <span>&spades;</span>
+                  <span draggable = "false">&spades;</span>
                 ) : this.props.deck[this.state.index].suit === "clubs" ? (
-                  <span>&clubs;</span>
+                  <span draggable = "false">&clubs;</span>
                 ) : (
-                  <span>&#x2666;</span>
+                  <span draggable = "false">&#x2666;</span>
                 )}
               </div>
               {this.props.deck[this.state.index].suit === "hearts" ? (
-                <h1 className={this.props.deck[this.state.index].color}>
+                <h1 draggable = "false" className={this.props.deck[this.state.index].color}>
                   &hearts;
                 </h1>
               ) : this.props.deck[this.state.index].suit === "spades" ? (
-                <h1 className={this.props.deck[this.state.index].color}>
+                <h1 draggable = "false" className={this.props.deck[this.state.index].color}>
                   &spades;
                 </h1>
               ) : this.props.deck[this.state.index].suit === "clubs" ? (
-                <h1 className={this.props.deck[this.state.index].color}>
+                <h1 draggable = "false" className={this.props.deck[this.state.index].color}>
                   &clubs;
                 </h1>
               ) : (
-                <h1 className={this.props.deck[this.state.index].color}>
+                <h1 draggable = "false" className={this.props.deck[this.state.index].color}>
                   &#x2666;
                 </h1>
               )}
@@ -64,15 +64,15 @@ class TopRow extends Component {
                 className={"bottom " + this.props.deck[this.state.index].color}
               >
                 {this.props.deck[this.state.index].suit === "hearts" ? (
-                  <span>&hearts;</span>
+                  <span draggable = "false">&hearts;</span>
                 ) : this.props.deck[this.state.index].suit === "spades" ? (
-                  <span>&spades;</span>
+                  <span draggable = "false">&spades;</span>
                 ) : this.props.deck[this.state.index].suit === "clubs" ? (
                   <span>&clubs;</span>
                 ) : (
-                  <span>&#x2666;</span>
+                  <span draggable = "false">&#x2666;</span>
                 )}
-                <span>{this.props.deck[this.state.index].value}</span>
+                <span draggable = "false" >{this.props.deck[this.state.index].value}</span>
               </div>
             </div>
           </div>
