@@ -1,17 +1,17 @@
 import React, {Component, Proptypes} from 'react'; 
 
-class BottomRow extends Component {
+class FinalStack extends Component {
     state = {
 
     }
 
     render () {
         return (
-            <div className="bottomRow">
-            
+            <div className = "finalStack">
+
             </div>
         )
     }
 }
 
-export default BottomRow; 
+export default FinalStack; 

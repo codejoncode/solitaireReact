@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 
+import RemainingDeck from "./RemainingDeck"
+import Home from "./Home"
+
 let dragSrc = null; 
 
 class App extends Component {
@@ -208,6 +211,16 @@ class App extends Component {
       column.style.opacity = 1; 
     })
   }
+  handleRemainingDeckDrag = () => {
+    /* this function will handle the remainingDeck drag. I want to increment the list so that it will go to the next card. */
+    const deck = this.state.deck.slice(); 
+    const remainingDeckIndex = (this.state.remainingDeckIndex + 1) % this.state.deck.length; 
+    const last = deck.pop(); 
+    const last_obj = {last, from : "remainingDeck"}; //  from will be used when using rules if it is not fitting of the rules it will return back to its list it came from. 
+
+    this.setState({deck, last_obj, remainingDeckIndex}); 
+
+  }
 
   /*
   Building the layout  one card is face up and six cards is face down next to it. 
@@ -224,9 +237,12 @@ class App extends Component {
     const colSix = this.state.colSix.slice();
     const colSeven = this.state.colSeven.slice();
     console.log(this.state.remainingDeckIndex);
+    console.log(this.state.dec);
 
     return (
       <div className="container">
+        <Home deck = {this.state.deck}/>
+        
         {/* <button onClick={this.shuffleDeck}>New Game</button>
         <div className="outline scene">
           <div onClick = {this.flipCard} className="card">
@@ -247,39 +263,40 @@ class App extends Component {
 
         </div> */}
         <div className="topRow">
-          <div  className="drawPile">
-            <div onClick = {this.goToNextCard} className="outline scene drawFrom">
+          {/* <div  className="drawPile"> */}
+            {/* <div onClick = {this.goToNextCard} className="outline scene drawFrom">
               <p>React Solitaire</p>
-            </div>
-            <div onDragStart={this.handleDragStart} draggable="true" onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column">
+            </div> */}
+            {/* onDrag = {this.handleRemainingDeckDrag} */}
+            {/* <div  onDragStart={this.handleDragStart} draggable="true" onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"> */}
             {/* onDrop={this.handleDrop}  */}
-              <div className={"top " + remainingDeck[this.state.remainingDeckIndex].color}>
+              {/* <div className={"top " + remainingDeck[this.state.remainingDeckIndex].color}>
                 <span>{remainingDeck[this.state.remainingDeckIndex].value}</span> {remainingDeck[this.state.remainingDeckIndex].suit === 'hearts' ? <span>&hearts;</span> :  remainingDeck[this.state.remainingDeckIndex].suit === 'spades' ? <span>&spades;</span> :remainingDeck[this.state.remainingDeckIndex].suit === 'clubs' ? <span>&clubs;</span>: <span>&#x2666;</span> }
               </div>
-              {remainingDeck[this.state.remainingDeckIndex].suit === 'hearts' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&hearts;</h1> :  remainingDeck[this.state.remainingDeckIndex].suit === 'spades' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&spades;</h1> :remainingDeck[this.state.remainingDeckIndex].suit === 'clubs' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&clubs;</h1>:  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&#x2666;</h1>}
+              {remainingDeck[this.state.remainingDeckIndex].suit === 'hearts' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&hearts;</h1> :  remainingDeck[this.state.remainingDeckIndex].suit === 'spades' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&spades;</h1> :remainingDeck[this.state.remainingDeckIndex].suit === 'clubs' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&clubs;</h1>:  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&#x2666;</h1>} */}
               
-              <div className={"bottom " + remainingDeck[this.state.remainingDeckIndex].color}>
+              {/* <div className={"bottom " + remainingDeck[this.state.remainingDeckIndex].color}>
                 {remainingDeck[this.state.remainingDeckIndex].suit === 'hearts' ? <span>&hearts;</span> :  remainingDeck[this.state.remainingDeckIndex].suit === 'spades' ? <span>&spades;</span> :remainingDeck[this.state.remainingDeckIndex].suit === 'clubs' ? <span>&clubs;</span>: <span>&#x2666;</span> }<span>{remainingDeck[this.state.remainingDeckIndex].value}</span> 
-              </div>
+              </div> */}
             
-            </div>
+            {/* </div> */}
               
-            </div>
+            {/* </div> */}
           <div className="finalStack">
+            {/* <div onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
             <div onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
             <div onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
-            <div onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
-            <div onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
+            <div onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div> */}
           </div>
         </div>
         <div className="bottomRow">
+          {/* <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
           <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
           <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
           <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
           <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
           <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
-          <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
-          <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
+          <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div> */}
         </div>
       </div>
     );

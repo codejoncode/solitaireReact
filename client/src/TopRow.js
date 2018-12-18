@@ -1,24 +1,24 @@
 import React, {Component, Proptypes} from 'react'; 
-import Card from "./Card"
 
-class RemainingDeck extends Component {
+class TopRow extends Component {
     state = {
-
+        deck : []
     }
 
-    render () {
+    render() {
         return (
-            <div className = "topRow">
+            <div className="topRow">
               <div className="drawPile">
                 <div className="outline scene drawFrom">
-                    <Card />
-                    <Card />
+                    <p>React Solitaire</p>
                 </div>
-              
+                <div className="outline scene column">
+                
+                </div>
               </div>
             </div>
         )
     }
 }
 
-export default RemainingDeck; 
+export default TopRow; 
