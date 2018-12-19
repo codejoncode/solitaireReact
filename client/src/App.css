@@ -12,8 +12,6 @@ span {
 
 .outline {
   text-align: center; 
-  padding: 10px; 
-  margin: 10px; 
   background: #FFF; 
   color: #cc0033; 
   border: 1px solid black; 
@@ -101,14 +99,14 @@ span {
 }
 
 .card {
-  height: 100px; 
-  width: 60px; 
   flex: 100px 1 0; 
   border: solid 1px black;
-  /* border-radius: 5px;  */
+  border-radius: 5px; 
   background-color: white; 
-  /* box-shadow: 3px 3px 3px gray;  */
-  margin-top: -10px;
+  box-shadow: 3px 3px 3px gray; 
+  margin-top: -30px;
+  width: 120px;
+  height: 180px;
 }
 .backOfCard {
   background: blue; 

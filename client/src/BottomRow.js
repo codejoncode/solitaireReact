@@ -17,13 +17,13 @@ class BottomRow extends Component {
               <BottomSection cards = {this.props.colSix}/>
               <BottomSection cards = {this.props.colSeven}/>
               
-              <div className="deck">
-                <div className="card outline scene">1</div>
-                <div className="card outline scene">2</div>
-                <div className="card outline scene">3</div>
-                <div className="card outline scene">4</div>
-                <div className="card outline scene">5</div>
-              </div>
+              {/* <div className="deck">
+                <div className="outline scene card">1</div>
+                <div className="outline scene card">2</div>
+                <div className="outline scene card">3</div>
+                <div className="outline scene card">4</div>
+                <div className="outline scene card">5</div>
+              </div> */}
             </div>
         )
     }
