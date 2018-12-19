@@ -24,6 +24,60 @@ class App extends Component {
     this.setDeckUp();
   }
 
+  returnActualValue = (value) => {
+    /* This function will return the actual value. Curently value is being used to display the card
+    However, the game will require the color to be opposite of the previous color and the value to be one less
+    or the array for that section to be empty. Actual value will assign values 1 - 13 with Ace being first */
+    let returning; 
+    switch (value){
+      case 'A':
+        returning = 1; 
+        break; 
+      // case '2': 
+      //   returning = 2; 
+      //   break; 
+      // case '3':
+      //   returning = 3; 
+      //   break; 
+      // case '4':
+      //   returning = 4; 
+      //   break; 
+      // case '5':
+      //   returning = 5; 
+      //   break; 
+      // case '6':
+      //   returning = 6; 
+      //   break; 
+      // case '7': 
+      //   returning = 7;
+      //   break; 
+      // case '8':
+      //   returning = 8;
+      //   break; 
+      // case '9':
+      //   returning = 9; 
+      //   break; 
+      // case '10':
+      //   returning = 10;
+      //   break; 
+      case 'J': 
+        returning = 11;
+        break;  
+      case 'Q':
+        returning = 12;
+        break; 
+      case 'K':
+        returning = 13; 
+        break;
+      default:
+        returning = Number(value);
+    }
+    //because react requires a default case  this can be simplified.
+    //2-10 will be the integer version of its string. Reason for the commented out section.  
+
+    return returning; 
+  }
+
   setDeckUp = () => {
     //Step 1 of creating the game solitaire building a deck.
     const cards = [
@@ -46,18 +100,19 @@ class App extends Component {
 
     for (let i = 0; i < suitsLength; i++) {
       for (let j = 0; j < cards.length; j++) {
+        const actual = this.returnActualValue(cards[j]);
         switch (i) {
           case 0:
-            deck.push({ suit: "hearts", value: cards[j], color: "red" });
+            deck.push({ suit: "hearts", value: cards[j], color: "red", actual });
             break;
           case 1:
-            deck.push({ suit: "clubs", value: cards[j], color: "black" });
+            deck.push({ suit: "clubs", value: cards[j], color: "black", actual });
             break;
           case 2:
-            deck.push({ suit: "spades", value: cards[j], color: "black" });
+            deck.push({ suit: "spades", value: cards[j], color: "black", actual });
             break;
           case 3:
-            deck.push({ suit: "diamonds", value: cards[j], color: "red" });
+            deck.push({ suit: "diamonds", value: cards[j], color: "red", actual });
             break;
           default:
             console.log("shouldn't reach this");
