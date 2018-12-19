@@ -17,6 +17,10 @@ class App extends Component {
     colFive: [],
     colSix: [],
     colSeven: [],
+    finalStack1: [],
+    finalStack2: [],
+    finalStack3: [],
+    finalStack4: [],
 
     remainingDeckIndex: 0, 
   };
@@ -33,33 +37,6 @@ class App extends Component {
       case 'A':
         returning = 1; 
         break; 
-      // case '2': 
-      //   returning = 2; 
-      //   break; 
-      // case '3':
-      //   returning = 3; 
-      //   break; 
-      // case '4':
-      //   returning = 4; 
-      //   break; 
-      // case '5':
-      //   returning = 5; 
-      //   break; 
-      // case '6':
-      //   returning = 6; 
-      //   break; 
-      // case '7': 
-      //   returning = 7;
-      //   break; 
-      // case '8':
-      //   returning = 8;
-      //   break; 
-      // case '9':
-      //   returning = 9; 
-      //   break; 
-      // case '10':
-      //   returning = 10;
-      //   break; 
       case 'J': 
         returning = 11;
         break;  
@@ -73,7 +50,7 @@ class App extends Component {
         returning = Number(value);
     }
     //because react requires a default case  this can be simplified.
-    //2-10 will be the integer version of its string. Reason for the commented out section.  
+    //2-10 will be the integer version of its string. 
 
     return returning; 
   }
@@ -283,20 +260,13 @@ class App extends Component {
   */
 
   render() {
-    const remainingDeck = this.state.deck.slice(); //starts off the entire deck but I will pull from this for the other piles.
-    const colOne = this.state.colOne.slice();
-    const colTwo = this.state.colTwo.slice();
-    const colThree = this.state.colThree.slice();
-    const colFour = this.state.colFour.slice();
-    const colFive = this.state.colFive.slice();
-    const colSix = this.state.colSix.slice();
-    const colSeven = this.state.colSeven.slice();
-    console.log(this.state.remainingDeckIndex);
-    console.log(this.state.dec);
 
     return (
       <div className="container">
-        <Home deck = {this.state.deck}/>
+        <Home deck = {this.state.deck} colOne = {this.state.colOne} colTwo = {this.state.colTwo} 
+        colThree = {this.state.colThree} colFour = {this.state.colFour} colFive = {this.state.colFive}
+        colSix = {this.state.colSix} colSeven = {this.state.colSeven} finalStack1 = {this.state.finalStack1}
+        finalStack2 = {this.state.finalStack2} finalStack3 = {this.state.finalStack3} finalStack4 = {this.state.finalStack4}/>
         
         {/* <button onClick={this.shuffleDeck}>New Game</button>
         <div className="outline scene">
