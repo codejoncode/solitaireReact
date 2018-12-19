@@ -17,8 +17,8 @@ class BottomSection extends Component {
     return (
       <div>
         {cards.map((card, id) => (
-            <div  key = {id} className="outline scene column deck">
-                <div onClick = {this.clickingCard} draggable = "true" className = "card">
+            <div  key = {id} className="deck">
+                <div onClick = {this.clickingCard} draggable = "true" className = { id === this.props.cards.length -1 ? "card lastInStack outline scene column" : "card stackedCards outline scene column"}>
                 <div className={"top " + card.color}>
                 <span>{card.value}</span>{" "}
                 {card.suit === "hearts" ? (
@@ -51,6 +51,7 @@ class BottomSection extends Component {
                   <span>&#x2666;</span>
                 )}
                 <span>{card.value}</span>
+                {/* <hr/> */}
               </div>
                 </div>
             </div>

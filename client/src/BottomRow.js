@@ -24,7 +24,9 @@ class BottomRow extends Component {
                 <div className="outline scene card">4</div>
                 <div className="outline scene card">5</div>
               </div> */}
+
             </div>
+            
         )
     }
 }
