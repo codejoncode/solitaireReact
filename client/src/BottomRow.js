@@ -1,6 +1,8 @@
 import React, {Component, Proptypes} from 'react'; 
 import DraggableSection from './DraggableSection';
 import BottomSection from './BottomSection';
+import back from './blackCardPicture.PNG';
+
 class BottomRow extends Component {
     state = {
 
@@ -17,13 +19,6 @@ class BottomRow extends Component {
               <BottomSection cards = {this.props.colSix}/>
               <BottomSection cards = {this.props.colSeven}/>
               
-              {/* <div className="deck">
-                <div className="outline scene card">1</div>
-                <div className="outline scene card">2</div>
-                <div className="outline scene card">3</div>
-                <div className="outline scene card">4</div>
-                <div className="outline scene card">5</div>
-              </div> */}
 
             </div>
             

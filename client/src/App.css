@@ -94,7 +94,6 @@ span {
 }
 .deck {
   display: flex; 
-  /* height: 200px;  */
   flex-direction: column;
 }
 
@@ -115,5 +114,11 @@ span {
 }
 
 .lastInStack {
-  /* overflow: auto; */
+  
+}
+
+.backOfCard {
+  z-index: 3;
+  width: 120px;
+  height: 180px;
 }
