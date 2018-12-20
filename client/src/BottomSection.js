@@ -1,19 +1,20 @@
 import React, { Component, Proptypes } from "react";
 import DraggableSection from "./DraggableSection";
-import back from './blackCardPicture.PNG';
+import back from "./blackCardPicture.PNG";
 
-{/* <div className="">
+{
+  /* <div className="">
   <img className = "backOfCard" src= {back} alt="back of card"/>              
-</div> */}
-let lastCard = false; 
+</div> */
+}
+let lastCard = false;
 class BottomSection extends Component {
   state = {};
 
-
-  clickingCard = (event) => {
+  clickingCard = event => {
     // console.log(event.target);
     // console.log(event.target.classList);
-  }
+  };
 
   render() {
     console.log("BottomSection");
@@ -23,10 +24,32 @@ class BottomSection extends Component {
     return (
       <div>
         {cards.map((card, id) => (
-            <div  key = {id} className="deck">
-                <div onClick = {this.clickingCard}  onDoubleClick = {() => this.props.doubleClick(card, this.props.name)} draggable = "true" className = { id === this.props.cards.length -1 ? "card lastInStack outline scene column" : "card stackedCards outline scene column"}>
-                {card.showBack === true  && id !== this.props.cards.length -1 ? <img className = "backOfCard" src = {back} alt = "back of card"></img> : lastCard = true}
-                <div className={"top " + card.color}>
+          <div key={id} className="deck">
+            <div
+              onClick={this.clickingCard}
+              onDoubleClick={() =>
+                this.props.doubleClick(card, this.props.name)
+              }
+              onDragStart = {this.props.handleDragStart}
+              // onDrag = {this.props.handleDrag}
+              onDragEnd = {this.props.handleDragEnd} 
+              onDragEnter={this.handleDragEnter}
+              onDragOver={this.props.handleDragOver}
+              onDrop={this.props.handleOnDrop}
+              onDragLeave={this.props.handleDragLeave}
+              draggable="true"
+              className={
+                id === this.props.cards.length - 1
+                  ? "card lastInStack outline scene column"
+                  : "card stackedCards outline scene column"
+              }
+            >
+              {card.showBack === true && id !== this.props.cards.length - 1 ? (
+                <img className="backOfCard" src={back} alt="back of card" />
+              ) : (
+                (lastCard = true)
+              )}
+              <div className={"top " + card.color}>
                 <span>{card.value}</span>{" "}
                 {card.suit === "hearts" ? (
                   <span>&hearts;</span>
@@ -59,9 +82,8 @@ class BottomSection extends Component {
                 )}
                 <span>{card.value}</span>
               </div>
-                </div>
-              
             </div>
+          </div>
         ))}
       </div>
     );

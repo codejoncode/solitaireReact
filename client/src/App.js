@@ -286,9 +286,11 @@ class App extends Component {
       event.stopPropagation();
     }
     if (dragSrc !== event.target) {
+      console.log(dragSrc.classList)
       dragSrc.innerHTML = event.target.innerHTML;
       event.target.innerHTML = event.dataTransfer.getData("text/html");
     }
+    console.log(event.target.classList)
     return false;
   
   };

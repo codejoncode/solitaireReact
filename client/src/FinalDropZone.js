@@ -13,7 +13,7 @@ class FinalDropZone extends Component {
     // handleDragend={this.props.handleDragEnd}
     return (
       <div
-        
+        draggable = "false"
         className="outline scene column"
         id = "droptarget"
         onDragStart = {this.props.handleDragStart}

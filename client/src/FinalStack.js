@@ -13,7 +13,7 @@ class FinalStack extends Component {
     // handleDragend={this.props.handleDragEnd}
     return (
       <div draggable = "false" className="finalStack">
-        <FinalDropZone
+        <FinalDropZone className = "stack1"
           handleDragEnter={this.props.handleDragEnter}
           handleDragOver={this.props.handleDragOver}
           handleDragLeave={this.props.handleDragLeave}
@@ -22,7 +22,7 @@ class FinalStack extends Component {
           handleDrag={this.props.handleDrag}
           handleDragEnd={this.props.handleDragEnd}
         />
-        <FinalDropZone
+        <FinalDropZone className = "stack2"
           handleDragEnter={this.props.handleDragEnter}
           handleDragOver={this.props.handleDragOver}
           handleDragLeave={this.props.handleDragLeave}
@@ -31,7 +31,7 @@ class FinalStack extends Component {
           handleDrag={this.props.handleDrag}
           handleDragEnd={this.props.handleDragEnd}
         />
-        <FinalDropZone
+        <FinalDropZone className = "stack3"
           handleDragEnter={this.props.handleDragEnter}
           handleDragOver={this.props.handleDragOver}
           handleDragLeave={this.props.handleDragLeave}
@@ -40,7 +40,7 @@ class FinalStack extends Component {
           handleDrag={this.props.handleDrag}
           handleDragEnd={this.props.handleDragEnd}
         />
-        <FinalDropZone
+        <FinalDropZone className = "stack4"
           handleDragEnter={this.props.handleDragEnter}
           handleDragOver={this.props.handleDragOver}
           handleDragLeave={this.props.handleDragLeave}
