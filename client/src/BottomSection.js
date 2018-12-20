@@ -11,8 +11,8 @@ class BottomSection extends Component {
 
 
   clickingCard = (event) => {
-    console.log(event.target);
-    console.log(event.target.classList);
+    // console.log(event.target);
+    // console.log(event.target.classList);
   }
 
   render() {
@@ -24,7 +24,7 @@ class BottomSection extends Component {
       <div>
         {cards.map((card, id) => (
             <div  key = {id} className="deck">
-                <div onClick = {this.clickingCard} draggable = "true" className = { id === this.props.cards.length -1 ? "card lastInStack outline scene column" : "card stackedCards outline scene column"}>
+                <div onClick = {this.clickingCard}  onDoubleClick = {() => this.props.doubleClick(card, this.props.name)} draggable = "true" className = { id === this.props.cards.length -1 ? "card lastInStack outline scene column" : "card stackedCards outline scene column"}>
                 {card.showBack === true  && id !== this.props.cards.length -1 ? <img className = "backOfCard" src = {back} alt = "back of card"></img> : lastCard = true}
                 <div className={"top " + card.color}>
                 <span>{card.value}</span>{" "}

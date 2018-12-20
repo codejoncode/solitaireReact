@@ -7,7 +7,30 @@ class Home extends Component {
     console.log(this.props);
     return (
       <div>
-        <TopRow deck={this.props.deck} stack1 = {this.props.finalStack1} stack2 = {this.props.finalStack2} stack3 = {this.props.finalStack3} stack4 = {this.props.finalStack4}/>
+        <TopRow
+          deck={this.props.deck}
+          stack1={this.props.finalStack1}
+          stack2={this.props.finalStack2}
+          stack3={this.props.finalStack3}
+          stack4={this.props.finalStack4}
+          doubleClick={this.props.doubleClick}
+          handleDragStart={this.props.handleDragStart}
+          handleDrag={this.props.handleDrag}
+          handleDragLeave={this.props.handleDragLeave}
+          handleDragEnter = {this.props.handleDragEnter}
+          handleOnDrop = {this.props.handleOnDrop}
+          handleDragOver = {this.props.handleDragOver}
+          handleDragEnd={this.props.handleDragEnd}
+          
+          
+        />
+        {/* handleDragStart = {this.handleDragStart} 
+            handleDragOver = {this.handleDragOver} 
+            handleDragEnter = {this.handleDragEnter} 
+            handleDragLeave = {this.handleDragLeave} 
+            handleOnDrop = {this.handleDrop} 
+            handleDrag = {this.handleDrag}
+            handleDragEnd ={this.handleDragEnd} */}
         <BottomRow
           colOne={this.props.colOne}
           colTwo={this.props.colTwo}
@@ -16,6 +39,15 @@ class Home extends Component {
           colFive={this.props.colFive}
           colSix={this.props.colSix}
           colSeven={this.props.colSeven}
+          doubleClick={this.props.doubleClick}
+          handleDragStart={this.props.handleDragStart}
+          handleDrag={this.props.handleDrag}
+          handleDragLeave={this.props.handleDragLeave}
+          handleDragEnter = {this.props.handleDragEnter}
+          handleOnDrop = {this.props.handleOnDrop}
+          handleDragOver = {this.props.handleDragOver}
+          handleDragEnd={this.props.handleDragEnd}
+
         />
       </div>
     );

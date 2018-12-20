@@ -1,6 +1,6 @@
 import React, { Component, Proptypes } from "react";
-import FinalStack from './FinalStack'
-import back from './blackCardPicture.PNG';
+import FinalStack from "./FinalStack";
+import back from "./blackCardPicture.PNG";
 class TopRow extends Component {
   state = {
     index: 0
@@ -18,10 +18,17 @@ class TopRow extends Component {
 
   deckClick = () => {
     const index = (this.state.index + 1) % this.props.deck.length;
-    this.setState({index});
+    this.setState({ index });
   };
 
   render() {
+    // handleDragStart={this.props.handleDragStart}
+    // handleDrag={this.props.handleDrag}
+    // handleDragLeave={this.props.handleDragLeave}
+    // handleDragEnter = {this.props.handleDragEnter}
+    // handleOnDrop = {this.props.handleOnDrop}
+    // handleDragOver = {this.props.handleDragOver}
+    // handleDragend={this.props.handleDragEnd}
     console.log(this.props.deck);
     console.log(this.state.index);
     if (this.state.index < 24) {
@@ -29,35 +36,60 @@ class TopRow extends Component {
         <div className="topRow">
           <div className="drawPile">
             <div className="outline scene drawFrom" onClick={this.deckClick}>
-              <img className = "backOfCard" src={back} alt="back of card"/>
+              <img className="backOfCard" src={back} alt="back of card" />
             </div>
-            <div draggable = "true" className="outline scene column">
+            <div
+              onDoubleClick={this.props.doubleClick}
+              draggable="true"
+              className="outline scene column"
+              onDragStart = {this.props.handleDragStart}
+              // onDrag = {this.props.handleDrag}
+              onDragEnd = {this.props.handleDragEnd} 
+              onDragEnter={this.handleDragEnter}
+              onDragOver={this.props.handleDragOver}
+              onDrop={this.props.handleOnDrop}
+              onDragLeave={this.props.handleDragLeave}
+            >
               <div className={"top " + this.props.deck[this.state.index].color}>
-                <span draggable = "false">{this.props.deck[this.state.index].value}</span>{" "}
+                <span draggable="false">
+                  {this.props.deck[this.state.index].value}
+                </span>{" "}
                 {this.props.deck[this.state.index].suit === "hearts" ? (
                   <span>&hearts;</span>
                 ) : this.props.deck[this.state.index].suit === "spades" ? (
-                  <span draggable = "false">&spades;</span>
+                  <span draggable="false">&spades;</span>
                 ) : this.props.deck[this.state.index].suit === "clubs" ? (
-                  <span draggable = "false">&clubs;</span>
+                  <span draggable="false">&clubs;</span>
                 ) : (
-                  <span draggable = "false">&#x2666;</span>
+                  <span draggable="false">&#x2666;</span>
                 )}
               </div>
               {this.props.deck[this.state.index].suit === "hearts" ? (
-                <h1 draggable = "false" className={this.props.deck[this.state.index].color}>
+                <h1
+                  draggable="false"
+                  className={this.props.deck[this.state.index].color}
+                >
                   &hearts;
                 </h1>
               ) : this.props.deck[this.state.index].suit === "spades" ? (
-                <h1 draggable = "false" className={this.props.deck[this.state.index].color}>
+                <h1
+                  draggable="false"
+                  className={this.props.deck[this.state.index].color}
+                >
                   &spades;
                 </h1>
               ) : this.props.deck[this.state.index].suit === "clubs" ? (
-                <h1 draggable = "false" className={this.props.deck[this.state.index].color}>
+                <h1
+                  draggable="false"
+                  className={this.props.deck[this.state.index].color}
+                >
                   &clubs;
                 </h1>
               ) : (
-                <h1 draggable = "false" className={this.props.deck[this.state.index].color}>
+                <h1
+                  draggable="false"
+                  className={this.props.deck[this.state.index].color}
+                >
                   &#x2666;
                 </h1>
               )}
@@ -65,19 +97,36 @@ class TopRow extends Component {
                 className={"bottom " + this.props.deck[this.state.index].color}
               >
                 {this.props.deck[this.state.index].suit === "hearts" ? (
-                  <span draggable = "false">&hearts;</span>
+                  <span draggable="false">&hearts;</span>
                 ) : this.props.deck[this.state.index].suit === "spades" ? (
-                  <span draggable = "false">&spades;</span>
+                  <span draggable="false">&spades;</span>
                 ) : this.props.deck[this.state.index].suit === "clubs" ? (
                   <span>&clubs;</span>
                 ) : (
-                  <span draggable = "false">&#x2666;</span>
+                  <span draggable="false">&#x2666;</span>
                 )}
-                <span draggable = "false" >{this.props.deck[this.state.index].value}</span>
+                <span draggable="false">
+                  {this.props.deck[this.state.index].value}
+                </span>
               </div>
             </div>
           </div>
-          <FinalStack />
+          {/* // handleDragStart={this.props.handleDragStart}
+          // handleDrag={this.props.handleDrag}
+          // handleDragLeave={this.props.handleDragLeave}
+          // handleDragEnter = {this.props.handleDragEnter}
+          // handleOnDrop = {this.props.handleOnDrop}
+          // handleDragOver = {this.props.handleDragOver}
+          // handleDragend={this.props.handleDragEnd} */}
+          <FinalStack
+            handleDragStart={this.props.handleDragStart}
+            handleDrag={this.props.handleDrag}
+            handleDragLeave={this.props.handleDragLeave}
+            handleDragEnter={this.props.handleDragEnter}
+            handleOnDrop={this.props.handleOnDrop}
+            handleDragOver={this.props.handleDragOver}
+            handleDragEnd={this.props.handleDragEnd}
+          />
         </div>
       );
     } else {

@@ -1,17 +1,32 @@
-import React, {Component, Proptypes} from 'react'; 
+import React, { Component, Proptypes } from "react";
 
 class FinalDropZone extends Component {
-    state = {
+  state = {};
 
-    }
+  render() {
+    // handleDragEnter={this.props.handleDragEnter}
+    // handleDragOver={this.props.handleDragOver}
+    // handleDragLeave={this.props.handleDragLeave}
+    // handleOnDrop={this.props.handleOnDrop}
+    // handleDragStart={this.props.handleDragStart}
+    // handleDrag={this.props.handleDrag}
+    // handleDragend={this.props.handleDragEnd}
+    return (
+      <div
+        
+        className="outline scene column"
+        id = "droptarget"
+        onDragStart = {this.props.handleDragStart}
+        // onDrag = {this.props.handleDrag}
+        onDragEnd = {this.props.handleDragEnd} 
+        onDragEnter={this.props.handleDragEnter}
+        onDragOver={this.props.handleDragOver}
+        onDrop={this.props.handleOnDrop}
+        onDragLeave={this.props.handleDragLeave}
 
-    render () {
-        return (
-            <div className = "outline scene column"> 
-                
-            </div>
-        )
-    }
+      />
+    );
+  }
 }
 
-export default FinalDropZone; 
+export default FinalDropZone;

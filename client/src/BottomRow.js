@@ -1,29 +1,100 @@
-import React, {Component, Proptypes} from 'react'; 
-import DraggableSection from './DraggableSection';
-import BottomSection from './BottomSection';
-
+import React, { Component, Proptypes } from "react";
+import DraggableSection from "./DraggableSection";
+import BottomSection from "./BottomSection";
 
 class BottomRow extends Component {
-    state = {
+  state = {};
 
-    }
-
-    render () {
-        return (
-            <div className="bottomRow">
-              <BottomSection cards = {this.props.colOne}/>
-              <BottomSection cards = {this.props.colTwo}/>
-              <BottomSection cards = {this.props.colThree}/>
-              <BottomSection cards = {this.props.colFour}/>
-              <BottomSection cards = {this.props.colFive}/>
-              <BottomSection cards = {this.props.colSix}/>
-              <BottomSection cards = {this.props.colSeven}/>
-              
-
-            </div>
-            
-        )
-    }
+  render() {
+    return (
+      <div className="bottomRow">
+        <BottomSection
+          doubleClick={this.props.doubleClick}
+          cards={this.props.colOne}
+          name="column 1"
+          handleDragStart={this.props.handleDragStart}
+          handleDrag={this.props.handleDrag}
+          handleDragLeave={this.props.handleDragLeave}
+          handleDragEnter = {this.props.handleDragEnter}
+          handleOnDrop = {this.props.handleOnDrop}
+          handleDragOver = {this.props.handleDragOver}
+          handleDragend={this.props.handleDragEnd}
+        />
+        <BottomSection
+          doubleClick={this.props.doubleClick}
+          cards={this.props.colTwo}
+          name="column 2"
+          handleDragStart={this.props.handleDragStart}
+          handleDrag={this.props.handleDrag}
+          handleDragLeave={this.props.handleDragLeave}
+          handleDragEnter = {this.props.handleDragEnter}
+          handleOnDrop = {this.props.handleOnDrop}
+          handleDragOver = {this.props.handleDragOver}
+          handleDragend={this.props.handleDragEnd}
+        />
+        <BottomSection
+          doubleClick={this.props.doubleClick}
+          cards={this.props.colThree}
+          name="column 3"
+          handleDragStart={this.props.handleDragStart}
+          handleDrag={this.props.handleDrag}
+          handleDragLeave={this.props.handleDragLeave}
+          handleDragEnter = {this.props.handleDragEnter}
+          handleOnDrop = {this.props.handleOnDrop}
+          handleDragOver = {this.props.handleDragOver}
+          handleDragend={this.props.handleDragEnd}
+        />
+        <BottomSection
+          doubleClick={this.props.doubleClick}
+          cards={this.props.colFour}
+          name="column 4"
+          handleDragStart={this.props.handleDragStart}
+          handleDrag={this.props.handleDrag}
+          handleDragLeave={this.props.handleDragLeave}
+          handleDragEnter = {this.props.handleDragEnter}
+          handleOnDrop = {this.props.handleOnDrop}
+          handleDragOver = {this.props.handleDragOver}
+          handleDragend={this.props.handleDragEnd}
+        />
+        <BottomSection
+          doubleClick={this.props.doubleClick}
+          cards={this.props.colFive}
+          name="column 5"
+          handleDragStart={this.props.handleDragStart}
+          handleDrag={this.props.handleDrag}
+          handleDragLeave={this.props.handleDragLeave}
+          handleDragEnter = {this.props.handleDragEnter}
+          handleOnDrop = {this.props.handleOnDrop}
+          handleDragOver = {this.props.handleDragOver}
+          handleDragend={this.props.handleDragEnd}
+        />
+        <BottomSection
+          doubleClick={this.props.doubleClick}
+          cards={this.props.colSix}
+          name="column 6"
+          handleDragStart={this.props.handleDragStart}
+          handleDrag={this.props.handleDrag}
+          handleDragLeave={this.props.handleDragLeave}
+          handleDragEnter = {this.props.handleDragEnter}
+          handleOnDrop = {this.props.handleOnDrop}
+          handleDragOver = {this.props.handleDragOver}
+          handleDragend={this.props.handleDragEnd}
+        />
+        <BottomSection
+          doubleClick={this.props.doubleClick}
+          cards={this.props.colSeven}
+          name="column 7"
+          handleDragStart={this.props.handleDragStart}
+          handleDrag={this.props.handleDrag}
+          handleDragLeave={this.props.handleDragLeave}
+          handleDragEnter = {this.props.handleDragEnter}
+          handleOnDrop = {this.props.handleOnDrop}
+          handleDragOver = {this.props.handleDragOver}
+          handleDragend={this.props.handleDragEnd}
+        />
+      </div>
+    );
+  }
 }
 
-export default BottomRow; 
+export default BottomRow;

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import RemainingDeck from "./RemainingDeck"
-import Home from "./Home"
+import RemainingDeck from "./RemainingDeck";
+import Home from "./Home";
 
-let dragSrc = null; 
+let dragSrc = null;
 
 class App extends Component {
   state = {
@@ -22,38 +22,38 @@ class App extends Component {
     finalStack3: [],
     finalStack4: [],
 
-    remainingDeckIndex: 0, 
+    remainingDeckIndex: 0
   };
   componentWillMount() {
     this.setDeckUp();
   }
 
-  returnActualValue = (value) => {
+  returnActualValue = value => {
     /* This function will return the actual value. Curently value is being used to display the card
     However, the game will require the color to be opposite of the previous color and the value to be one less
     or the array for that section to be empty. Actual value will assign values 1 - 13 with Ace being first */
-    let returning; 
-    switch (value){
-      case 'A':
-        returning = 1; 
-        break; 
-      case 'J': 
+    let returning;
+    switch (value) {
+      case "A":
+        returning = 1;
+        break;
+      case "J":
         returning = 11;
-        break;  
-      case 'Q':
+        break;
+      case "Q":
         returning = 12;
-        break; 
-      case 'K':
-        returning = 13; 
+        break;
+      case "K":
+        returning = 13;
         break;
       default:
         returning = Number(value);
     }
     //because react requires a default case  this can be simplified.
-    //2-10 will be the integer version of its string. 
+    //2-10 will be the integer version of its string.
 
-    return returning; 
-  }
+    return returning;
+  };
 
   setDeckUp = () => {
     //Step 1 of creating the game solitaire building a deck.
@@ -80,26 +80,54 @@ class App extends Component {
         const actual = this.returnActualValue(cards[j]);
         switch (i) {
           case 0:
-            deck.push({ suit: "hearts", value: cards[j], color: "red", actual });
+            deck.push({
+              suit: "hearts",
+              value: cards[j],
+              color: "red",
+              actual,
+              connected: false,
+              column: "none"
+            });
             break;
           case 1:
-            deck.push({ suit: "clubs", value: cards[j], color: "black", actual });
+            deck.push({
+              suit: "clubs",
+              value: cards[j],
+              color: "black",
+              actual,
+              connected: false,
+              column: "none"
+            });
             break;
           case 2:
-            deck.push({ suit: "spades", value: cards[j], color: "black", actual });
+            deck.push({
+              suit: "spades",
+              value: cards[j],
+              color: "black",
+              actual,
+              connected: false,
+              column: "none"
+            });
             break;
           case 3:
-            deck.push({ suit: "diamonds", value: cards[j], color: "red", actual });
+            deck.push({
+              suit: "diamonds",
+              value: cards[j],
+              color: "red",
+              actual,
+              connected: false,
+              column: "none"
+            });
             break;
           default:
             console.log("shouldn't reach this");
         }
       }
     }
-    
-    this.setState({deck}, () => {
-      this.shuffleDeck(); 
-    })
+
+    this.setState({ deck }, () => {
+      this.shuffleDeck();
+    });
   };
 
   shuffleDeck = () => {
@@ -138,7 +166,7 @@ class App extends Component {
   };
 
   generateColumns = () => {
-    const deck = this.state.deck.slice(); 
+    const deck = this.state.deck.slice();
     const colOne = [];
     const colTwo = [];
     const colThree = [];
@@ -153,45 +181,44 @@ class App extends Component {
       for (let i = 0; i < breakPoint; i++) {
         if (i < 1) {
           poppedFromList = deck.pop();
-          poppedFromList.showBack = true // added to each column and will be used to show back / click and reveal card. 
-          poppedFromList.column = 1; // will be used to identify the column being pulled from and or added to. 
+          poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          poppedFromList.column = 1; // will be used to identify the column being pulled from and or added to.
           colOne.push(poppedFromList);
         } else if (i < 3) {
           poppedFromList = deck.pop();
-          poppedFromList.showBack = true // added to each column and will be used to show back / click and reveal card. 
-          poppedFromList.column = 2; // will be used to identify the column being pulled from and or added to. 
+          poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          poppedFromList.column = 2; // will be used to identify the column being pulled from and or added to.
           colTwo.push(poppedFromList);
         } else if (i < 6) {
           poppedFromList = deck.pop();
-          poppedFromList.showBack = true // added to each column and will be used to show back / click and reveal card. 
-          poppedFromList.column = 3; // will be used to identify the column being pulled from and or added to. 
+          poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          poppedFromList.column = 3; // will be used to identify the column being pulled from and or added to.
           colThree.push(poppedFromList);
         } else if (i < 10) {
           poppedFromList = deck.pop();
-          poppedFromList.showBack = true // added to each column and will be used to show back / click and reveal card. 
-          poppedFromList.column = 4; // will be used to identify the column being pulled from and or added to. 
+          poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          poppedFromList.column = 4; // will be used to identify the column being pulled from and or added to.
           colFour.push(poppedFromList);
         } else if (i < 15) {
           poppedFromList = deck.pop();
-          poppedFromList.showBack = true // added to each column and will be used to show back / click and reveal card. 
-          poppedFromList.column = 5; // will be used to identify the column being pulled from and or added to. 
+          poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          poppedFromList.column = 5; // will be used to identify the column being pulled from and or added to.
           colFive.push(poppedFromList);
         } else if (i < 21) {
           poppedFromList = deck.pop();
-          poppedFromList.showBack = true // added to each column and will be used to show back / click and reveal card. 
-          poppedFromList.column = 6; // will be used to identify the column being pulled from and or added to. 
+          poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          poppedFromList.column = 6; // will be used to identify the column being pulled from and or added to.
           colSix.push(poppedFromList);
         } else if (i < breakPoint) {
           poppedFromList = deck.pop();
-          poppedFromList.showBack = true // added to each column and will be used to show back / click and reveal card. 
-          poppedFromList.column = 7; // will be used to identify the column being pulled from and or added to. 
+          poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          poppedFromList.column = 7; // will be used to identify the column being pulled from and or added to.
           colSeven.push(poppedFromList);
         }
       }
     } else {
       this.shuffleDeck();
     }
-    
 
     this.setState({
       deck,
@@ -202,7 +229,7 @@ class App extends Component {
       colFive,
       colSix,
       colSeven,
-      remainingDeckIndex: deck.length -1,
+      remainingDeckIndex: deck.length - 1
     });
   };
 
@@ -212,131 +239,132 @@ class App extends Component {
 
   goToNextCard = () => {
     /* Click the deck of remaining cards and this will increment and take the deck to the next position uses the modulo operator */
-    const remainingDeckIndex = (this.state.remainingDeckIndex + 1) % this.state.deck.length; 
-    this.setState({remainingDeckIndex});
+    const remainingDeckIndex =
+      (this.state.remainingDeckIndex + 1) % this.state.deck.length;
+    this.setState({ remainingDeckIndex });
   };
 
   /* Drag and drop functions*/
+
+  handleDrag = event => {
+    console.log("dragging");
+  };
+
   handleDragStart = event => {
+    console.log("drag start");
     event.target.style.opacity = ".35";
-    dragSrc = event.target; 
+    dragSrc = event.target;
 
     event.dataTransfer.setData("text/html", event.target.innerHTML);
-  }
+  };
 
   handleDragOver = event => {
-    if (event.preventDefault){
+    console.log("Drag over");
+    if (event.preventDefault) {
       event.preventDefault();
     }
     event.dataTransfer.dropEffect = "move";
-  }
+  };
 
   handleDragEnter = event => {
+    console.log("Drag enter")
     event.target.classList.add("over");
-  }
+  };
 
   handleDragLeave = event => {
+    console.log("Drag Leave")
     event.target.classList.remove("over");
-  }
+  };
 
   handleDrop = event => {
+    // event.preventDefault()
+    // if(event.target.id === "droptarget"){
+    //   const data = event.dataTransfer.getData("Text");
+    //   event.target.appendChild(document.getElementById(data));
+    // }
     if (event.stopPropagation) {
       event.stopPropagation();
     }
-    if (dragSrc !== event.target){
-      dragSrc.innerHTML = event.target.innerHTML; 
+    if (dragSrc !== event.target) {
+      dragSrc.innerHTML = event.target.innerHTML;
       event.target.innerHTML = event.dataTransfer.getData("text/html");
     }
-    return false; 
-  }
+    return false;
+  
+  };
 
   handleDragEnd = () => {
+    console.log("Drag End")
     const columns = document.querySelectorAll(".column");
     columns.forEach(column => {
       column.classList.remove("over");
-      column.style.opacity = 1; 
-    })
-  }
+      column.style.opacity = 1;
+    });
+  };
+
   handleRemainingDeckDrag = () => {
     /* this function will handle the remainingDeck drag. I want to increment the list so that it will go to the next card. */
-    const deck = this.state.deck.slice(); 
-    const remainingDeckIndex = (this.state.remainingDeckIndex + 1) % this.state.deck.length; 
-    const last = deck.pop(); 
-    const last_obj = {last, from : "remainingDeck"}; //  from will be used when using rules if it is not fitting of the rules it will return back to its list it came from. 
+    const deck = this.state.deck.slice();
+    const remainingDeckIndex =
+      (this.state.remainingDeckIndex + 1) % this.state.deck.length;
+    const last = deck.pop();
+    const last_obj = { last, from: "remainingDeck" }; //  from will be used when using rules if it is not fitting of the rules it will return back to its list it came from.
 
-    this.setState({deck, last_obj, remainingDeckIndex}); 
+    this.setState({ deck, last_obj, remainingDeckIndex });
+  };
 
-  }
+  /* New drag and drop functions trying something different */
+  allowingDrop = event => {
+    console.log(event.target);
+    event.preventDefault();
+  };
 
+  dragging = event => {
+    console.log(event.target);
+    event.dataTransfer.setData("text", event.target.id);
+  };
+
+  dropping = event => {
+    console.log(event.target);
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text");
+    event.target.appendChild(document.getElementById(data));
+  };
+
+  doubleClick = (card, column) => {
+    console.log(card);
+    console.log(column);
+  };
   /*
   Building the layout  one card is face up and six cards is face down next to it. 
   
   */
 
   render() {
-
     return (
       <div className="container">
-        <Home deck = {this.state.deck} colOne = {this.state.colOne} colTwo = {this.state.colTwo} 
-        colThree = {this.state.colThree} colFour = {this.state.colFour} colFive = {this.state.colFive}
-        colSix = {this.state.colSix} colSeven = {this.state.colSeven} finalStack1 = {this.state.finalStack1}
-        finalStack2 = {this.state.finalStack2} finalStack3 = {this.state.finalStack3} finalStack4 = {this.state.finalStack4}/>
-        
-        {/* <button onClick={this.shuffleDeck}>New Game</button>
-        <div className="outline scene">
-          <div onClick = {this.flipCard} className="card">
-            <div className="card__face card__face--front">
-              <div className="top">
-                {" "}
-                <span>A</span> <span>&#x2666;</span>{" "}
-              </div>
-               <h1 className = {remainingDeck[remainingDeck.length-1].color}>&#x2666;</h1>
-              <div className="bottom">
-                <span>A</span> <span>&#x2666;</span>
-              </div>
-              <div className="card__face card__face--back">BACK</div>
-            </div>
-          </div>
-        </div>
-        <div>
-
-        </div> */}
-        <div className="topRow">
-          {/* <div  className="drawPile"> */}
-            {/* <div onClick = {this.goToNextCard} className="outline scene drawFrom">
-              <p>React Solitaire</p>
-            </div> */}
-            {/* onDrag = {this.handleRemainingDeckDrag} */}
-            {/* <div  onDragStart={this.handleDragStart} draggable="true" onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"> */}
-            {/* onDrop={this.handleDrop}  */}
-              {/* <div className={"top " + remainingDeck[this.state.remainingDeckIndex].color}>
-                <span>{remainingDeck[this.state.remainingDeckIndex].value}</span> {remainingDeck[this.state.remainingDeckIndex].suit === 'hearts' ? <span>&hearts;</span> :  remainingDeck[this.state.remainingDeckIndex].suit === 'spades' ? <span>&spades;</span> :remainingDeck[this.state.remainingDeckIndex].suit === 'clubs' ? <span>&clubs;</span>: <span>&#x2666;</span> }
-              </div>
-              {remainingDeck[this.state.remainingDeckIndex].suit === 'hearts' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&hearts;</h1> :  remainingDeck[this.state.remainingDeckIndex].suit === 'spades' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&spades;</h1> :remainingDeck[this.state.remainingDeckIndex].suit === 'clubs' ?  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&clubs;</h1>:  <h1 className = {remainingDeck[this.state.remainingDeckIndex].color}>&#x2666;</h1>} */}
-              
-              {/* <div className={"bottom " + remainingDeck[this.state.remainingDeckIndex].color}>
-                {remainingDeck[this.state.remainingDeckIndex].suit === 'hearts' ? <span>&hearts;</span> :  remainingDeck[this.state.remainingDeckIndex].suit === 'spades' ? <span>&spades;</span> :remainingDeck[this.state.remainingDeckIndex].suit === 'clubs' ? <span>&clubs;</span>: <span>&#x2666;</span> }<span>{remainingDeck[this.state.remainingDeckIndex].value}</span> 
-              </div> */}
-            
-            {/* </div> */}
-              
-            {/* </div> */}
-          <div className="finalStack">
-            {/* <div onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
-            <div onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
-            <div onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
-            <div onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div> */}
-          </div>
-        </div>
-        <div className="bottomRow">
-          {/* <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
-          <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
-          <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
-          <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
-          <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
-          <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div>
-          <div draggable = "true" onDrop={this.handleDrop} onDragStart={this.handleDragStart} onDragOver={this.handleDragOver} onDragEnter={this.handleDragEnter} onDragLeave={this.handleDragLeave} onDragEnd={this.handleDragEnd} className="outline scene column"></div> */}
-        </div>
+        <Home
+          deck={this.state.deck}
+          colOne={this.state.colOne}
+          colTwo={this.state.colTwo}
+          colThree={this.state.colThree}
+          colFour={this.state.colFour}
+          colFive={this.state.colFive}
+          colSix={this.state.colSix}
+          colSeven={this.state.colSeven}
+          finalStack1={this.state.finalStack1}
+          finalStack2={this.state.finalStack2}
+          finalStack3={this.state.finalStack3}
+          finalStack4={this.state.finalStack4}
+          doubleClick={this.doubleClick}
+          handleDragStart={this.handleDragStart}
+          handleDragOver={this.handleDragOver}
+          handleDragEnter={this.handleDragEnter}
+          handleDragLeave={this.handleDragLeave}
+          handleOnDrop={this.handleDrop}
+          handleDrag={this.handleDrag}
+          handleDragEnd={this.handleDragEnd}
+        />
       </div>
     );
   }
