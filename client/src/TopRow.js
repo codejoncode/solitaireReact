@@ -1,5 +1,6 @@
 import React, { Component, Proptypes } from "react";
 import FinalStack from './FinalStack'
+import back from './blackCardPicture.PNG';
 class TopRow extends Component {
   state = {
     index: 0
@@ -28,7 +29,7 @@ class TopRow extends Component {
         <div className="topRow">
           <div className="drawPile">
             <div className="outline scene drawFrom" onClick={this.deckClick}>
-              <p>React Solitaire</p>
+              <img className = "backOfCard" src={back} alt="back of card"/>
             </div>
             <div draggable = "true" className="outline scene column">
               <div className={"top " + this.props.deck[this.state.index].color}>

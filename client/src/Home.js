@@ -7,7 +7,7 @@ class Home extends Component {
     console.log(this.props);
     return (
       <div>
-        <TopRow deck={this.props.deck} />
+        <TopRow deck={this.props.deck} stack1 = {this.props.finalStack1} stack2 = {this.props.finalStack2} stack3 = {this.props.finalStack3} stack4 = {this.props.finalStack4}/>
         <BottomRow
           colOne={this.props.colOne}
           colTwo={this.props.colTwo}

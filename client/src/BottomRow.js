@@ -1,7 +1,7 @@
 import React, {Component, Proptypes} from 'react'; 
 import DraggableSection from './DraggableSection';
 import BottomSection from './BottomSection';
-import back from './blackCardPicture.PNG';
+
 
 class BottomRow extends Component {
     state = {
