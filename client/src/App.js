@@ -337,25 +337,22 @@ class App extends Component {
     event.target.appendChild(document.getElementById(data));
   };
 
-  removeFromColumn = (column, index) => {
-    const deck = this.state.deck.slice() 
-    const colOne = this.state.colOne.slice()
-    const colTwo = this.state.colTwo.slice()
-    const colThree = this.state.colThree.slice()
-    const colFour = this.state.colFour.slice()
-    const colFive = this.state.colFive.slice()
-    const colSix = this.state.colSix.slice()
-    const colSeven = this.state.colSeven.slice()
-
+  removeFromColumn = (column, index,  deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4) => {
+    
+    console.log("Column to remove from", column)
     switch(column){
       case "remaining deck":
+        console.log(column, "triggered"); 
         if (index !== 5000){
+          console.log(deck.length);
           deck.splice(index, 1); 
+          console.log(deck.length);
         } else {
           deck.pop(); 
         }
         break;
-      case "column 1": 
+      case "column 1":
+        console.log(column, "triggered");  
         if (index !== 5000){
           colOne.splice(index, 1); 
         } else {
@@ -363,6 +360,7 @@ class App extends Component {
         }
         break;
       case "column 2":
+        console.log(column, "triggered"); 
         if (index !== 5000){
           colTwo.splice(index, 1);
         } else {
@@ -370,6 +368,7 @@ class App extends Component {
         }
         break; 
       case "column 3":
+        console.log(column, "triggered"); 
         if(index !== 5000){
           colThree.splice(index, 1);
         } else {
@@ -377,6 +376,7 @@ class App extends Component {
         }
         break; 
       case "column 4":
+        console.log(column, "triggered"); 
         if (index !== 5000){
           colFour.splice(index, 1);
         } else {
@@ -384,6 +384,7 @@ class App extends Component {
         }
         break; 
       case "column 5":
+        console.log(column, "triggered"); 
         if (index !== 5000){
           colFive.splice(index, 1);
         } else {
@@ -391,6 +392,7 @@ class App extends Component {
         }
         break;
       case "column 6":
+        console.log(column, "triggered"); 
         if (index !== 5000){
           colSix.splice(index, 1);
         } else {
@@ -398,6 +400,7 @@ class App extends Component {
         }
         break; 
       case "column 7":
+        console.log(column, "triggered"); 
         if (index !== 5000){
           colSeven.splice(index, 1); 
         } else {
@@ -407,7 +410,7 @@ class App extends Component {
       default:
         console.log("no case for this yet", column);
     }
-    this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven})
+    this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4})
   }
 
   doubleClick = (card, column, index = 5000) => {
@@ -445,46 +448,46 @@ class App extends Component {
       console.log(finalStack1, "before ")
       finalStack1.push(card);
       console.log(finalStack1, "after")
-      this.removeFromColumn(column, index); 
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
     }
     else if(finalStack2.length === 0 && card.value === 'A'){
       finalStack2.push(card);
-      this.removeFromColumn(column, index); 
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
     }
     else if(finalStack3.length === 0 && card.value === 'A'){
       finalStack3.push(card); 
-      this.removeFromColumn(column, index); 
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);  
     }
     else if(finalStack4.length === 0 && card.value === 'A'){
       finalStack4.push(card); 
-      this.removeFromColumn(column, index); 
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
     }
 
     else if(finalStack1.length > 0){
       if(finalStack1.length === card.actual && finalStack1[finalStack1.length-1].color === card.color){
         finalStack1.push(card);
-        this.removeFromColumn(column, index); 
+        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);  
       }
     }
 
     else if(finalStack2.length > 0){
       if(finalStack2.length === card.actual && finalStack2[finalStack2.length-1].color === card.color){
         finalStack2.push(card);
-        this.removeFromColumn(column, index); 
+        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
       }
     }
 
     else if(finalStack3.length > 0){
       if(finalStack3.length === card.actual && finalStack3[finalStack3.length-1].color === card.color){
         finalStack3.push(card);
-        this.removeFromColumn(column, index); 
+        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
       }
     }
 
     else if(finalStack4.length > 0){
       if(finalStack4.length === card.actual && finalStack4[finalStack4.length-1].color === card.color){
         finalStack4.push(card);
-        this.removeFromColumn(column, index); 
+        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
       }
     }
 
@@ -495,7 +498,7 @@ class App extends Component {
     
 
 
-    this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4})
+    // this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4})
   };
   /*
   Building the layout  one card is face up and six cards is face down next to it. 
