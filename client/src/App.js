@@ -9,6 +9,7 @@ let dragSrc = null;
 class App extends Component {
   state = {
     deck: [],
+    index: 0,
     shuffled: false,
     colOne: [],
     colTwo: [],
@@ -32,7 +33,7 @@ class App extends Component {
     /* This function will return the actual value. Curently value is being used to display the card
     However, the game will require the color to be opposite of the previous color and the value to be one less
     or the array for that section to be empty. Actual value will assign values 1 - 13 with Ace being first */
-    let returning;
+    let returning = null;
     switch (value) {
       case "A":
         returning = 1;
@@ -51,7 +52,8 @@ class App extends Component {
     }
     //because react requires a default case  this can be simplified.
     //2-10 will be the integer version of its string.
-
+    let x = 0; 
+    returning ? x = 1 : console.log("ISSUE WITH RETURNING", value);
     return returning;
   };
 
@@ -234,7 +236,14 @@ class App extends Component {
       remainingDeckIndex: deck.length - 1
     });
   };
-
+  
+  deckClick = () => {
+    console.log("Current State index", this.state.index);
+    console.log("Length of the State", this.props.deck.length);
+    const index = (this.state.index + 1) % this.props.deck.length;
+    this.setState({ index });
+    
+  };
   flipCard = () => {
     //this function should flip the card by taking the classname off or adding it.
   };
@@ -415,9 +424,250 @@ class App extends Component {
     this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4})
   }
 
+  connectedAdd = (card, column) => {
+    console.log(card, "connected");
+    console.log(column); 
+    const deck = this.state.deck.slice() 
+    const colOne = this.state.colOne.slice()
+    const colTwo = this.state.colTwo.slice()
+    const colThree = this.state.colThree.slice()
+    const colFour = this.state.colFour.slice()
+    const colFive = this.state.colFive.slice()
+    const colSix = this.state.colSix.slice()
+    const colSeven = this.state.colSeven.slice()
+    const finalStack1 = this.state.finalStack1.slice()
+    const finalStack2 = this.state.finalStack2.slice()
+    const finalStack3 = this.state.finalStack3.slice()
+    const finalStack4 = this.state.finalStack4.slice()
+
+    const lastOne = colOne[colOne.length -1];
+    const lastTwo = colTwo[colTwo.length - 1]; 
+    const lastThree = colThree[colThree.length - 1];
+    const lastFour = colFour[colFour.length - 1]; 
+    const lastFive = colFive[colFive.length -1]; 
+    const lastSix = colSix[colSix.length -1];
+    const lastSeven = colSeven[colSeven.length - 1];
+
+    /*if remaining deck is empty we can peform a way to get all the cards added at once */
+
+    /*For now just a way to take connected cards to their place on the board. */
+    const toBeAdded = []; 
+
+    switch(column){
+      case "column 1":
+        console.log(column, "triggered"); 
+        console.log(colOne); 
+        console.log(colOne[colOne.length -1], "first to pop")
+        while(colOne[colOne.length - 1].connected){
+          const toAdd = colOne.pop(); 
+          toBeAdded.push(toAdd); 
+          console.log(toBeAdded)
+        }
+        break;
+      case "column 2":
+        console.log(column, "triggered"); 
+        console.log(colTwo);
+        console.log(colTwo[colTwo.length - 1], "first to pop");
+        while(colTwo[colTwo.length - 1].connected){
+          const toAdd = colTwo.pop();
+          toBeAdded.push(toAdd);
+          console.log(toBeAdded)
+        } 
+        break; 
+      case "column 3":
+        console.log(column, "triggered"); 
+        console.log(colThree);
+        console.log(colThree[colThree.length - 1], "first to pop");
+        while(colThree[colThree.length - 1].connected){
+          const toAdd = colThree.pop();
+          toBeAdded.push(toAdd); 
+          console.log(toBeAdded)
+        }
+        break; 
+      case "column 4":
+        console.log(column, "triggered"); 
+        console.log(colFour);
+        console.log(colFour[colFour.length - 1], "first to pop");
+        while(colFour[colFour.length - 1].connected){
+          const toAdd = colFour.pop();
+          toBeAdded.push(toAdd);
+          console.log(toBeAdded)
+        }
+        break; 
+      case "column 5":
+        console.log(column, "triggered"); 
+        console.log(colFive);
+        console.log(colFive[colFive.length, "first to pop"]);
+        while(colFive[colFive.length - 1].connected){
+          const toAdd = colFive.pop(); 
+          toBeAdded.push(toAdd);
+          console.log(toBeAdded)
+        }
+        break;
+      case "column 6":
+        console.log(column, "triggered"); 
+        console.log(colSix);
+        console.log(colSix[colSix.length -1], "first to pop");
+        while(colSix[colSix.length - 1].connected){
+          const toAdd = colSix.pop(); 
+          toBeAdded.push(toAdd);
+          console.log(toBeAdded)
+        }
+        break; 
+      case "column 7":
+        console.log(column, "triggered"); 
+        console.log(colSeven);
+        console.log(colSeven[colSeven.length - 1], "first to pop");
+        while(colSeven[colSeven.length - 1].connected){
+          const toAdd = colSeven.pop();
+          toBeAdded.push(toAdd);
+          console.log(toBeAdded)
+        }
+
+      default:
+        console.log("no case for this yet", column);
+    }
+    /* Now handle columns lastOne through lastSeven has the card avialble to the last of each column*/
+    console.log(lastOne, lastTwo, lastThree, lastFour, lastFive, lastSix, lastSeven);
+    if(lastOne){
+      if(lastOne.actual - 1 === card.actual && lastOne.color !== card.color){
+        card.connected = true; 
+        lastOne.connected = true; 
+        card.showBack = false;
+        for (let i = toBeAdded.length -1; i >= 0; i--){
+          colOne.push(toBeAdded[i]);
+        } 
+        
+        return; 
+      }
+    }
+    if(lastTwo){
+      if (lastTwo.actual - 1 === card.actual && lastTwo.color !== card.color){
+        card.connected = true;
+        lastTwo.connected = true; 
+        card.showBack = false;
+        for (let i = toBeAdded.length -1; i >= 0; i--){
+          colTwo.push(toBeAdded[i]);
+        } 
+        
+        return; 
+      }
+    }
+    if(lastThree){
+      if (lastThree.actual - 1 === card.actual && lastThree.color !== card.color){
+        card.connected = true;
+        lastThree.connected = true; 
+        card.showBack = false;
+        for (let i = toBeAdded.length -1; i >= 0; i--){
+          colThree.push(toBeAdded[i]);
+        } 
+        
+        return; 
+      }
+    }
+    if(lastFour){
+      if (lastFour.actual - 1 === card.actual && lastFour.color !== card.color){
+        card.connected = true;
+        lastFour.connected = true; 
+        card.showBack = false;
+        for (let i = toBeAdded.length -1; i >= 0; i--){
+          colFour.push(toBeAdded[i]);
+        } 
+        return; 
+      }
+    }
+    if(lastFive){
+      if (lastFive.actual - 1 === card.actual && lastFive.color !== card.color){
+        card.connected = true;
+        lastFive.connected = true; 
+        card.showBack = false;
+        for (let i = toBeAdded.length -1; i >= 0; i--){
+          colFive.push(toBeAdded[i]);
+        } 
+        return; 
+      }
+    }
+    if(lastSix){
+      if (lastSix.actual - 1 === card.actual && lastSix.color !== card.color){
+        card.connected = true;
+        lastSix.connected = true; 
+        card.showBack = false;
+        for (let i = toBeAdded.length -1; i >= 0; i--){
+          colSix.push(toBeAdded[i]);
+        } 
+        return; 
+      }
+    }
+    if(lastSeven){
+      if (lastSeven.actual - 1 === card.actual && lastSeven.color !== card.color){
+        card.connected = true;
+        lastSeven.connected = true; 
+        card.showBack = false;
+        for (let i = toBeAdded.length -1; i >= 0; i--){
+          colSeven.push(toBeAdded[i]);
+        } 
+        return; 
+      }
+    }
+
+    /*Need to add card to empty section */
+    if(colOne.length === 0){
+      for (let i = toBeAdded.length -1; i >= 0; i--){
+        colOne.push(toBeAdded[i]);
+      } 
+      return; 
+    }
+    if(colTwo.length === 0){
+      for (let i = toBeAdded.length -1; i >= 0; i--){
+        colTwo.push(toBeAdded[i]);
+      } 
+      return; 
+    }
+    if(colThree.length === 0){
+      for (let i = toBeAdded.length -1; i >= 0; i--){
+        colThree.push(toBeAdded[i]);
+      } 
+      return; 
+    }
+    if (colFour.length === 0){
+      for (let i = toBeAdded.length -1; i >= 0; i--){
+        colFour.push(toBeAdded[i]);
+      } 
+      return; 
+    }
+    if (colFive.length === 0){
+      for (let i = toBeAdded.length -1; i >= 0; i--){
+        colFive.push(toBeAdded[i]);
+      } 
+      return; 
+    }
+    if (colSix.length === 0){
+      for (let i = toBeAdded.length -1; i >= 0; i--){
+        colSix.push(toBeAdded[i]);
+      } 
+      return; 
+    }
+    if (colSeven.length === 0){
+      for (let i = toBeAdded.length -1; i >= 0; i--){
+        colSeven.push(toBeAdded[i]);
+      } 
+      return; 
+    }
+
+
+    this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4})
+
+  } 
+
   doubleClick = (card, column, index = 5000) => {
     console.log(card);
     console.log(column);
+    
+    if (card.connected){
+      //if its true we have to take the cards underneath it as well. 
+      this.connectedAdd(card, column); 
+      return;
+    }
     const deck = this.state.deck.slice() 
     const colOne = this.state.colOne.slice()
     const colTwo = this.state.colTwo.slice()
@@ -470,7 +720,7 @@ class App extends Component {
     }
 
     if(finalStack1.length > 0){
-      if(finalStack1.length + 1 === card.actual && finalStack1[finalStack1.length-1].color === card.color){
+      if(finalStack1.length + 1 === card.actual && finalStack1[finalStack1.length-1].suit === card.suit){
         finalStack1.push(card);
         this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
         return;  
@@ -478,7 +728,7 @@ class App extends Component {
     }
 
     if(finalStack2.length > 0){
-      if(finalStack2.length + 1 === card.actual && finalStack2[finalStack2.length-1].color === card.color){
+      if(finalStack2.length + 1 === card.actual && finalStack2[finalStack2.length-1].suit === card.suit){
         finalStack2.push(card);
         this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
         return; 
@@ -486,7 +736,7 @@ class App extends Component {
     }
 
     if(finalStack3.length > 0){
-      if(finalStack3.length + 1 === card.actual && finalStack3[finalStack3.length-1].color === card.color){
+      if(finalStack3.length + 1 === card.actual && finalStack3[finalStack3.length-1].suit === card.suit){
         finalStack3.push(card);
         this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
         return; 
@@ -494,7 +744,7 @@ class App extends Component {
     }
 
     if(finalStack4.length > 0){
-      if(finalStack4.length + 1 === card.actual && finalStack4[finalStack4.length-1].color === card.color){
+      if(finalStack4.length + 1 === card.actual && finalStack4[finalStack4.length-1].suit === card.suit){
         finalStack4.push(card);
         this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
         return; 
@@ -503,57 +753,126 @@ class App extends Component {
 
     /* Now handle columns lastOne through lastSeven has the card avialble to the last of each column*/
     console.log(lastOne, lastTwo, lastThree, lastFour, lastFive, lastSix, lastSeven);
-    if(lastOne.actual - 1 === card.actual && lastOne.color !== card.color){
-      card.connected = true; 
+    if(lastOne){
+      if(lastOne.actual - 1 === card.actual && lastOne.color !== card.color){
+        card.connected = true; 
+        lastOne.connected = true; 
+        card.showBack = false; 
+        colOne.push(card);
+        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+        return; 
+      }
+    }
+    if(lastTwo){
+      if (lastTwo.actual - 1 === card.actual && lastTwo.color !== card.color){
+        card.connected = true;
+        lastTwo.connected = true; 
+        card.showBack = false;
+        colTwo.push(card);
+        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+        return; 
+      }
+    }
+    if(lastThree){
+      if (lastThree.actual - 1 === card.actual && lastThree.color !== card.color){
+        card.connected = true;
+        lastThree.connected = true; 
+        card.showBack = false;
+        colThree.push(card);
+        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+        return; 
+      }
+    }
+    if(lastFour){
+      if (lastFour.actual - 1 === card.actual && lastFour.color !== card.color){
+        card.connected = true;
+        lastFour.connected = true; 
+        card.showBack = false;
+        colFour.push(card);
+        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+        return; 
+      }
+    }
+    if(lastFive){
+      if (lastFive.actual - 1 === card.actual && lastFive.color !== card.color){
+        card.connected = true;
+        lastFive.connected = true; 
+        card.showBack = false;
+        colFive.push(card);
+        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+        return; 
+      }
+    }
+    if(lastSix){
+      if (lastSix.actual - 1 === card.actual && lastSix.color !== card.color){
+        card.connected = true;
+        lastSix.connected = true; 
+        card.showBack = false;
+        colSix.push(card);
+        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+        return; 
+      }
+    }
+    if(lastSeven){
+      if (lastSeven.actual - 1 === card.actual && lastSeven.color !== card.color){
+        card.connected = true;
+        lastSeven.connected = true; 
+        card.showBack = false;
+        colSeven.push(card);
+        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+        return; 
+      }
+    }
+
+    /*Need to add card to empty section */
+    if(colOne.length === 0){
       colOne.push(card);
       this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
       return; 
     }
-    if (lastTwo.actual - 1 === card.actual && lastTwo.color !== card.color){
-      card.connected = true;
+    if(colTwo.length === 0){
       colTwo.push(card);
       this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
       return; 
     }
-    if (lastThree.actual - 1 === card.actual && lastThree.color !== card.color){
-      card.connected = true;
+    if(colThree.length === 0){
       colThree.push(card);
       this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
       return; 
     }
-    if (lastFour.actual - 1 === card.actual && lastFour.color !== card.color){
-      card.connected = true;
+    if (colFour.length === 0){
       colFour.push(card);
       this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
       return; 
     }
-    if (lastFive.actual - 1 === card.actual && lastFive.color !== card.color){
-      card.connected = true;
+    if (colFive.length === 0){
       colFive.push(card);
       this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
       return; 
     }
-    if (lastSix.actual - 1 === card.actual && lastSix.color !== card.color){
-      card.connected = true;
+    if (colSix.length === 0){
       colSix.push(card);
       this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
       return; 
     }
-    if (lastSeven.actual - 1 === card.actual && lastSeven.color !== card.color){
-      card.connected = true;
+    if (colSeven.length === 0){
       colSeven.push(card);
       this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
       return; 
     }
-
-    /*Need to add card to empty section */
-    
 
 
     
 
 
     // this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4})
+  };
+  deckClick = () => {
+    console.log("Current State index", this.state.index);
+    console.log("Length of the State", this.props.deck.length);
+    const index = (this.state.index + 1) % this.props.deck.length;
+    this.setState({ index });
+    
   };
   /*
   Building the layout  one card is face up and six cards is face down next to it. 

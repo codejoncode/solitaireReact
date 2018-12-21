@@ -17,8 +17,11 @@ class TopRow extends Component {
   }
 
   deckClick = () => {
+    console.log("Current State index", this.state.index);
+    console.log("Length of the State", this.props.deck.length);
     const index = (this.state.index + 1) % this.props.deck.length;
     this.setState({ index });
+    
   };
 
   render() {
@@ -29,9 +32,9 @@ class TopRow extends Component {
     // handleOnDrop = {this.props.handleOnDrop}
     // handleDragOver = {this.props.handleDragOver}
     // handleDragend={this.props.handleDragEnd}
-    console.log(this.props.deck);
-    console.log(this.state.index);
-    if (this.state.index < 24) {
+    console.log("this is the deck", this.props.deck);
+    console.log("this is the index", this.state.index);
+    if (this.state.index < 28) {
       return (
         <div className="topRow">
           <div className="drawPile">
@@ -49,7 +52,8 @@ class TopRow extends Component {
               // onDragOver={this.props.handleDragOver}
               // onDrop={this.props.handleOnDrop}
               onDragLeave={this.props.handleDragLeave}
-              onDoubleClick = {() => {this.props.doubleClick(this.props.deck[this.state.index], "remaining deck", this.state.index)}}
+              onDoubleClick = {() => {this.props.doubleClick(this.props.deck[this.state.index], "remaining deck", this.state.index)}}    
+              // I added minus one above to test out if it keeps me from getting a certain error
             >
               <div className={"top " + this.props.deck[this.state.index].color}>
                 <span draggable="false">

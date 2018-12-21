@@ -25,7 +25,7 @@ class FinalDropZone extends Component {
         onDrop={this.props.handleOnDrop}
         onDragLeave={this.props.handleDragLeave}
         stack={this.props.stack}
-        doubleClick={this.props.doubleClick}
+        onDoubleClick={this.props.doubleClick}
       >
         {this.props.stack.length ? (
           <div>

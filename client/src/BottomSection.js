@@ -17,10 +17,9 @@ class BottomSection extends Component {
   };
 
   render() {
-    console.log("BottomSection");
-    console.log(this.props);
+    
     const cards = this.props.cards;
-    console.log(cards);
+    
     return (
       <div>
         {cards.map((card, id) => (
@@ -43,9 +42,10 @@ class BottomSection extends Component {
                   ? "card lastInStack outline scene column"
                   : "card stackedCards outline scene column"
               }
+              // className = "card stackedCards outline scene column" needed to keep last card at full width need to have a class witout stackedCards
             >
               {/* {(card.showBack === true && id !== this.props.cards.length - 1)  ? ( */}
-              {(card.showBack === true ) ? (
+              {(card.showBack === true && card.connected === false) ? (
                 <img className="backOfCard" src={back} alt="back of card" />
               ) : (
                 (lastCard = true)
