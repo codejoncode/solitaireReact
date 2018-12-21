@@ -20,6 +20,10 @@ class TopRow extends Component {
     console.log("Current State index", this.state.index);
     console.log("Length of the State", this.props.deck.length);
     const index = (this.state.index + 1) % this.props.deck.length;
+
+    // if(index === this.props.deck.length){
+    //   index -= 1; // this conditional was added becasue i keep getting a property color cannot be read on undefined and for some reason the index is the same number as the length. 
+    // }
     this.setState({ index });
     
   };
@@ -34,7 +38,8 @@ class TopRow extends Component {
     // handleDragend={this.props.handleDragEnd}
     console.log("this is the deck", this.props.deck);
     console.log("this is the index", this.state.index);
-    if (this.state.index < 28) {
+    
+    if (this.state.index < this.props.deck.length) {
       return (
         <div className="topRow">
           <div className="drawPile">

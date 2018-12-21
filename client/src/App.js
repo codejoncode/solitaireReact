@@ -458,7 +458,7 @@ class App extends Component {
         console.log(column, "triggered"); 
         console.log(colOne); 
         console.log(colOne[colOne.length -1], "first to pop")
-        while(colOne[colOne.length - 1].connected){
+        while(colOne.length && colOne[colOne.length - 1].connected){
           const toAdd = colOne.pop(); 
           toBeAdded.push(toAdd); 
           console.log(toBeAdded)
@@ -468,7 +468,7 @@ class App extends Component {
         console.log(column, "triggered"); 
         console.log(colTwo);
         console.log(colTwo[colTwo.length - 1], "first to pop");
-        while(colTwo[colTwo.length - 1].connected){
+        while(colTwo.length && colTwo[colTwo.length - 1].connected){
           const toAdd = colTwo.pop();
           toBeAdded.push(toAdd);
           console.log(toBeAdded)
@@ -478,7 +478,7 @@ class App extends Component {
         console.log(column, "triggered"); 
         console.log(colThree);
         console.log(colThree[colThree.length - 1], "first to pop");
-        while(colThree[colThree.length - 1].connected){
+        while(colThree.length && colThree[colThree.length - 1].connected){
           const toAdd = colThree.pop();
           toBeAdded.push(toAdd); 
           console.log(toBeAdded)
@@ -488,7 +488,7 @@ class App extends Component {
         console.log(column, "triggered"); 
         console.log(colFour);
         console.log(colFour[colFour.length - 1], "first to pop");
-        while(colFour[colFour.length - 1].connected){
+        while(colFour.length && colFour[colFour.length - 1].connected){
           const toAdd = colFour.pop();
           toBeAdded.push(toAdd);
           console.log(toBeAdded)
@@ -498,7 +498,7 @@ class App extends Component {
         console.log(column, "triggered"); 
         console.log(colFive);
         console.log(colFive[colFive.length, "first to pop"]);
-        while(colFive[colFive.length - 1].connected){
+        while(colFive.length && colFive[colFive.length - 1].connected){
           const toAdd = colFive.pop(); 
           toBeAdded.push(toAdd);
           console.log(toBeAdded)
@@ -508,7 +508,7 @@ class App extends Component {
         console.log(column, "triggered"); 
         console.log(colSix);
         console.log(colSix[colSix.length -1], "first to pop");
-        while(colSix[colSix.length - 1].connected){
+        while(colSix.length && colSix[colSix.length - 1].connected){
           const toAdd = colSix.pop(); 
           toBeAdded.push(toAdd);
           console.log(toBeAdded)
@@ -518,7 +518,7 @@ class App extends Component {
         console.log(column, "triggered"); 
         console.log(colSeven);
         console.log(colSeven[colSeven.length - 1], "first to pop");
-        while(colSeven[colSeven.length - 1].connected){
+        while(colSeven.length && colSeven[colSeven.length - 1].connected){
           const toAdd = colSeven.pop();
           toBeAdded.push(toAdd);
           console.log(toBeAdded)
@@ -611,63 +611,69 @@ class App extends Component {
     }
 
     /*Need to add card to empty section */
-    if(colOne.length === 0){
-      foundAPlace = true; 
-      for (let i = toBeAdded.length -1; i >= 0; i--){
-        colOne.push(toBeAdded[i]);
-      } 
+    if(foundAPlace === false){
+      if(colOne.length === 0){
+        foundAPlace = true; 
+        for (let i = toBeAdded.length -1; i >= 0; i--){
+          colOne.push(toBeAdded[i]);
+        } 
+      }
+      if(colTwo.length === 0){
+        foundAPlace = true; 
+        for (let i = toBeAdded.length -1; i >= 0; i--){
+          colTwo.push(toBeAdded[i]);
+        } 
+      }
+      if(colThree.length === 0){
+        foundAPlace = true; 
+        for (let i = toBeAdded.length -1; i >= 0; i--){
+          colThree.push(toBeAdded[i]);
+        } 
+      }
+      if (colFour.length === 0){
+        foundAPlace = true; 
+        for (let i = toBeAdded.length -1; i >= 0; i--){
+          colFour.push(toBeAdded[i]);
+        }  
+      }
+      if (colFive.length === 0){
+        foundAPlace = true; 
+        for (let i = toBeAdded.length -1; i >= 0; i--){
+          colFive.push(toBeAdded[i]);
+        } 
+      }
+      if (colSix.length === 0){
+        foundAPlace = true; 
+        for (let i = toBeAdded.length -1; i >= 0; i--){
+          colSix.push(toBeAdded[i]);
+        } 
+      }
+      if (colSeven.length === 0){
+        foundAPlace = true; 
+        for (let i = toBeAdded.length -1; i >= 0; i--){
+          colSeven.push(toBeAdded[i]);
+        } 
+      }
     }
-    if(colTwo.length === 0){
-      foundAPlace = true; 
-      for (let i = toBeAdded.length -1; i >= 0; i--){
-        colTwo.push(toBeAdded[i]);
-      } 
-    }
-    if(colThree.length === 0){
-      foundAPlace = true; 
-      for (let i = toBeAdded.length -1; i >= 0; i--){
-        colThree.push(toBeAdded[i]);
-      } 
-    }
-    if (colFour.length === 0){
-      foundAPlace = true; 
-      for (let i = toBeAdded.length -1; i >= 0; i--){
-        colFour.push(toBeAdded[i]);
-      }  
-    }
-    if (colFive.length === 0){
-      foundAPlace = true; 
-      for (let i = toBeAdded.length -1; i >= 0; i--){
-        colFive.push(toBeAdded[i]);
-      } 
-    }
-    if (colSix.length === 0){
-      foundAPlace = true; 
-      for (let i = toBeAdded.length -1; i >= 0; i--){
-        colSix.push(toBeAdded[i]);
-      } 
-    }
-    if (colSeven.length === 0){
-      foundAPlace = true; 
-      for (let i = toBeAdded.length -1; i >= 0; i--){
-        colSeven.push(toBeAdded[i]);
-      } 
-    }
-
     if(foundAPlace){
       this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4});
-    } 
+      return true; 
+    } else {
+      return false; 
+    }
 
   } 
 
   doubleClick = (card, column, index = 5000) => {
     console.log(card);
     console.log(column);
-    
+    let foundAPlace = false; 
     if (card.connected){
       //if its true we have to take the cards underneath it as well. 
-      this.connectedAdd(card, column); 
-      return;
+      foundAPlace = this.connectedAdd(card, column); 
+    }
+    if (foundAPlace){
+      return; 
     }
     const deck = this.state.deck.slice() 
     const colOne = this.state.colOne.slice()
