@@ -23,6 +23,7 @@ class FinalStack extends Component {
           handleDragStart={this.props.handleDragStart}
           handleDrag={this.props.handleDrag}
           handleDragEnd={this.props.handleDragEnd}
+          stack = {this.props.stack1}
         />
         <FinalDropZone className = "stack2"
           stack = "stack2"
@@ -34,6 +35,7 @@ class FinalStack extends Component {
           handleDragStart={this.props.handleDragStart}
           handleDrag={this.props.handleDrag}
           handleDragEnd={this.props.handleDragEnd}
+          stack = {this.props.stack2}
         />
         <FinalDropZone className = "stack3"
           stack = "stack3"
@@ -45,6 +47,7 @@ class FinalStack extends Component {
           handleDragStart={this.props.handleDragStart}
           handleDrag={this.props.handleDrag}
           handleDragEnd={this.props.handleDragEnd}
+          stack = {this.props.stack3}
         />
         <FinalDropZone className = "stack4"
           stack = "stack4"
@@ -56,6 +59,7 @@ class FinalStack extends Component {
           handleDragStart={this.props.handleDragStart}
           handleDrag={this.props.handleDrag}
           handleDragEnd={this.props.handleDragEnd}
+          stack = {this.props.stack4}
         />
       </div>
     );

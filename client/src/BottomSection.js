@@ -34,7 +34,7 @@ class BottomSection extends Component {
               // onDrag = {this.props.handleDrag}
               onDragEnd = {this.props.handleDragEnd} 
               onDragEnter={this.handleDragEnter}
-              onDragOver={this.props.handleDragOver}
+              onDragOver={event => this.props.handleDragOver(event, this.props.name)}
               onDrop={this.props.handleOnDrop}
               onDragLeave={this.props.handleDragLeave}
               draggable="true"

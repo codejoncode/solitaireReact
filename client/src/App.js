@@ -250,7 +250,7 @@ class App extends Component {
     console.log("dragging");
   };
 
-  handleDragStart = event => {
+  handleDragStart = (event) => {
     console.log("drag start");
     event.target.style.opacity = ".35";
     dragSrc = event.target;
@@ -258,7 +258,10 @@ class App extends Component {
     event.dataTransfer.setData("text/html", event.target.innerHTML);
   };
 
-  handleDragOver = event => {
+  handleDragOver = (event, column = 10000) => {
+    if(column !== 10000){
+      console.log(column); 
+    }
     console.log("Drag over");
     if (event.preventDefault) {
       event.preventDefault();
@@ -439,7 +442,9 @@ class App extends Component {
 
     //first check the final stacks 
     if (finalStack1.length === 0 && card.value === 'A'){
+      console.log(finalStack1, "before ")
       finalStack1.push(card);
+      console.log(finalStack1, "after")
       this.removeFromColumn(column, index); 
     }
     else if(finalStack2.length === 0 && card.value === 'A'){
@@ -486,10 +491,11 @@ class App extends Component {
     /* Now handle columns lastOne through lastSeven has the card avialble to the last of each column*/
     
 
+
     
 
 
-    this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven})
+    this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4})
   };
   /*
   Building the layout  one card is face up and six cards is face down next to it. 

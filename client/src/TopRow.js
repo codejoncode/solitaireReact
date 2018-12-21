@@ -46,8 +46,8 @@ class TopRow extends Component {
               // onDrag = {this.props.handleDrag}
               onDragEnd = {this.props.handleDragEnd} 
               onDragEnter={this.handleDragEnter}
-              onDragOver={this.props.handleDragOver}
-              onDrop={this.props.handleOnDrop}
+              // onDragOver={this.props.handleDragOver}
+              // onDrop={this.props.handleOnDrop}
               onDragLeave={this.props.handleDragLeave}
               onDoubleClick = {() => {this.props.doubleClick(this.props.deck[this.state.index], "remaining deck", this.state.index)}}
             >
@@ -128,6 +128,10 @@ class TopRow extends Component {
             handleOnDrop={this.props.handleOnDrop}
             handleDragOver={this.props.handleDragOver}
             handleDragEnd={this.props.handleDragEnd}
+            stack1 = {this.props.stack1}
+            stack2 = {this.props.stack2}
+            stack3 = {this.props.stack3}
+            stack4 = {this.props.stack4}
           />
         </div>
       );
