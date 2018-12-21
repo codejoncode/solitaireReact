@@ -463,35 +463,36 @@ class App extends Component {
       this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
     }
 
-    else if(finalStack1.length > 0){
-      if(finalStack1.length === card.actual && finalStack1[finalStack1.length-1].color === card.color){
+    if(finalStack1.length > 0){
+      if(finalStack1.length + 1 === card.actual && finalStack1[finalStack1.length-1].color === card.color){
         finalStack1.push(card);
         this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);  
       }
     }
 
-    else if(finalStack2.length > 0){
-      if(finalStack2.length === card.actual && finalStack2[finalStack2.length-1].color === card.color){
+    if(finalStack2.length > 0){
+      if(finalStack2.length + 1 === card.actual && finalStack2[finalStack2.length-1].color === card.color){
         finalStack2.push(card);
         this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
       }
     }
 
-    else if(finalStack3.length > 0){
-      if(finalStack3.length === card.actual && finalStack3[finalStack3.length-1].color === card.color){
+    if(finalStack3.length > 0){
+      if(finalStack3.length + 1 === card.actual && finalStack3[finalStack3.length-1].color === card.color){
         finalStack3.push(card);
         this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
       }
     }
 
-    else if(finalStack4.length > 0){
-      if(finalStack4.length === card.actual && finalStack4[finalStack4.length-1].color === card.color){
+    if(finalStack4.length > 0){
+      if(finalStack4.length + 1 === card.actual && finalStack4[finalStack4.length-1].color === card.color){
         finalStack4.push(card);
         this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
       }
     }
 
     /* Now handle columns lastOne through lastSeven has the card avialble to the last of each column*/
+
     
 
 
