@@ -276,7 +276,7 @@ class App extends Component {
     event.target.classList.remove("over");
   };
 
-  handleDrop = event => {
+  handleDrop = (event, from) => {
     // event.preventDefault()
     // if(event.target.id === "droptarget"){
     //   const data = event.dataTransfer.getData("Text");
