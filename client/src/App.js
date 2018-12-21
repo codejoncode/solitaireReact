@@ -181,37 +181,39 @@ class App extends Component {
       for (let i = 0; i < breakPoint; i++) {
         if (i < 1) {
           poppedFromList = deck.pop();
-          poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+
+          // poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          //doesn't need a show back we will always reveal the card even after adding to this section. 
           poppedFromList.column = 1; // will be used to identify the column being pulled from and or added to.
           colOne.push(poppedFromList);
         } else if (i < 3) {
           poppedFromList = deck.pop();
-          poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          poppedFromList.showBack = i === 2 ? false: true; // added to each column and will be used to show back / click and reveal card.
           poppedFromList.column = 2; // will be used to identify the column being pulled from and or added to.
           colTwo.push(poppedFromList);
         } else if (i < 6) {
           poppedFromList = deck.pop();
-          poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          poppedFromList.showBack = i === 5 ? false : true; // added to each column and will be used to show back / click and reveal card.
           poppedFromList.column = 3; // will be used to identify the column being pulled from and or added to.
           colThree.push(poppedFromList);
         } else if (i < 10) {
           poppedFromList = deck.pop();
-          poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          poppedFromList.showBack = i === 9 ? false: true; // added to each column and will be used to show back / click and reveal card.
           poppedFromList.column = 4; // will be used to identify the column being pulled from and or added to.
           colFour.push(poppedFromList);
         } else if (i < 15) {
           poppedFromList = deck.pop();
-          poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          poppedFromList.showBack = i === 14 ? false : true; // added to each column and will be used to show back / click and reveal card.
           poppedFromList.column = 5; // will be used to identify the column being pulled from and or added to.
           colFive.push(poppedFromList);
         } else if (i < 21) {
           poppedFromList = deck.pop();
-          poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          poppedFromList.showBack = i === 20 ? false : true; // added to each column and will be used to show back / click and reveal card.
           poppedFromList.column = 6; // will be used to identify the column being pulled from and or added to.
           colSix.push(poppedFromList);
         } else if (i < breakPoint) {
           poppedFromList = deck.pop();
-          poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          poppedFromList.showBack = i === breakPoint - 1 ? false : true; // added to each column and will be used to show back / click and reveal card.
           poppedFromList.column = 7; // will be used to identify the column being pulled from and or added to.
           colSeven.push(poppedFromList);
         }
@@ -543,6 +545,8 @@ class App extends Component {
       this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
       return; 
     }
+
+    /*Need to add card to empty section */
     
 
 

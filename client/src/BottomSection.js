@@ -44,7 +44,8 @@ class BottomSection extends Component {
                   : "card stackedCards outline scene column"
               }
             >
-              {card.showBack === true && id !== this.props.cards.length - 1 ? (
+              {/* {(card.showBack === true && id !== this.props.cards.length - 1)  ? ( */}
+              {(card.showBack === true ) ? (
                 <img className="backOfCard" src={back} alt="back of card" />
               ) : (
                 (lastCard = true)
