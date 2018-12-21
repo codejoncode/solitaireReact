@@ -452,7 +452,7 @@ class App extends Component {
 
     /*For now just a way to take connected cards to their place on the board. */
     const toBeAdded = []; 
-
+    let foundAPlace = false; 
     switch(column){
       case "column 1":
         console.log(column, "triggered"); 
@@ -534,11 +534,11 @@ class App extends Component {
         card.connected = true; 
         lastOne.connected = true; 
         card.showBack = false;
+        foundAPlace = true; 
         for (let i = toBeAdded.length -1; i >= 0; i--){
           colOne.push(toBeAdded[i]);
         } 
         
-        return; 
       }
     }
     if(lastTwo){
@@ -546,11 +546,11 @@ class App extends Component {
         card.connected = true;
         lastTwo.connected = true; 
         card.showBack = false;
+        foundAPlace = true; 
         for (let i = toBeAdded.length -1; i >= 0; i--){
           colTwo.push(toBeAdded[i]);
         } 
         
-        return; 
       }
     }
     if(lastThree){
@@ -558,11 +558,11 @@ class App extends Component {
         card.connected = true;
         lastThree.connected = true; 
         card.showBack = false;
+        foundAPlace = true; 
         for (let i = toBeAdded.length -1; i >= 0; i--){
           colThree.push(toBeAdded[i]);
         } 
         
-        return; 
       }
     }
     if(lastFour){
@@ -570,10 +570,10 @@ class App extends Component {
         card.connected = true;
         lastFour.connected = true; 
         card.showBack = false;
+        foundAPlace = true; 
         for (let i = toBeAdded.length -1; i >= 0; i--){
           colFour.push(toBeAdded[i]);
         } 
-        return; 
       }
     }
     if(lastFive){
@@ -581,10 +581,10 @@ class App extends Component {
         card.connected = true;
         lastFive.connected = true; 
         card.showBack = false;
+        foundAPlace = true; 
         for (let i = toBeAdded.length -1; i >= 0; i--){
           colFive.push(toBeAdded[i]);
-        } 
-        return; 
+        }  
       }
     }
     if(lastSix){
@@ -592,10 +592,10 @@ class App extends Component {
         card.connected = true;
         lastSix.connected = true; 
         card.showBack = false;
+        foundAPlace = true; 
         for (let i = toBeAdded.length -1; i >= 0; i--){
           colSix.push(toBeAdded[i]);
-        } 
-        return; 
+        }  
       }
     }
     if(lastSeven){
@@ -603,59 +603,60 @@ class App extends Component {
         card.connected = true;
         lastSeven.connected = true; 
         card.showBack = false;
+        foundAPlace = true; 
         for (let i = toBeAdded.length -1; i >= 0; i--){
           colSeven.push(toBeAdded[i]);
-        } 
-        return; 
+        }  
       }
     }
 
     /*Need to add card to empty section */
     if(colOne.length === 0){
+      foundAPlace = true; 
       for (let i = toBeAdded.length -1; i >= 0; i--){
         colOne.push(toBeAdded[i]);
       } 
-      return; 
     }
     if(colTwo.length === 0){
+      foundAPlace = true; 
       for (let i = toBeAdded.length -1; i >= 0; i--){
         colTwo.push(toBeAdded[i]);
       } 
-      return; 
     }
     if(colThree.length === 0){
+      foundAPlace = true; 
       for (let i = toBeAdded.length -1; i >= 0; i--){
         colThree.push(toBeAdded[i]);
       } 
-      return; 
     }
     if (colFour.length === 0){
+      foundAPlace = true; 
       for (let i = toBeAdded.length -1; i >= 0; i--){
         colFour.push(toBeAdded[i]);
-      } 
-      return; 
+      }  
     }
     if (colFive.length === 0){
+      foundAPlace = true; 
       for (let i = toBeAdded.length -1; i >= 0; i--){
         colFive.push(toBeAdded[i]);
       } 
-      return; 
     }
     if (colSix.length === 0){
+      foundAPlace = true; 
       for (let i = toBeAdded.length -1; i >= 0; i--){
         colSix.push(toBeAdded[i]);
       } 
-      return; 
     }
     if (colSeven.length === 0){
+      foundAPlace = true; 
       for (let i = toBeAdded.length -1; i >= 0; i--){
         colSeven.push(toBeAdded[i]);
       } 
-      return; 
     }
 
-
-    this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4})
+    if(foundAPlace){
+      this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4});
+    } 
 
   } 
 
