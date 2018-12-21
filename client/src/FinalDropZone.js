@@ -23,6 +23,8 @@ class FinalDropZone extends Component {
         onDragOver={this.props.handleDragOver}
         onDrop={this.props.handleOnDrop}
         onDragLeave={this.props.handleDragLeave}
+        stack = {this.props.stack}
+        doubleClick = {this.props.doubleClick}
 
       />
     );

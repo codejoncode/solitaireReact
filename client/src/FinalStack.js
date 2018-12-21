@@ -14,6 +14,8 @@ class FinalStack extends Component {
     return (
       <div draggable = "false" className="finalStack">
         <FinalDropZone className = "stack1"
+          stack = "stack1"
+          doubleClick = {this.props.doubleClick}
           handleDragEnter={this.props.handleDragEnter}
           handleDragOver={this.props.handleDragOver}
           handleDragLeave={this.props.handleDragLeave}
@@ -23,6 +25,8 @@ class FinalStack extends Component {
           handleDragEnd={this.props.handleDragEnd}
         />
         <FinalDropZone className = "stack2"
+          stack = "stack2"
+          doubleClick = {this.props.doubleClick}
           handleDragEnter={this.props.handleDragEnter}
           handleDragOver={this.props.handleDragOver}
           handleDragLeave={this.props.handleDragLeave}
@@ -32,6 +36,8 @@ class FinalStack extends Component {
           handleDragEnd={this.props.handleDragEnd}
         />
         <FinalDropZone className = "stack3"
+          stack = "stack3"
+          doubleClick = {this.props.doubleClick}
           handleDragEnter={this.props.handleDragEnter}
           handleDragOver={this.props.handleDragOver}
           handleDragLeave={this.props.handleDragLeave}
@@ -41,6 +47,8 @@ class FinalStack extends Component {
           handleDragEnd={this.props.handleDragEnd}
         />
         <FinalDropZone className = "stack4"
+          stack = "stack4"
+          doubleClick = {this.props.doubleClick}
           handleDragEnter={this.props.handleDragEnter}
           handleDragOver={this.props.handleDragOver}
           handleDragLeave={this.props.handleDragLeave}

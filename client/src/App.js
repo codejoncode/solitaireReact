@@ -268,6 +268,7 @@ class App extends Component {
 
   handleDragEnter = event => {
     console.log("Drag enter")
+    
     event.target.classList.add("over");
   };
 
@@ -276,7 +277,7 @@ class App extends Component {
     event.target.classList.remove("over");
   };
 
-  handleDrop = (event, from) => {
+  handleDrop = (event) => {
     // event.preventDefault()
     // if(event.target.id === "droptarget"){
     //   const data = event.dataTransfer.getData("Text");
@@ -333,9 +334,162 @@ class App extends Component {
     event.target.appendChild(document.getElementById(data));
   };
 
-  doubleClick = (card, column) => {
+  removeFromColumn = (column, index) => {
+    const deck = this.state.deck.slice() 
+    const colOne = this.state.colOne.slice()
+    const colTwo = this.state.colTwo.slice()
+    const colThree = this.state.colThree.slice()
+    const colFour = this.state.colFour.slice()
+    const colFive = this.state.colFive.slice()
+    const colSix = this.state.colSix.slice()
+    const colSeven = this.state.colSeven.slice()
+
+    switch(column){
+      case "remaining deck":
+        if (index !== 5000){
+          deck.splice(index, 1); 
+        } else {
+          deck.pop(); 
+        }
+        break;
+      case "column 1": 
+        if (index !== 5000){
+          colOne.splice(index, 1); 
+        } else {
+          colOne.pop(); 
+        }
+        break;
+      case "column 2":
+        if (index !== 5000){
+          colTwo.splice(index, 1);
+        } else {
+          colTwo.pop(); 
+        }
+        break; 
+      case "column 3":
+        if(index !== 5000){
+          colThree.splice(index, 1);
+        } else {
+          colThree.pop();
+        }
+        break; 
+      case "column 4":
+        if (index !== 5000){
+          colFour.splice(index, 1);
+        } else {
+          colFour.pop(); 
+        }
+        break; 
+      case "column 5":
+        if (index !== 5000){
+          colFive.splice(index, 1);
+        } else {
+          colFive.pop(); 
+        }
+        break;
+      case "column 6":
+        if (index !== 5000){
+          colSix.splice(index, 1);
+        } else {
+          colSix.pop(); 
+        }
+        break; 
+      case "column 7":
+        if (index !== 5000){
+          colSeven.splice(index, 1); 
+        } else {
+          colSeven.pop(); 
+        }
+
+      default:
+        console.log("no case for this yet", column);
+    }
+    this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven})
+  }
+
+  doubleClick = (card, column, index = 5000) => {
     console.log(card);
     console.log(column);
+    const deck = this.state.deck.slice() 
+    const colOne = this.state.colOne.slice()
+    const colTwo = this.state.colTwo.slice()
+    const colThree = this.state.colThree.slice()
+    const colFour = this.state.colFour.slice()
+    const colFive = this.state.colFive.slice()
+    const colSix = this.state.colSix.slice()
+    const colSeven = this.state.colSeven.slice()
+    const finalStack1 = this.state.finalStack1.slice()
+    const finalStack2 = this.state.finalStack2.slice()
+    const finalStack3 = this.state.finalStack3.slice()
+    const finalStack4 = this.state.finalStack4.slice()
+
+    const lastOne = colOne[colOne.length -1];
+    const lastTwo = colTwo[colTwo.length - 1]; 
+    const lastThree = colThree[colThree.length - 1];
+    const lastFour = colFour[colFour.length - 1]; 
+    const lastFive = colFive[colFive.length -1]; 
+    const lastSix = colSix[colSix.length -1];
+    const lastSeven = colSeven[colSeven.length - 1]; 
+    // suit: "hearts",
+    // value: cards[j],
+    // color: "red",
+    // actual,
+    // connected: false,
+    // column: "none"
+
+    //first check the final stacks 
+    if (finalStack1.length === 0 && card.value === 'A'){
+      finalStack1.push(card);
+      this.removeFromColumn(column, index); 
+    }
+    else if(finalStack2.length === 0 && card.value === 'A'){
+      finalStack2.push(card);
+      this.removeFromColumn(column, index); 
+    }
+    else if(finalStack3.length === 0 && card.value === 'A'){
+      finalStack3.push(card); 
+      this.removeFromColumn(column, index); 
+    }
+    else if(finalStack4.length === 0 && card.value === 'A'){
+      finalStack4.push(card); 
+      this.removeFromColumn(column, index); 
+    }
+
+    else if(finalStack1.length > 0){
+      if(finalStack1.length === card.actual && finalStack1[finalStack1.length-1].color === card.color){
+        finalStack1.push(card);
+        this.removeFromColumn(column, index); 
+      }
+    }
+
+    else if(finalStack2.length > 0){
+      if(finalStack2.length === card.actual && finalStack2[finalStack2.length-1].color === card.color){
+        finalStack2.push(card);
+        this.removeFromColumn(column, index); 
+      }
+    }
+
+    else if(finalStack3.length > 0){
+      if(finalStack3.length === card.actual && finalStack3[finalStack3.length-1].color === card.color){
+        finalStack3.push(card);
+        this.removeFromColumn(column, index); 
+      }
+    }
+
+    else if(finalStack4.length > 0){
+      if(finalStack4.length === card.actual && finalStack4[finalStack4.length-1].color === card.color){
+        finalStack4.push(card);
+        this.removeFromColumn(column, index); 
+      }
+    }
+
+    /* Now handle columns lastOne through lastSeven has the card avialble to the last of each column*/
+    
+
+    
+
+
+    this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven})
   };
   /*
   Building the layout  one card is face up and six cards is face down next to it. 

@@ -49,6 +49,7 @@ class TopRow extends Component {
               onDragOver={this.props.handleDragOver}
               onDrop={this.props.handleOnDrop}
               onDragLeave={this.props.handleDragLeave}
+              onDoubleClick = {() => {this.props.doubleClick(this.props.deck[this.state.index], "remaining deck", this.state.index)}}
             >
               <div className={"top " + this.props.deck[this.state.index].color}>
                 <span draggable="false">
@@ -119,6 +120,7 @@ class TopRow extends Component {
           // handleDragOver = {this.props.handleDragOver}
           // handleDragend={this.props.handleDragEnd} */}
           <FinalStack
+            doubleClick={this.props.doubleClick}
             handleDragStart={this.props.handleDragStart}
             handleDrag={this.props.handleDrag}
             handleDragLeave={this.props.handleDragLeave}
