@@ -449,24 +449,29 @@ class App extends Component {
       finalStack1.push(card);
       console.log(finalStack1, "after")
       this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+      return; 
     }
     else if(finalStack2.length === 0 && card.value === 'A'){
       finalStack2.push(card);
       this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+      return; 
     }
     else if(finalStack3.length === 0 && card.value === 'A'){
       finalStack3.push(card); 
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);  
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+      return;  
     }
     else if(finalStack4.length === 0 && card.value === 'A'){
       finalStack4.push(card); 
       this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+      return; 
     }
 
     if(finalStack1.length > 0){
       if(finalStack1.length + 1 === card.actual && finalStack1[finalStack1.length-1].color === card.color){
         finalStack1.push(card);
-        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);  
+        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+        return;  
       }
     }
 
@@ -474,6 +479,7 @@ class App extends Component {
       if(finalStack2.length + 1 === card.actual && finalStack2[finalStack2.length-1].color === card.color){
         finalStack2.push(card);
         this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+        return; 
       }
     }
 
@@ -481,6 +487,7 @@ class App extends Component {
       if(finalStack3.length + 1 === card.actual && finalStack3[finalStack3.length-1].color === card.color){
         finalStack3.push(card);
         this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+        return; 
       }
     }
 
@@ -488,11 +495,54 @@ class App extends Component {
       if(finalStack4.length + 1 === card.actual && finalStack4[finalStack4.length-1].color === card.color){
         finalStack4.push(card);
         this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+        return; 
       }
     }
 
     /* Now handle columns lastOne through lastSeven has the card avialble to the last of each column*/
-
+    console.log(lastOne, lastTwo, lastThree, lastFour, lastFive, lastSix, lastSeven);
+    if(lastOne.actual - 1 === card.actual && lastOne.color !== card.color){
+      card.connected = true; 
+      colOne.push(card);
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+      return; 
+    }
+    if (lastTwo.actual - 1 === card.actual && lastTwo.color !== card.color){
+      card.connected = true;
+      colTwo.push(card);
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+      return; 
+    }
+    if (lastThree.actual - 1 === card.actual && lastThree.color !== card.color){
+      card.connected = true;
+      colThree.push(card);
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+      return; 
+    }
+    if (lastFour.actual - 1 === card.actual && lastFour.color !== card.color){
+      card.connected = true;
+      colFour.push(card);
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+      return; 
+    }
+    if (lastFive.actual - 1 === card.actual && lastFive.color !== card.color){
+      card.connected = true;
+      colFive.push(card);
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+      return; 
+    }
+    if (lastSix.actual - 1 === card.actual && lastSix.color !== card.color){
+      card.connected = true;
+      colSix.push(card);
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+      return; 
+    }
+    if (lastSeven.actual - 1 === card.actual && lastSeven.color !== card.color){
+      card.connected = true;
+      colSeven.push(card);
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+      return; 
+    }
     
 
 
