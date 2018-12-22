@@ -492,7 +492,7 @@ class App extends Component {
             } else if (readyOne.suit === finalStack3[finalStack2.length].suit && readyOne.actual === finalStack3.length){
               const popOff = colOne.pop();
               finalStack3.push(popOff); 
-            } else if (readyOne.suit === finalStack4[finalStack2.length].suit && readyOne.actual === finalStack4.length){
+            } else if (readyOne.suit === finalStack4[finalStack4.length].suit && readyOne.actual === finalStack4.length){
               const popOff = colOne.pop(); 
               finalStack4.push(popOff); 
             }
@@ -505,10 +505,10 @@ class App extends Component {
             } else if (readyTwo.suit === finalStack2[finalStack2.length].suit && readyTwo.actual === finalStack2.length) {
               const popOff = colTwo.pop();
               finalStack2.push(popOff); 
-            } else if (readyTwo.suit === finalStack3[finalStack2.length].suit && readyTwo.actual === finalStack3.length){
+            } else if (readyTwo.suit === finalStack3[finalStack3.length].suit && readyTwo.actual === finalStack3.length){
               const popOff = colTwo.pop();
               finalStack3.push(popOff); 
-            } else if (readyTwo.suit === finalStack4[finalStack2.length].suit && readyTwo.actual === finalStack4.length){
+            } else if (readyTwo.suit === finalStack4[finalStack4.length].suit && readyTwo.actual === finalStack4.length){
               const popOff = colTwo.pop(); 
               finalStack4.push(popOff); 
             }
@@ -521,7 +521,7 @@ class App extends Component {
             } else if (readyThree.suit === finalStack2[finalStack2.length].suit && readyThree.actual === finalStack2.length) {
               const popOff = colThree.pop();
               finalStack2.push(popOff); 
-            } else if (readyThree.suit === finalStack3[finalStack2.length].suit && readyThree.actual === finalStack3.length){
+            } else if (readyThree.suit === finalStack3[finalStack3.length].suit && readyThree.actual === finalStack3.length){
               const popOff = colThree.pop();
               finalStack3.push(popOff); 
             } else if (readyThree.suit === finalStack4[finalStack2.length].suit && readyThree.actual === finalStack4.length){
@@ -537,10 +537,10 @@ class App extends Component {
             } else if (readyFour.suit === finalStack2[finalStack2.length].suit && readyFour.actual === finalStack2.length) {
               const popOff = colFour.pop();
               finalStack2.push(popOff); 
-            } else if (readyFour.suit === finalStack3[finalStack2.length].suit && readyFour.actual === finalStack3.length){
+            } else if (readyFour.suit === finalStack3[finalStack3.length].suit && readyFour.actual === finalStack3.length){
               const popOff = colFour.pop();
               finalStack3.push(popOff); 
-            } else if (readyFour.suit === finalStack4[finalStack2.length].suit && readyFour.actual === finalStack4.length){
+            } else if (readyFour.suit === finalStack4[finalStack4.length].suit && readyFour.actual === finalStack4.length){
               const popOff = colFour.pop(); 
               finalStack4.push(popOff); 
             }
@@ -553,10 +553,10 @@ class App extends Component {
             } else if (readyFive.suit === finalStack2[finalStack2.length].suit && readyFive.actual === finalStack2.length) {
               const popOff = colFive.pop();
               finalStack2.push(popOff); 
-            } else if (readyFive.suit === finalStack3[finalStack2.length].suit && readyFive.actual === finalStack3.length){
+            } else if (readyFive.suit === finalStack3[finalStack3.length].suit && readyFive.actual === finalStack3.length){
               const popOff = colFive.pop();
               finalStack3.push(popOff); 
-            } else if (readyFive.suit === finalStack4[finalStack2.length].suit && readyFive.actual === finalStack4.length){
+            } else if (readyFive.suit === finalStack4[finalStack4.length].suit && readyFive.actual === finalStack4.length){
               const popOff = colFive.pop(); 
               finalStack4.push(popOff); 
             }
@@ -569,10 +569,10 @@ class App extends Component {
             } else if (readySix.suit === finalStack2[finalStack2.length].suit && readySix.actual === finalStack2.length) {
               const popOff = colSix.pop();
               finalStack2.push(popOff); 
-            } else if (readySix.suit === finalStack3[finalStack2.length].suit && readySix.actual === finalStack3.length){
+            } else if (readySix.suit === finalStack3[finalStack3.length].suit && readySix.actual === finalStack3.length){
               const popOff = colSix.pop();
               finalStack3.push(popOff); 
-            } else if (readySix.suit === finalStack4[finalStack2.length].suit && readySix.actual === finalStack4.length){
+            } else if (readySix.suit === finalStack4[finalStack4.length].suit && readySix.actual === finalStack4.length){
               const popOff = colSix.pop(); 
               finalStack4.push(popOff); 
             }
@@ -585,10 +585,10 @@ class App extends Component {
             } else if (readySeven.suit === finalStack2[finalStack2.length].suit && readySeven.actual === finalStack2.length) {
               const popOff = colSeven.pop();
               finalStack2.push(popOff); 
-            } else if (readySeven.suit === finalStack3[finalStack2.length].suit && readySeven.actual === finalStack3.length){
+            } else if (readySeven.suit === finalStack3[finalStack3.length].suit && readySeven.actual === finalStack3.length){
               const popOff = colSeven.pop();
               finalStack3.push(popOff); 
-            } else if (readySeven.suit === finalStack4[finalStack2.length].suit && readySeven.actual === finalStack4.length){
+            } else if (readySeven.suit === finalStack4[finalStack4.length].suit && readySeven.actual === finalStack4.length){
               const popOff = colSeven.pop(); 
               finalStack4.push(popOff); 
             }
@@ -822,13 +822,6 @@ class App extends Component {
     console.log(card);
     console.log(column);
     let foundAPlace = false; 
-    if (card.connected){
-      //if its true we have to take the cards underneath it as well. 
-      foundAPlace = this.connectedAdd(card, column); 
-    }
-    if (foundAPlace){
-      return; 
-    }
     const deck = this.state.deck.slice() 
     const colOne = this.state.colOne.slice()
     const colTwo = this.state.colTwo.slice()
@@ -849,6 +842,26 @@ class App extends Component {
     const lastFive = colFive[colFive.length -1]; 
     const lastSix = colSix[colSix.length -1];
     const lastSeven = colSeven[colSeven.length - 1]; 
+    const allLast = [lastOne, lastTwo, lastThree, lastFour, lastFive, lastSix, lastSeven]
+    let notOneOfLast = true; 
+
+    for(let i = 0; i< allLast.length; i++){
+      if(allLast[i]){
+        if(allLast[i].suit === card.suit && allLast[i].color === card.color && allLast[i].value === card.value){
+          notOneOfLast = false; 
+        }
+      }
+    }
+
+    
+
+    if (card.connected && notOneOfLast){
+      //if its true we have to take the cards underneath it as well. 
+      foundAPlace = this.connectedAdd(card, column); 
+    }
+    if (foundAPlace){
+      return; 
+    }
     // suit: "hearts",
     // value: cards[j],
     // color: "red",
@@ -856,7 +869,28 @@ class App extends Component {
     // connected: false,
     // column: "none"
 
-    
+    if (finalStack1.length === 0 && card.value === 'A'){
+      console.log(finalStack1, "before ")
+      finalStack1.push(card);
+      console.log(finalStack1, "after")
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+      return; 
+    }
+    else if(finalStack2.length === 0 && card.value === 'A'){
+      finalStack2.push(card);
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+      return; 
+    }
+    else if(finalStack3.length === 0 && card.value === 'A'){
+      finalStack3.push(card); 
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+      return;  
+    }
+    else if(finalStack4.length === 0 && card.value === 'A'){
+      finalStack4.push(card); 
+      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+      return; 
+    }
 
     /* Now handle columns lastOne through lastSeven has the card avialble to the last of each column*/
     console.log(lastOne, lastTwo, lastThree, lastFour, lastFive, lastSix, lastSeven);
@@ -969,28 +1003,7 @@ class App extends Component {
     }
 
     //first check the final stacks 
-    if (finalStack1.length === 0 && card.value === 'A'){
-      console.log(finalStack1, "before ")
-      finalStack1.push(card);
-      console.log(finalStack1, "after")
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
-      return; 
-    }
-    else if(finalStack2.length === 0 && card.value === 'A'){
-      finalStack2.push(card);
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
-      return; 
-    }
-    else if(finalStack3.length === 0 && card.value === 'A'){
-      finalStack3.push(card); 
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
-      return;  
-    }
-    else if(finalStack4.length === 0 && card.value === 'A'){
-      finalStack4.push(card); 
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
-      return; 
-    }
+    
 
     if(finalStack1.length > 0){
       if(finalStack1.length + 1 === card.actual && finalStack1[finalStack1.length-1].suit === card.suit){
