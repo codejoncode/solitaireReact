@@ -483,112 +483,112 @@ class App extends Component {
           const allReady = [readyOne, readyTwo, readyThree, readyFour, readyFive, readySix, readySeven]; 
           
           if(readyOne){
-            if(readyOne.suit === finalStack1[finalStack1.length].suit && readyOne.actual === finalStack1.length){
+            if(readyOne.suit === finalStack1[finalStack1.length-1].suit && readyOne.actual === finalStack1.length){
               const popOff = colOne.pop();
               finalStack1.push(popOff)
-            } else if (readyOne.suit === finalStack2[finalStack2.length].suit && readyOne.actual === finalStack2.length) {
+            } else if (readyOne.suit === finalStack2[finalStack2.length-1].suit && readyOne.actual === finalStack2.length) {
               const popOff = colOne.pop();
               finalStack2.push(popOff); 
-            } else if (readyOne.suit === finalStack3[finalStack2.length].suit && readyOne.actual === finalStack3.length){
+            } else if (readyOne.suit === finalStack3[finalStack2.length-1].suit && readyOne.actual === finalStack3.length){
               const popOff = colOne.pop();
               finalStack3.push(popOff); 
-            } else if (readyOne.suit === finalStack4[finalStack4.length].suit && readyOne.actual === finalStack4.length){
+            } else if (readyOne.suit === finalStack4[finalStack4.length-1].suit && readyOne.actual === finalStack4.length){
               const popOff = colOne.pop(); 
               finalStack4.push(popOff); 
             }
           }
 
           if(readyTwo){
-            if(readyTwo.suit === finalStack1[finalStack1.length].suit && readyTwo.actual === finalStack1.length){
+            if(readyTwo.suit === finalStack1[finalStack1.length-1].suit && readyTwo.actual === finalStack1.length){
               const popOff = colTwo.pop();
               finalStack1.push(popOff)
-            } else if (readyTwo.suit === finalStack2[finalStack2.length].suit && readyTwo.actual === finalStack2.length) {
+            } else if (readyTwo.suit === finalStack2[finalStack2.length-1].suit && readyTwo.actual === finalStack2.length) {
               const popOff = colTwo.pop();
               finalStack2.push(popOff); 
-            } else if (readyTwo.suit === finalStack3[finalStack3.length].suit && readyTwo.actual === finalStack3.length){
+            } else if (readyTwo.suit === finalStack3[finalStack3.length-1].suit && readyTwo.actual === finalStack3.length){
               const popOff = colTwo.pop();
               finalStack3.push(popOff); 
-            } else if (readyTwo.suit === finalStack4[finalStack4.length].suit && readyTwo.actual === finalStack4.length){
+            } else if (readyTwo.suit === finalStack4[finalStack4.length-1].suit && readyTwo.actual === finalStack4.length){
               const popOff = colTwo.pop(); 
               finalStack4.push(popOff); 
             }
           }
 
           if(readyThree){
-            if(readyThree.suit === finalStack1[finalStack1.length].suit && readyThree.actual === finalStack1.length){
+            if(readyThree.suit === finalStack1[finalStack1.length-1].suit && readyThree.actual === finalStack1.length){
               const popOff = colThree.pop();
               finalStack1.push(popOff)
-            } else if (readyThree.suit === finalStack2[finalStack2.length].suit && readyThree.actual === finalStack2.length) {
+            } else if (readyThree.suit === finalStack2[finalStack2.length-1].suit && readyThree.actual === finalStack2.length) {
               const popOff = colThree.pop();
               finalStack2.push(popOff); 
-            } else if (readyThree.suit === finalStack3[finalStack3.length].suit && readyThree.actual === finalStack3.length){
+            } else if (readyThree.suit === finalStack3[finalStack3.length-1].suit && readyThree.actual === finalStack3.length){
               const popOff = colThree.pop();
               finalStack3.push(popOff); 
-            } else if (readyThree.suit === finalStack4[finalStack2.length].suit && readyThree.actual === finalStack4.length){
+            } else if (readyThree.suit === finalStack4[finalStack2.length-1].suit && readyThree.actual === finalStack4.length){
               const popOff = colThree.pop(); 
               finalStack4.push(popOff); 
             }
           }
 
           if(readyFour){
-            if(readyFour.suit === finalStack1[finalStack1.length].suit && readyFour.actual === finalStack1.length){
+            if(readyFour.suit === finalStack1[finalStack1.length-1].suit && readyFour.actual === finalStack1.length){
               const popOff = colFour.pop();
               finalStack1.push(popOff)
-            } else if (readyFour.suit === finalStack2[finalStack2.length].suit && readyFour.actual === finalStack2.length) {
+            } else if (readyFour.suit === finalStack2[finalStack2.length-1].suit && readyFour.actual === finalStack2.length) {
               const popOff = colFour.pop();
               finalStack2.push(popOff); 
-            } else if (readyFour.suit === finalStack3[finalStack3.length].suit && readyFour.actual === finalStack3.length){
+            } else if (readyFour.suit === finalStack3[finalStack3.length-1].suit && readyFour.actual === finalStack3.length){
               const popOff = colFour.pop();
               finalStack3.push(popOff); 
-            } else if (readyFour.suit === finalStack4[finalStack4.length].suit && readyFour.actual === finalStack4.length){
+            } else if (readyFour.suit === finalStack4[finalStack4.length-1].suit && readyFour.actual === finalStack4.length){
               const popOff = colFour.pop(); 
               finalStack4.push(popOff); 
             }
           }
 
           if(readyFive){
-            if(readyFive.suit === finalStack1[finalStack1.length].suit && readyFive.actual === finalStack1.length){
+            if(readyFive.suit === finalStack1[finalStack1.length-1].suit && readyFive.actual === finalStack1.length){
               const popOff = colFive.pop();
               finalStack1.push(popOff)
-            } else if (readyFive.suit === finalStack2[finalStack2.length].suit && readyFive.actual === finalStack2.length) {
+            } else if (readyFive.suit === finalStack2[finalStack2.length-1].suit && readyFive.actual === finalStack2.length) {
               const popOff = colFive.pop();
               finalStack2.push(popOff); 
-            } else if (readyFive.suit === finalStack3[finalStack3.length].suit && readyFive.actual === finalStack3.length){
+            } else if (readyFive.suit === finalStack3[finalStack3.length-1].suit && readyFive.actual === finalStack3.length){
               const popOff = colFive.pop();
               finalStack3.push(popOff); 
-            } else if (readyFive.suit === finalStack4[finalStack4.length].suit && readyFive.actual === finalStack4.length){
+            } else if (readyFive.suit === finalStack4[finalStack4.length-1].suit && readyFive.actual === finalStack4.length){
               const popOff = colFive.pop(); 
               finalStack4.push(popOff); 
             }
           }
 
           if(readySix){
-            if(readySix.suit === finalStack1[finalStack1.length].suit && readySix.actual === finalStack1.length){
+            if(readySix.suit === finalStack1[finalStack1.length-1].suit && readySix.actual === finalStack1.length){
               const popOff = colSix.pop();
               finalStack1.push(popOff)
-            } else if (readySix.suit === finalStack2[finalStack2.length].suit && readySix.actual === finalStack2.length) {
+            } else if (readySix.suit === finalStack2[finalStack2.length-1].suit && readySix.actual === finalStack2.length) {
               const popOff = colSix.pop();
               finalStack2.push(popOff); 
-            } else if (readySix.suit === finalStack3[finalStack3.length].suit && readySix.actual === finalStack3.length){
+            } else if (readySix.suit === finalStack3[finalStack3.length-1].suit && readySix.actual === finalStack3.length){
               const popOff = colSix.pop();
               finalStack3.push(popOff); 
-            } else if (readySix.suit === finalStack4[finalStack4.length].suit && readySix.actual === finalStack4.length){
+            } else if (readySix.suit === finalStack4[finalStack4.length-1].suit && readySix.actual === finalStack4.length){
               const popOff = colSix.pop(); 
               finalStack4.push(popOff); 
             }
           }
 
           if(readySeven){
-            if(readySeven.suit === finalStack1[finalStack1.length].suit && readySeven.actual === finalStack1.length){
+            if(readySeven.suit === finalStack1[finalStack1.length-1].suit && readySeven.actual === finalStack1.length){
               const popOff = colSeven.pop();
               finalStack1.push(popOff)
-            } else if (readySeven.suit === finalStack2[finalStack2.length].suit && readySeven.actual === finalStack2.length) {
+            } else if (readySeven.suit === finalStack2[finalStack2.length-1].suit && readySeven.actual === finalStack2.length) {
               const popOff = colSeven.pop();
               finalStack2.push(popOff); 
-            } else if (readySeven.suit === finalStack3[finalStack3.length].suit && readySeven.actual === finalStack3.length){
+            } else if (readySeven.suit === finalStack3[finalStack3.length-1].suit && readySeven.actual === finalStack3.length){
               const popOff = colSeven.pop();
               finalStack3.push(popOff); 
-            } else if (readySeven.suit === finalStack4[finalStack4.length].suit && readySeven.actual === finalStack4.length){
+            } else if (readySeven.suit === finalStack4[finalStack4.length-1].suit && readySeven.actual === finalStack4.length){
               const popOff = colSeven.pop(); 
               finalStack4.push(popOff); 
             }
