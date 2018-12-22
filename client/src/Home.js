@@ -21,6 +21,8 @@ class Home extends Component {
           handleOnDrop = {this.props.handleOnDrop}
           handleDragOver = {this.props.handleDragOver}
           handleDragEnd={this.props.handleDragEnd}
+          handleDeckClick = {this.props.handleDeckClick}
+          deckIndex = {this.props.deckIndex}
           
           
         />
