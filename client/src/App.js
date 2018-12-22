@@ -489,7 +489,7 @@ class App extends Component {
             } else if (readyOne.suit === finalStack2[finalStack2.length-1].suit && readyOne.actual === finalStack2.length) {
               const popOff = colOne.pop();
               finalStack2.push(popOff); 
-            } else if (readyOne.suit === finalStack3[finalStack2.length-1].suit && readyOne.actual === finalStack3.length){
+            } else if (readyOne.suit === finalStack3[finalStack3.length-1].suit && readyOne.actual === finalStack3.length){
               const popOff = colOne.pop();
               finalStack3.push(popOff); 
             } else if (readyOne.suit === finalStack4[finalStack4.length-1].suit && readyOne.actual === finalStack4.length){
@@ -524,7 +524,7 @@ class App extends Component {
             } else if (readyThree.suit === finalStack3[finalStack3.length-1].suit && readyThree.actual === finalStack3.length){
               const popOff = colThree.pop();
               finalStack3.push(popOff); 
-            } else if (readyThree.suit === finalStack4[finalStack2.length-1].suit && readyThree.actual === finalStack4.length){
+            } else if (readyThree.suit === finalStack4[finalStack4.length-1].suit && readyThree.actual === finalStack4.length){
               const popOff = colThree.pop(); 
               finalStack4.push(popOff); 
             }
