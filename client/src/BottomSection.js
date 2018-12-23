@@ -45,7 +45,7 @@ class BottomSection extends Component {
               // className = "card stackedCards outline scene column" needed to keep last card at full width need to have a class witout stackedCards
             >
               {/* {(card.showBack === true && id !== this.props.cards.length - 1)  ? ( */}
-              {(card.showBack === true && card.connected === false) ? (
+              {(card.showBack === true && card.connected === false && id !== this.props.cards.length - 1) ? (
                 <img className="backOfCard" src={back} alt="back of card" />
               ) : (
                 (lastCard = true)

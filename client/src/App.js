@@ -387,6 +387,9 @@ class App extends Component {
           colTwo.splice(index, 1);
         } else {
           colTwo.pop(); 
+          if (colTwo.length){
+            colTwo[colTwo.length -1].showBack = false; 
+          }
         }
         break; 
       case "column 3":
@@ -395,6 +398,9 @@ class App extends Component {
           colThree.splice(index, 1);
         } else {
           colThree.pop();
+          if (colThree.length){
+            colThree[colThree.length - 1].showBack = false; 
+          }
         }
         break; 
       case "column 4":
@@ -402,7 +408,10 @@ class App extends Component {
         if (index !== 5000){
           colFour.splice(index, 1);
         } else {
-          colFour.pop(); 
+          colFour.pop();
+          if(colFour.length) {
+            colFour[colFour.length -1].showBack = false; 
+          } 
         }
         break; 
       case "column 5":
@@ -411,6 +420,9 @@ class App extends Component {
           colFive.splice(index, 1);
         } else {
           colFive.pop(); 
+          if(colFive.length){
+            colFive[colFive.length - 1].showBack = false; 
+          }
         }
         break;
       case "column 6":
@@ -418,7 +430,10 @@ class App extends Component {
         if (index !== 5000){
           colSix.splice(index, 1);
         } else {
-          colSix.pop(); 
+          colSix.pop();
+          if(colSix.length){
+            colSix[colSix.length - 1].showBack = false; 
+          } 
         }
         break; 
       case "column 7":
@@ -426,7 +441,10 @@ class App extends Component {
         if (index !== 5000){
           colSeven.splice(index, 1); 
         } else {
-          colSeven.pop(); 
+          colSeven.pop();
+          if(colSeven.length){
+            colSeven[colSeven.length - 1].showBack = false; 
+          } 
         }
 
       default:
@@ -881,6 +899,13 @@ class App extends Component {
   render() {
     // console.log("state index")
     // console.log(this.state.index);
+    console.log(this.state.colOne);
+    console.log(this.state.colTwo);
+    console.log(this.state.colThree);
+    console.log(this.state.colFour);
+    console.log(this.state.colFive);
+    console.log(this.state.colSix);
+    console.log(this.state.colSeven);
     return (
       <div className="container">
         <Home
