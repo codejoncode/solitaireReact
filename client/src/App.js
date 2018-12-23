@@ -504,54 +504,57 @@ class App extends Component {
         noBlackSideShowing = this.anyBlackCardsLeft(bottomRow[count]);
         count += 1; 
       }
+      //BELOW IS THE CODE FOR THE END OF THE GAME
 
-      if (noBlackSideShowing) {
-        //now we will start to place the cards into the final stacks. 
-        //should be able to pop of until we can't then switch to the next column.
-        console.log("NO CARDS TURNED OVER AND NO CARDS LEFT IN DECK")
-        while  (finalStack1.length + finalStack2.length + finalStack3.length + finalStack4.length !== 52) {
-          console.log(finalStack1.length + finalStack2.length + finalStack3.length + finalStack4.length);
-          const readyOne = colOne[colOne.length -1];
-          const readyTwo = colTwo[colTwo.length - 1]; 
-          const readyThree = colThree[colThree.length - 1];
-          const readyFour = colFour[colFour.length - 1]; 
-          const readyFive = colFive[colFive.length -1]; 
-          const readySix = colSix[colSix.length -1];
-          const readySeven = colSeven[colSeven.length - 1];
-          const final_1 = finalStack1[finalStack1.length -1]
-          const final_2 = finalStack2[finalStack2.length - 1]
-          const final_3 = finalStack3[finalStack3.length -1]
-          const final_4 = finalStack3[finalStack4.length - 1]
+    //   if (noBlackSideShowing) {
+    //     //now we will start to place the cards into the final stacks. 
+    //     //should be able to pop of until we can't then switch to the next column.
+    //     console.log("NO CARDS TURNED OVER AND NO CARDS LEFT IN DECK")
+    //     while  (finalStack1.length + finalStack2.length + finalStack3.length + finalStack4.length !== 52) {
+    //       console.log(finalStack1.length + finalStack2.length + finalStack3.length + finalStack4.length);
+    //       const readyOne = colOne[colOne.length -1];
+    //       const readyTwo = colTwo[colTwo.length - 1]; 
+    //       const readyThree = colThree[colThree.length - 1];
+    //       const readyFour = colFour[colFour.length - 1]; 
+    //       const readyFive = colFive[colFive.length -1]; 
+    //       const readySix = colSix[colSix.length -1];
+    //       const readySeven = colSeven[colSeven.length - 1];
+    //       const final_1 = finalStack1[finalStack1.length -1]
+    //       const final_2 = finalStack2[finalStack2.length - 1]
+    //       const final_3 = finalStack3[finalStack3.length -1]
+    //       const final_4 = finalStack3[finalStack4.length - 1]
 
-          const allReady = [readyOne, readyTwo, readyThree, readyFour, readyFive, readySix, readySeven]; 
-          console.log(allReady)
-          for (let ready of allReady){
-            if(ready){
-              if(ready.suit === finalStack1[finalStack1.length-1].suit && ready.actual === finalStack1.length){
-                const popOff = colOne.pop();
-                finalStack1.push(popOff)
-              } else if (ready.suit === finalStack2[finalStack2.length-1].suit && ready.actual === finalStack2.length) {
-                const popOff = colOne.pop();
-                finalStack2.push(popOff); 
-              } else if (ready.suit === finalStack3[finalStack3.length-1].suit && ready.actual === finalStack3.length){
-                const popOff = colOne.pop();
-                finalStack3.push(popOff); 
-              } else if (ready.suit === finalStack4[finalStack4.length-1].suit && ready.actual === finalStack4.length){
-                const popOff = colOne.pop(); 
-                finalStack4.push(popOff); 
-              }
-            }
+    //       const allReady = [readyOne, readyTwo, readyThree, readyFour, readyFive, readySix, readySeven]; 
+    //       console.log(allReady)
+    //       for (let ready of allReady){
+    //         if(ready){
+    //           if(ready.suit === finalStack1[finalStack1.length-1].suit && ready.actual === finalStack1.length){
+    //             const popOff = colOne.pop();
+    //             finalStack1.push(popOff)
+    //           } else if (ready.suit === finalStack2[finalStack2.length-1].suit && ready.actual === finalStack2.length) {
+    //             const popOff = colOne.pop();
+    //             finalStack2.push(popOff); 
+    //           } else if (ready.suit === finalStack3[finalStack3.length-1].suit && ready.actual === finalStack3.length){
+    //             const popOff = colOne.pop();
+    //             finalStack3.push(popOff); 
+    //           } else if (ready.suit === finalStack4[finalStack4.length-1].suit && ready.actual === finalStack4.length){
+    //             const popOff = colOne.pop(); 
+    //             finalStack4.push(popOff); 
+    //           }
+    //         }
 
-          }
+    //       }
 
-        }
+    //     }
         
-        //set state and break out of this function. here. 
-        const ix = this.state.index % deck.length; 
-        this.setState({index : ix, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4});
-        return; 
-      }
+    //     //set state and break out of this function. here. 
+    //     const ix = this.state.index % deck.length; 
+    //     this.setState({index : ix, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4});
+    //     return; 
+    //   }
     }
+
+    ///ABOVE IS THE CODE FOR THE END OF THE GAME. 
 
     /*For now just a way to take connected cards to their place on the board. */
     const toBeAdded = []; 
