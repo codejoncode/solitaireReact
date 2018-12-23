@@ -38,15 +38,15 @@ class TopRow extends Component {
     // handleOnDrop = {this.props.handleOnDrop}
     // handleDragOver = {this.props.handleDragOver}
     // handleDragend={this.props.handleDragEnd}
-    console.log("HERE COMES THE PROPS FOR TOP ROW")
-    console.log(this.props)
+    // console.log("HERE COMES THE PROPS FOR TOP ROW")
+    // console.log(this.props)
     let ix = this.props.deckIndex === this.props.deck.length ? this.props.deckIndex  % this.props.deck.length : this.props.deckIndex
-    console.log("this is the deck", this.props.deck);
-    console.log("this is the index", ix);
+    // console.log("this is the deck", this.props.deck);
+    // console.log("this is the index", ix);
     
     if (this.props.deck.length > 0) {
-      console.log(this.props.deck);
-      console.log(this.props.deck)
+      // console.log(this.props.deck);
+      // console.log(this.props.deck)
       return (
         <div className="topRow">
           <div className="drawPile">

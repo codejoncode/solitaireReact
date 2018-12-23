@@ -4,14 +4,6 @@ class FinalDropZone extends Component {
   state = {};
 
   render() {
-    console.log(this.props);
-    // handleDragEnter={this.props.handleDragEnter}
-    // handleDragOver={this.props.handleDragOver}
-    // handleDragLeave={this.props.handleDragLeave}
-    // handleOnDrop={this.props.handleOnDrop}
-    // handleDragStart={this.props.handleDragStart}
-    // handleDrag={this.props.handleDrag}
-    // handleDragend={this.props.handleDragEnd}
     return (
       <div
         draggable="false"

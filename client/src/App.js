@@ -22,8 +22,9 @@ class App extends Component {
     finalStack2: [],
     finalStack3: [],
     finalStack4: [],
-
-    remainingDeckIndex: 0
+    remainingDeckIndex: 0,
+    from : {}, 
+    to : {}, 
   };
   componentWillMount() {
     this.setDeckUp();
@@ -88,7 +89,8 @@ class App extends Component {
               color: "red",
               actual,
               connected: false,
-              column: "none"
+              column: "none",
+              bottomRow: false
             });
             break;
           case 1:
@@ -98,7 +100,8 @@ class App extends Component {
               color: "black",
               actual,
               connected: false,
-              column: "none"
+              column: "none",
+              bottomRow: false
             });
             break;
           case 2:
@@ -108,7 +111,8 @@ class App extends Component {
               color: "black",
               actual,
               connected: false,
-              column: "none"
+              column: "none",
+              bottomRow: false
             });
             break;
           case 3:
@@ -118,7 +122,8 @@ class App extends Component {
               color: "red",
               actual,
               connected: false,
-              column: "none"
+              column: "none",
+              bottomRow: false
             });
             break;
           default:
@@ -184,39 +189,46 @@ class App extends Component {
         if (i < 1) {
           poppedFromList = deck.pop();
 
-          // poppedFromList.showBack = true; // added to each column and will be used to show back / click and reveal card.
+          poppedFromList.showBack = false; // added to each column and will be used to show back / click and reveal card.
           //doesn't need a show back we will always reveal the card even after adding to this section. 
           poppedFromList.column = 1; // will be used to identify the column being pulled from and or added to.
+          poppedFromList.bottomRow = true; 
           colOne.push(poppedFromList);
         } else if (i < 3) {
           poppedFromList = deck.pop();
           poppedFromList.showBack = i === 2 ? false: true; // added to each column and will be used to show back / click and reveal card.
           poppedFromList.column = 2; // will be used to identify the column being pulled from and or added to.
+          poppedFromList.bottomRow = true;
           colTwo.push(poppedFromList);
         } else if (i < 6) {
           poppedFromList = deck.pop();
           poppedFromList.showBack = i === 5 ? false : true; // added to each column and will be used to show back / click and reveal card.
           poppedFromList.column = 3; // will be used to identify the column being pulled from and or added to.
+          poppedFromList.bottomRow = true;
           colThree.push(poppedFromList);
         } else if (i < 10) {
           poppedFromList = deck.pop();
           poppedFromList.showBack = i === 9 ? false: true; // added to each column and will be used to show back / click and reveal card.
           poppedFromList.column = 4; // will be used to identify the column being pulled from and or added to.
+          poppedFromList.bottomRow = true;
           colFour.push(poppedFromList);
         } else if (i < 15) {
           poppedFromList = deck.pop();
           poppedFromList.showBack = i === 14 ? false : true; // added to each column and will be used to show back / click and reveal card.
           poppedFromList.column = 5; // will be used to identify the column being pulled from and or added to.
+          poppedFromList.bottomRow = true;
           colFive.push(poppedFromList);
         } else if (i < 21) {
           poppedFromList = deck.pop();
           poppedFromList.showBack = i === 20 ? false : true; // added to each column and will be used to show back / click and reveal card.
           poppedFromList.column = 6; // will be used to identify the column being pulled from and or added to.
+          poppedFromList.bottomRow = true;
           colSix.push(poppedFromList);
         } else if (i < breakPoint) {
           poppedFromList = deck.pop();
           poppedFromList.showBack = i === breakPoint - 1 ? false : true; // added to each column and will be used to show back / click and reveal card.
           poppedFromList.column = 7; // will be used to identify the column being pulled from and or added to.
+          poppedFromList.bottomRow = true;
           colSeven.push(poppedFromList);
         }
       }
@@ -256,8 +268,12 @@ class App extends Component {
     console.log("dragging");
   };
 
-  handleDragStart = (event) => {
+  handleDragStart = (event, column = 1000) => {
     console.log("drag start");
+    if(column !== 1000){
+      console.log(column); 
+    }
+
     event.target.style.opacity = ".35";
     dragSrc = event.target;
 
@@ -462,6 +478,7 @@ class App extends Component {
     /*if remaining deck is empty we can peform a way to get all the cards added at once */
     if (deck.length === 0){
       //I want to check if if all cards are revealed. 
+      console.log("DECK IS EMPTY");
       let noBlackSideShowing = false; 
       const bottomRow = [colOne, colTwo, colThree, colFour, colFive, colSix, colSeven]; 
       let count = 0; 
@@ -469,10 +486,13 @@ class App extends Component {
         noBlackSideShowing = this.anyBlackCardsLeft(bottomRow[count]);
         count += 1; 
       }
+
       if (noBlackSideShowing) {
         //now we will start to place the cards into the final stacks. 
         //should be able to pop of until we can't then switch to the next column.
+        console.log("NO CARDS TURNED OVER AND NO CARDS LEFT IN DECK")
         while  (finalStack1.length + finalStack2.length + finalStack3.length + finalStack4.length !== 52) {
+          console.log(finalStack1.length + finalStack2.length + finalStack3.length + finalStack4.length);
           const readyOne = colOne[colOne.length -1];
           const readyTwo = colTwo[colTwo.length - 1]; 
           const readyThree = colThree[colThree.length - 1];
@@ -480,118 +500,30 @@ class App extends Component {
           const readyFive = colFive[colFive.length -1]; 
           const readySix = colSix[colSix.length -1];
           const readySeven = colSeven[colSeven.length - 1];
+          const final_1 = finalStack1[finalStack1.length -1]
+          const final_2 = finalStack2[finalStack2.length - 1]
+          const final_3 = finalStack3[finalStack3.length -1]
+          const final_4 = finalStack3[finalStack4.length - 1]
+
           const allReady = [readyOne, readyTwo, readyThree, readyFour, readyFive, readySix, readySeven]; 
-          
-          if(readyOne){
-            if(readyOne.suit === finalStack1[finalStack1.length-1].suit && readyOne.actual === finalStack1.length){
-              const popOff = colOne.pop();
-              finalStack1.push(popOff)
-            } else if (readyOne.suit === finalStack2[finalStack2.length-1].suit && readyOne.actual === finalStack2.length) {
-              const popOff = colOne.pop();
-              finalStack2.push(popOff); 
-            } else if (readyOne.suit === finalStack3[finalStack3.length-1].suit && readyOne.actual === finalStack3.length){
-              const popOff = colOne.pop();
-              finalStack3.push(popOff); 
-            } else if (readyOne.suit === finalStack4[finalStack4.length-1].suit && readyOne.actual === finalStack4.length){
-              const popOff = colOne.pop(); 
-              finalStack4.push(popOff); 
+          console.log(allReady)
+          for (let ready of allReady){
+            if(ready){
+              if(ready.suit === finalStack1[finalStack1.length-1].suit && ready.actual === finalStack1.length){
+                const popOff = colOne.pop();
+                finalStack1.push(popOff)
+              } else if (ready.suit === finalStack2[finalStack2.length-1].suit && ready.actual === finalStack2.length) {
+                const popOff = colOne.pop();
+                finalStack2.push(popOff); 
+              } else if (ready.suit === finalStack3[finalStack3.length-1].suit && ready.actual === finalStack3.length){
+                const popOff = colOne.pop();
+                finalStack3.push(popOff); 
+              } else if (ready.suit === finalStack4[finalStack4.length-1].suit && ready.actual === finalStack4.length){
+                const popOff = colOne.pop(); 
+                finalStack4.push(popOff); 
+              }
             }
-          }
 
-          if(readyTwo){
-            if(readyTwo.suit === finalStack1[finalStack1.length-1].suit && readyTwo.actual === finalStack1.length){
-              const popOff = colTwo.pop();
-              finalStack1.push(popOff)
-            } else if (readyTwo.suit === finalStack2[finalStack2.length-1].suit && readyTwo.actual === finalStack2.length) {
-              const popOff = colTwo.pop();
-              finalStack2.push(popOff); 
-            } else if (readyTwo.suit === finalStack3[finalStack3.length-1].suit && readyTwo.actual === finalStack3.length){
-              const popOff = colTwo.pop();
-              finalStack3.push(popOff); 
-            } else if (readyTwo.suit === finalStack4[finalStack4.length-1].suit && readyTwo.actual === finalStack4.length){
-              const popOff = colTwo.pop(); 
-              finalStack4.push(popOff); 
-            }
-          }
-
-          if(readyThree){
-            if(readyThree.suit === finalStack1[finalStack1.length-1].suit && readyThree.actual === finalStack1.length){
-              const popOff = colThree.pop();
-              finalStack1.push(popOff)
-            } else if (readyThree.suit === finalStack2[finalStack2.length-1].suit && readyThree.actual === finalStack2.length) {
-              const popOff = colThree.pop();
-              finalStack2.push(popOff); 
-            } else if (readyThree.suit === finalStack3[finalStack3.length-1].suit && readyThree.actual === finalStack3.length){
-              const popOff = colThree.pop();
-              finalStack3.push(popOff); 
-            } else if (readyThree.suit === finalStack4[finalStack4.length-1].suit && readyThree.actual === finalStack4.length){
-              const popOff = colThree.pop(); 
-              finalStack4.push(popOff); 
-            }
-          }
-
-          if(readyFour){
-            if(readyFour.suit === finalStack1[finalStack1.length-1].suit && readyFour.actual === finalStack1.length){
-              const popOff = colFour.pop();
-              finalStack1.push(popOff)
-            } else if (readyFour.suit === finalStack2[finalStack2.length-1].suit && readyFour.actual === finalStack2.length) {
-              const popOff = colFour.pop();
-              finalStack2.push(popOff); 
-            } else if (readyFour.suit === finalStack3[finalStack3.length-1].suit && readyFour.actual === finalStack3.length){
-              const popOff = colFour.pop();
-              finalStack3.push(popOff); 
-            } else if (readyFour.suit === finalStack4[finalStack4.length-1].suit && readyFour.actual === finalStack4.length){
-              const popOff = colFour.pop(); 
-              finalStack4.push(popOff); 
-            }
-          }
-
-          if(readyFive){
-            if(readyFive.suit === finalStack1[finalStack1.length-1].suit && readyFive.actual === finalStack1.length){
-              const popOff = colFive.pop();
-              finalStack1.push(popOff)
-            } else if (readyFive.suit === finalStack2[finalStack2.length-1].suit && readyFive.actual === finalStack2.length) {
-              const popOff = colFive.pop();
-              finalStack2.push(popOff); 
-            } else if (readyFive.suit === finalStack3[finalStack3.length-1].suit && readyFive.actual === finalStack3.length){
-              const popOff = colFive.pop();
-              finalStack3.push(popOff); 
-            } else if (readyFive.suit === finalStack4[finalStack4.length-1].suit && readyFive.actual === finalStack4.length){
-              const popOff = colFive.pop(); 
-              finalStack4.push(popOff); 
-            }
-          }
-
-          if(readySix){
-            if(readySix.suit === finalStack1[finalStack1.length-1].suit && readySix.actual === finalStack1.length){
-              const popOff = colSix.pop();
-              finalStack1.push(popOff)
-            } else if (readySix.suit === finalStack2[finalStack2.length-1].suit && readySix.actual === finalStack2.length) {
-              const popOff = colSix.pop();
-              finalStack2.push(popOff); 
-            } else if (readySix.suit === finalStack3[finalStack3.length-1].suit && readySix.actual === finalStack3.length){
-              const popOff = colSix.pop();
-              finalStack3.push(popOff); 
-            } else if (readySix.suit === finalStack4[finalStack4.length-1].suit && readySix.actual === finalStack4.length){
-              const popOff = colSix.pop(); 
-              finalStack4.push(popOff); 
-            }
-          }
-
-          if(readySeven){
-            if(readySeven.suit === finalStack1[finalStack1.length-1].suit && readySeven.actual === finalStack1.length){
-              const popOff = colSeven.pop();
-              finalStack1.push(popOff)
-            } else if (readySeven.suit === finalStack2[finalStack2.length-1].suit && readySeven.actual === finalStack2.length) {
-              const popOff = colSeven.pop();
-              finalStack2.push(popOff); 
-            } else if (readySeven.suit === finalStack3[finalStack3.length-1].suit && readySeven.actual === finalStack3.length){
-              const popOff = colSeven.pop();
-              finalStack3.push(popOff); 
-            } else if (readySeven.suit === finalStack4[finalStack4.length-1].suit && readySeven.actual === finalStack4.length){
-              const popOff = colSeven.pop(); 
-              finalStack4.push(popOff); 
-            }
           }
 
         }
@@ -681,7 +613,7 @@ class App extends Component {
         console.log("no case for this yet", column);
     }
     /* Now handle columns lastOne through lastSeven has the card avialble to the last of each column*/
-    console.log(lastOne, lastTwo, lastThree, lastFour, lastFive, lastSix, lastSeven);
+    console.log("inside connected checking ");
     if(lastOne){
       if(lastOne.actual - 1 === card.actual && lastOne.color !== card.color){
         card.connected = true; 
@@ -765,6 +697,7 @@ class App extends Component {
 
     /*Need to add card to empty section */
     if(foundAPlace === false){
+      console.log("inside connected checking empty column")
       if(colOne.length === 0){
         foundAPlace = true; 
         for (let i = toBeAdded.length -1; i >= 0; i--){
@@ -819,7 +752,7 @@ class App extends Component {
   } 
 
   doubleClick = (card, column, index = 5000) => {
-    console.log(card);
+    console.log(card, "coming in card");
     console.log(column);
     let foundAPlace = false; 
     const deck = this.state.deck.slice() 
@@ -830,6 +763,7 @@ class App extends Component {
     const colFive = this.state.colFive.slice()
     const colSix = this.state.colSix.slice()
     const colSeven = this.state.colSeven.slice()
+    const columns = [colOne, colTwo, colThree, colFour, colFive, colSix, colSeven];
     const finalStack1 = this.state.finalStack1.slice()
     const finalStack2 = this.state.finalStack2.slice()
     const finalStack3 = this.state.finalStack3.slice()
@@ -843,17 +777,17 @@ class App extends Component {
     const lastSix = colSix[colSix.length -1];
     const lastSeven = colSeven[colSeven.length - 1]; 
     const allLast = [lastOne, lastTwo, lastThree, lastFour, lastFive, lastSix, lastSeven]
+    const allStacks = [finalStack1, finalStack2, finalStack3, finalStack4]
     let notOneOfLast = true; 
 
     for(let i = 0; i< allLast.length; i++){
       if(allLast[i]){
         if(allLast[i].suit === card.suit && allLast[i].color === card.color && allLast[i].value === card.value){
           notOneOfLast = false; 
+          break; 
         }
       }
     }
-
-    
 
     if (card.connected && notOneOfLast){
       //if its true we have to take the cards underneath it as well. 
@@ -862,194 +796,82 @@ class App extends Component {
     if (foundAPlace){
       return; 
     }
-    // suit: "hearts",
-    // value: cards[j],
-    // color: "red",
-    // actual,
-    // connected: false,
-    // column: "none"
+    console.log("check stacks and if this is an ace")
+    for (let stack of allStacks){
+      if(stack.length === 0 && card.value === 'A'){
+        stack.push(card); 
+        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+        return; 
+      }
+    }
 
-    if (finalStack1.length === 0 && card.value === 'A'){
-      console.log(finalStack1, "before ")
-      finalStack1.push(card);
-      console.log(finalStack1, "after")
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
-      return; 
-    }
-    else if(finalStack2.length === 0 && card.value === 'A'){
-      finalStack2.push(card);
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
-      return; 
-    }
-    else if(finalStack3.length === 0 && card.value === 'A'){
-      finalStack3.push(card); 
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
-      return;  
-    }
-    else if(finalStack4.length === 0 && card.value === 'A'){
-      finalStack4.push(card); 
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
-      return; 
+    //if card is at the bottom  
+    if(card.bottomRow){
+      console.log("bottom row check stacks")
+      for (let stack of allStacks){
+        if(stack.length > 0){
+          if (stack.length + 1 === card.actual && stack[stack.length-1].suit === card.suit){
+            stack.push(card);
+            this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+            return;
+
+          }
+        }
+      }
     }
 
     /* Now handle columns lastOne through lastSeven has the card avialble to the last of each column*/
-    console.log(lastOne, lastTwo, lastThree, lastFour, lastFive, lastSix, lastSeven);
-    if(lastOne){
-      if(lastOne.actual - 1 === card.actual && lastOne.color !== card.color){
-        card.connected = true; 
-        lastOne.connected = true; 
-        card.showBack = false; 
-        colOne.push(card);
-        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
-        return; 
+    // const allLast = [lastOne, lastTwo, lastThree, lastFour, lastFive, lastSix, lastSeven]
+    const allColumns = [ colOne, colTwo, colThree, colFour, colFive, colSix, colSeven]
+    const columnObj = {1: allColumns[0], 2: allColumns[1], 3: allColumns[2], 4: allColumns[3], 5: allColumns[4], 6: allColumns[5],  7: allColumns[6]}
+    let count = 1; //start off at one to use object above 
+    console.log("check columns")
+    for (let last of allLast){
+      if(last){
+        console.log(last, card, "870 new factoring"); 
+        if (last.actual - 1 === card.actual && last.color !== card.color){
+          card.connected = true;
+          last.connected = true; 
+          card.showBack = false; 
+          card.bottomRow = true;
+          columnObj[count].push(card);
+          this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
+          return; 
+        } 
       }
+      count += 1; 
     }
-    if(lastTwo){
-      if (lastTwo.actual - 1 === card.actual && lastTwo.color !== card.color){
-        card.connected = true;
-        lastTwo.connected = true; 
-        card.showBack = false;
-        colTwo.push(card);
-        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
-        return; 
-      }
-    }
-    if(lastThree){
-      if (lastThree.actual - 1 === card.actual && lastThree.color !== card.color){
-        card.connected = true;
-        lastThree.connected = true; 
-        card.showBack = false;
-        colThree.push(card);
-        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
-        return; 
-      }
-    }
-    if(lastFour){
-      if (lastFour.actual - 1 === card.actual && lastFour.color !== card.color){
-        card.connected = true;
-        lastFour.connected = true; 
-        card.showBack = false;
-        colFour.push(card);
-        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
-        return; 
-      }
-    }
-    if(lastFive){
-      if (lastFive.actual - 1 === card.actual && lastFive.color !== card.color){
-        card.connected = true;
-        lastFive.connected = true; 
-        card.showBack = false;
-        colFive.push(card);
-        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
-        return; 
-      }
-    }
-    if(lastSix){
-      if (lastSix.actual - 1 === card.actual && lastSix.color !== card.color){
-        card.connected = true;
-        lastSix.connected = true; 
-        card.showBack = false;
-        colSix.push(card);
-        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
-        return; 
-      }
-    }
-    if(lastSeven){
-      if (lastSeven.actual - 1 === card.actual && lastSeven.color !== card.color){
-        card.connected = true;
-        lastSeven.connected = true; 
-        card.showBack = false;
-        colSeven.push(card);
-        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
-        return; 
-      }
-    }
-
-    /*Need to add card to empty section */
-    if(colOne.length === 0){
-      colOne.push(card);
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
-      return; 
-    }
-    if(colTwo.length === 0){
-      colTwo.push(card);
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
-      return; 
-    }
-    if(colThree.length === 0){
-      colThree.push(card);
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
-      return; 
-    }
-    if (colFour.length === 0){
-      colFour.push(card);
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
-      return; 
-    }
-    if (colFive.length === 0){
-      colFive.push(card);
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
-      return; 
-    }
-    if (colSix.length === 0){
-      colSix.push(card);
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
-      return; 
-    }
-    if (colSeven.length === 0){
-      colSeven.push(card);
-      this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
-      return; 
-    }
-
+    
     //first check the final stacks 
-    
-
-    if(finalStack1.length > 0){
-      if(finalStack1.length + 1 === card.actual && finalStack1[finalStack1.length-1].suit === card.suit){
-        finalStack1.push(card);
-        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
-        return;  
+    //I only want to check the final stacks if the card is at the bottom but not sure exactly yet. 
+    console.log("stack checks")
+    for (let stack of allStacks){
+      if(stack.length > 0){
+        if (stack.length + 1 === card.actual && stack[stack.length-1].suit === card.suit){
+          stack.push(card);
+          this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+          return;
+        }
       }
     }
 
-    if(finalStack2.length > 0){
-      if(finalStack2.length + 1 === card.actual && finalStack2[finalStack2.length-1].suit === card.suit){
-        finalStack2.push(card);
-        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
+    /*Need to add card to empty section  last resort*/
+    console.log("empty columns check")
+    for (let col of allColumns){
+      if(col.length === 0){
+        col.push(card);
+        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4);
         return; 
       }
     }
-
-    if(finalStack3.length > 0){
-      if(finalStack3.length + 1 === card.actual && finalStack3[finalStack3.length-1].suit === card.suit){
-        finalStack3.push(card);
-        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
-        return; 
-      }
-    }
-
-    if(finalStack4.length > 0){
-      if(finalStack4.length + 1 === card.actual && finalStack4[finalStack4.length-1].suit === card.suit){
-        finalStack4.push(card);
-        this.removeFromColumn(column, index, deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4); 
-        return; 
-      }
-    }
-
-
-    
-
-
-    // this.setState({deck, colOne, colTwo, colThree, colFour, colFive, colSix, colSeven, finalStack1, finalStack2, finalStack3, finalStack4})
   };
+
   deckClick = () => {
-    console.log("Current State index", this.state.index);
-    console.log("Length of the State", this.state.deck.length);
+    // console.log("Current State index", this.state.index);
+    // console.log("Length of the State", this.state.deck.length);
     const ix = (this.state.index + 1) % this.state.deck.length;
-    console.log(ix, "changed after double click")
+    // console.log(ix, "changed after double click")
     this.setState({ index : ix });
-    
   };
   /*
   Building the layout  one card is face up and six cards is face down next to it. 
@@ -1057,8 +879,8 @@ class App extends Component {
   */
 
   render() {
-    console.log("state index")
-    console.log(this.state.index);
+    // console.log("state index")
+    // console.log(this.state.index);
     return (
       <div className="container">
         <Home
