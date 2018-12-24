@@ -29,6 +29,10 @@ class App extends Component {
   componentWillMount() {
     this.setDeckUp();
   }
+  startNewGame = () => {
+    this.setDeckUp();
+    
+  }
 
   returnActualValue = value => {
     /* This function will return the actual value. Curently value is being used to display the card
@@ -1011,6 +1015,7 @@ class App extends Component {
           handleDragEnd={this.handleDragEnd}
           handleDeckClick={this.deckClick}
           deckIndex={this.state.index}
+          startNewGame = {this.startNewGame}
         />
       </div>
     );

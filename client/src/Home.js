@@ -7,6 +7,9 @@ class Home extends Component {
     console.log(this.props);
     return (
       <div>
+        <div>
+          <button onClick = {this.props.startNewGame}>Start New Game</button>
+        </div>
         <TopRow
           deck={this.props.deck}
           stack1={this.props.finalStack1}
