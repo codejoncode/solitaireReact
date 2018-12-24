@@ -1,5 +1,5 @@
-import React, { Component, Proptypes } from "react";
-import DraggableSection from "./DraggableSection";
+import React, { Component } from "react";
+
 import BottomSection from "./BottomSection";
 
 class BottomRow extends Component {

@@ -9,6 +9,7 @@ class Home extends Component {
       <div>
         <div>
           <button onClick = {this.props.startNewGame}>Start New Game</button>
+          <button onClick = {this.props.handleUndo}>Undo Last Move ({this.props.numberOfUndos})</button>
         </div>
         <TopRow
           deck={this.props.deck}

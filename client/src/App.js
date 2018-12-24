@@ -24,11 +24,14 @@ class App extends Component {
     finalStack4: [],
     remainingDeckIndex: 0,
     from: {},
-    to: {}
+    to: {},
+    prevState: [],
+
   };
   componentWillMount() {
     this.setDeckUp();
   }
+  
   startNewGame = () => {
     this.setDeckUp();
     
@@ -254,16 +257,6 @@ class App extends Component {
     });
   };
 
-  flipCard = () => {
-    //this function should flip the card by taking the classname off or adding it.
-  };
-
-  goToNextCard = () => {
-    /* Click the deck of remaining cards and this will increment and take the deck to the next position uses the modulo operator */
-    const remainingDeckIndex =
-      (this.state.remainingDeckIndex + 1) % this.state.deck.length;
-    this.setState({ remainingDeckIndex });
-  };
 
   /* Drag and drop functions*/
 
@@ -448,6 +441,9 @@ class App extends Component {
     }
 
     console.log(ix, "why am i getting NaN");
+    const prevState = this.state.prevState.slice(); 
+    prevState.push(this.state); 
+
     this.setState({
       index: ix,
       deck,
@@ -461,7 +457,8 @@ class App extends Component {
       finalStack1,
       finalStack2,
       finalStack3,
-      finalStack4
+      finalStack4,
+      prevState,
     });
   };
 
@@ -716,6 +713,8 @@ class App extends Component {
     }
     if (foundAPlace) {
       const ix = this.state.index % deck.length;
+      const prevState = this.state.prevState.slice(); 
+      prevState.push(this.state); 
       this.setState({
         index: ix,
         deck,
@@ -729,7 +728,8 @@ class App extends Component {
         finalStack1,
         finalStack2,
         finalStack3,
-        finalStack4
+        finalStack4,
+        prevState,
       });
       return true;
     } else {
@@ -973,8 +973,22 @@ class App extends Component {
     // console.log("Length of the State", this.state.deck.length);
     const ix = (this.state.index + 1) % this.state.deck.length;
     // console.log(ix, "changed after double click")
-    this.setState({ index: ix });
+    const prevState = this.state.prevState.slice(); 
+    prevState.push(this.state); 
+    this.setState({ index: ix, prevState});
   };
+
+  handleUndo = () => {
+    //This function will handle the undo of a move. 
+    console.log("handle undo clicked");
+    const prevState = this.state.prevState.slice();
+    
+    if(prevState.length){
+      const state = prevState.pop(); 
+      this.setState({...state}); 
+    }
+
+  }
   /*
   Building the layout  one card is face up and six cards is face down next to it. 
   
@@ -1016,6 +1030,8 @@ class App extends Component {
           handleDeckClick={this.deckClick}
           deckIndex={this.state.index}
           startNewGame = {this.startNewGame}
+          handleUndo = {this.handleUndo}
+          numberOfUndos = {this.state.prevState.length}
         />
       </div>
     );
