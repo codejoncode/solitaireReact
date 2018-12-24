@@ -26,16 +26,14 @@ class App extends Component {
     from: {},
     to: {},
     prevState: [],
-
   };
   componentWillMount() {
     this.setDeckUp();
   }
-  
+
   startNewGame = () => {
     this.setDeckUp();
-    
-  }
+  };
 
   returnActualValue = value => {
     /* This function will return the actual value. Curently value is being used to display the card
@@ -242,7 +240,20 @@ class App extends Component {
     } else {
       this.shuffleDeck();
     }
-
+    const prevState = [
+      {
+        deck,
+        colOne,
+        colTwo,
+        colThree,
+        colFour,
+        colFive,
+        colSix,
+        colSeven,
+        remainingDeckIndex: deck.length - 1,
+        index: deck.length - 1
+      }
+    ];
     this.setState({
       deck,
       colOne,
@@ -253,10 +264,12 @@ class App extends Component {
       colSix,
       colSeven,
       remainingDeckIndex: deck.length - 1,
-      index: deck.length - 1
+      index: deck.length - 1,
+      prevState
     });
   };
 
+  setPrevState = () => {};
 
   /* Drag and drop functions*/
 
@@ -368,7 +381,8 @@ class App extends Component {
     finalStack1,
     finalStack2,
     finalStack3,
-    finalStack4
+    finalStack4,
+    prevState,
   ) => {
     console.log("Column to remove from", column);
     let ix = this.state.index;
@@ -441,8 +455,8 @@ class App extends Component {
     }
 
     console.log(ix, "why am i getting NaN");
-    const prevState = this.state.prevState.slice(); 
-    prevState.push(this.state); 
+    // const prevState = this.state.prevState.slice();
+    // prevState.push(this.state);
 
     this.setState({
       index: ix,
@@ -458,7 +472,7 @@ class App extends Component {
       finalStack2,
       finalStack3,
       finalStack4,
-      prevState,
+      prevState
     });
   };
 
@@ -479,6 +493,8 @@ class App extends Component {
   connectedAdd = (card, column) => {
     console.log(card, "connected");
     console.log(column);
+    const prevState = this.state.prevState.slice(); 
+    prevState.push(this.state); 
     const deck = this.state.deck.slice();
     const colOne = this.state.colOne.slice();
     const colTwo = this.state.colTwo.slice();
@@ -713,8 +729,8 @@ class App extends Component {
     }
     if (foundAPlace) {
       const ix = this.state.index % deck.length;
-      const prevState = this.state.prevState.slice(); 
-      prevState.push(this.state); 
+      // const prevState = this.state.prevState.slice();
+      // prevState.push(this.state);
       this.setState({
         index: ix,
         deck,
@@ -729,7 +745,7 @@ class App extends Component {
         finalStack2,
         finalStack3,
         finalStack4,
-        prevState,
+        prevState
       });
       return true;
     } else {
@@ -740,6 +756,8 @@ class App extends Component {
   doubleClick = (card, column, index = 5000) => {
     console.log(card, "coming in card");
     console.log(column);
+    const prevState = this.state.prevState.slice();
+    prevState.push(this.state); 
     let foundAPlace = false;
     const deck = this.state.deck.slice();
     const colOne = this.state.colOne.slice();
@@ -820,7 +838,8 @@ class App extends Component {
           finalStack1,
           finalStack2,
           finalStack3,
-          finalStack4
+          finalStack4, 
+          prevState, 
         );
         return;
       }
@@ -850,7 +869,8 @@ class App extends Component {
               finalStack1,
               finalStack2,
               finalStack3,
-              finalStack4
+              finalStack4,
+              prevState, 
             );
             return;
           }
@@ -903,7 +923,8 @@ class App extends Component {
             finalStack1,
             finalStack2,
             finalStack3,
-            finalStack4
+            finalStack4,
+            prevState, 
           );
           return;
         }
@@ -935,7 +956,8 @@ class App extends Component {
             finalStack1,
             finalStack2,
             finalStack3,
-            finalStack4
+            finalStack4,
+            prevState, 
           );
           return;
         }
@@ -961,7 +983,8 @@ class App extends Component {
           finalStack1,
           finalStack2,
           finalStack3,
-          finalStack4
+          finalStack4,
+          prevState, 
         );
         return;
       }
@@ -973,22 +996,58 @@ class App extends Component {
     // console.log("Length of the State", this.state.deck.length);
     const ix = (this.state.index + 1) % this.state.deck.length;
     // console.log(ix, "changed after double click")
-    const prevState = this.state.prevState.slice(); 
-    prevState.push(this.state); 
-    this.setState({ index: ix, prevState});
+    const prevState = this.state.prevState.slice();
+    prevState.push(this.state);
+    this.setState({ index: ix, prevState });
   };
 
   handleUndo = () => {
-    //This function will handle the undo of a move. 
+    //This function will handle the undo of a move.
     console.log("handle undo clicked");
     const prevState = this.state.prevState.slice();
-    
-    if(prevState.length){
-      const state = prevState.pop(); 
-      this.setState({...state}); 
-    }
+    // deck: [],
+    // index: 0,
+    // shuffled: false,
+    // colOne: [],
+    // colTwo: [],
+    // colThree: [],
+    // colFour: [],
+    // colFive: [],
+    // colSix: [],
+    // colSeven: [],
+    // finalStack1: [],
+    // finalStack2: [],
+    // finalStack3: [],
+    // finalStack4: [],
+    // remainingDeckIndex: 0,
+    // from: {},
+    // to: {},
+    // prevState: [],
+    if (prevState.length) {
+      const state = prevState.pop();
 
-  }
+      this.setState({
+        deck: state.deck,
+        index: state.index,
+        shuffled: state.shuffled,
+        colOne: [...state.colOne],
+        colTwo: [...state.colTwo],
+        colThree: [...state.colThree],
+        colFour : [...state.colFour], 
+        colFive : [...state.colFive], 
+        colSix: [...state.colSix], 
+        colSeven: [...state.colSeven], 
+        finalStack1 : [...state.finalStack1],
+        finalStack2 : [...state.finalStack2],
+        finalStack3 : [...state.finalStack3],
+        finalStack4: [...state.finalStack4],
+        remainingDeckIndex : state.remainingDeckIndex,
+        // from : {}, 
+        // to : {},
+        prevState: [...state.prevState], 
+      });
+    }
+  };
   /*
   Building the layout  one card is face up and six cards is face down next to it. 
   
@@ -1004,6 +1063,7 @@ class App extends Component {
     console.log(this.state.colFive);
     console.log(this.state.colSix);
     console.log(this.state.colSeven);
+    console.log(this.state.prevState);
     return (
       <div className="container">
         <Home
@@ -1029,9 +1089,9 @@ class App extends Component {
           handleDragEnd={this.handleDragEnd}
           handleDeckClick={this.deckClick}
           deckIndex={this.state.index}
-          startNewGame = {this.startNewGame}
-          handleUndo = {this.handleUndo}
-          numberOfUndos = {this.state.prevState.length}
+          startNewGame={this.startNewGame}
+          handleUndo={this.handleUndo}
+          numberOfUndos={this.state.prevState.length}
         />
       </div>
     );
