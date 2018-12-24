@@ -4,7 +4,6 @@ import BottomRow from "./BottomRow";
 class Home extends Component {
   state = {};
   render() {
-    console.log(this.props);
     return (
       <div>
         <div>

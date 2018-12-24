@@ -278,7 +278,7 @@ class App extends Component {
   };
 
   handleDragStart = (event, card, column = 1000) => {
-    console.log("drag start");
+    console.log("drag start", card, column);
     if (column !== 1000) {
       console.log(column);
     }
@@ -290,10 +290,10 @@ class App extends Component {
   };
 
   handleDragOver = (event, card, column = 10000) => {
+    console.log("Drag over");
     if (column !== 10000) {
       console.log(column);
     }
-    console.log("Drag over");
     if (event.preventDefault) {
       event.preventDefault();
     }
@@ -320,12 +320,12 @@ class App extends Component {
       dragSrc.innerHTML = event.target.innerHTML;
       event.target.innerHTML = event.dataTransfer.getData("text/html");
     }
-    console.log(event.target.classList);
+    // console.log(event.target.classList);
     return false;
   };
 
   handleDragEnd = (event, card, column = 10000) => {
-    console.log("Drag End");
+    console.log("Drag End", column);
     const columns = document.querySelectorAll(".column");
     columns.forEach(column => {
       column.classList.remove("over");
@@ -365,63 +365,43 @@ class App extends Component {
     let ix = this.state.index;
     switch (column) {
       case "remaining deck":
-        console.log(column, "triggered");
-
-        console.log(deck.length, "length before removal");
-        console.log(
-          index,
-          "this is the index to remove is splice handled right?"
-        );
         deck.splice(index, 1);
-        console.log(deck.length, "length after removal");
         ix = (this.state.index + 1) % deck.length;
         break;
       case "column 1":
-        console.log(column, "triggered");
         colOne.pop();
-
         break;
       case "column 2":
-        console.log(column, "triggered");
         colTwo.pop();
         if (colTwo.length) {
           colTwo[colTwo.length - 1].showBack = false;
         }
         break;
       case "column 3":
-        console.log(column, "triggered");
         colThree.pop();
         if (colThree.length) {
           colThree[colThree.length - 1].showBack = false;
         }
         break;
       case "column 4":
-        console.log(column, "triggered");
-
         colFour.pop();
         if (colFour.length) {
           colFour[colFour.length - 1].showBack = false;
         }
         break;
       case "column 5":
-        console.log(column, "triggered");
-
         colFive.pop();
         if (colFive.length) {
           colFive[colFive.length - 1].showBack = false;
         }
         break;
       case "column 6":
-        console.log(column, "triggered");
-
         colSix.pop();
         if (colSix.length) {
           colSix[colSix.length - 1].showBack = false;
         }
         break;
       case "column 7":
-        console.log(column, "triggered");
-
         colSeven.pop();
         if (colSeven.length) {
           colSeven[colSeven.length - 1].showBack = false;
@@ -430,10 +410,6 @@ class App extends Component {
       default:
         console.log("no case for this yet", column);
     }
-
-    console.log(ix, "why am i getting NaN");
-    // const prevState = this.state.prevState.slice();
-    // prevState.push(this.state);
 
     this.setState({
       index: ix,
@@ -468,8 +444,6 @@ class App extends Component {
   };
 
   connectedAdd = (card, column) => {
-    console.log(card, "connected");
-    console.log(column);
     const prevState = this.state.prevState.slice(); 
     prevState.push(this.state); 
     const deck = this.state.deck.slice();
@@ -567,7 +541,6 @@ class App extends Component {
         console.log("no case for this yet", column);
     }
     /* Now handle columns lastOne through lastSeven has the card avialble to the last of each column*/
-    console.log("inside connected checking ");
     if (lastOne) {
       if (lastOne.actual - 1 === card.actual && lastOne.color !== card.color) {
         card.connected = true;
@@ -660,7 +633,6 @@ class App extends Component {
 
     /*Need to add card to empty section */
     if (foundAPlace === false) {
-      console.log("inside connected checking empty column");
       if (colOne.length === 0) {
         foundAPlace = true;
         for (let i = toBeAdded.length - 1; i >= 0; i--) {
@@ -731,8 +703,6 @@ class App extends Component {
   };
 
   doubleClick = (card, column, index = 5000) => {
-    console.log(card, "coming in card");
-    console.log(column);
     const prevState = this.state.prevState.slice();
     prevState.push(this.state); 
     let foundAPlace = false;
@@ -797,7 +767,6 @@ class App extends Component {
     if (foundAPlace) {
       return;
     }
-    console.log("check stacks and if this is an ace");
     for (let stack of allStacks) {
       if (stack.length === 0 && card.value === "A") {
         stack.push(card);
@@ -824,7 +793,6 @@ class App extends Component {
 
     //if card is at the bottom
     if (card.bottomRow) {
-      console.log("bottom row check stacks");
       for (let stack of allStacks) {
         if (stack.length > 0) {
           if (
@@ -876,10 +844,8 @@ class App extends Component {
       7: allColumns[6]
     };
     let count = 1; //start off at one to use object above
-    console.log("check columns");
     for (let last of allLast) {
       if (last) {
-        console.log(last, card, "870 new factoring");
         if (last.actual - 1 === card.actual && last.color !== card.color) {
           card.connected = true;
           last.connected = true;
@@ -911,7 +877,6 @@ class App extends Component {
 
     //first check the final stacks
     //I only want to check the final stacks if the card is at the bottom but not sure exactly yet.
-    console.log("stack checks");
     for (let stack of allStacks) {
       if (stack.length > 0) {
         if (
@@ -942,7 +907,6 @@ class App extends Component {
     }
 
     /*Need to add card to empty section  last resort*/
-    console.log("empty columns check");
     for (let col of allColumns) {
       if (col.length === 0) {
         col.push(card);
@@ -969,10 +933,7 @@ class App extends Component {
   };
 
   deckClick = () => {
-    // console.log("Current State index", this.state.index);
-    // console.log("Length of the State", this.state.deck.length);
     const ix = (this.state.index + 1) % this.state.deck.length;
-    // console.log(ix, "changed after double click")
     const prevState = this.state.prevState.slice();
     prevState.push(this.state);
     this.setState({ index: ix, prevState });
@@ -980,7 +941,6 @@ class App extends Component {
 
   handleUndo = () => {
     //This function will handle the undo of a move.
-    console.log("handle undo clicked");
     const prevState = this.state.prevState.slice();
     // deck: [],
     // index: 0,
@@ -1033,14 +993,14 @@ class App extends Component {
   render() {
     // console.log("state index")
     // console.log(this.state.index);
-    console.log(this.state.colOne);
-    console.log(this.state.colTwo);
-    console.log(this.state.colThree);
-    console.log(this.state.colFour);
-    console.log(this.state.colFive);
-    console.log(this.state.colSix);
-    console.log(this.state.colSeven);
-    console.log(this.state.prevState);
+    // console.log(this.state.colOne);
+    // console.log(this.state.colTwo);
+    // console.log(this.state.colThree);
+    // console.log(this.state.colFour);
+    // console.log(this.state.colFive);
+    // console.log(this.state.colSix);
+    // console.log(this.state.colSeven);
+    // console.log(this.state.prevState);
     return (
       <div className="container">
         <Home
