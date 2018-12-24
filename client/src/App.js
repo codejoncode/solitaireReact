@@ -277,7 +277,7 @@ class App extends Component {
     console.log("dragging");
   };
 
-  handleDragStart = (event, column = 1000) => {
+  handleDragStart = (event, card, column = 1000) => {
     console.log("drag start");
     if (column !== 1000) {
       console.log(column);
@@ -289,7 +289,7 @@ class App extends Component {
     event.dataTransfer.setData("text/html", event.target.innerHTML);
   };
 
-  handleDragOver = (event, column = 10000) => {
+  handleDragOver = (event, card, column = 10000) => {
     if (column !== 10000) {
       console.log(column);
     }
@@ -300,23 +300,18 @@ class App extends Component {
     event.dataTransfer.dropEffect = "move";
   };
 
-  handleDragEnter = event => {
+  handleDragEnter = (event, card, column = 10000) => {
     console.log("Drag enter");
 
     event.target.classList.add("over");
   };
 
-  handleDragLeave = event => {
+  handleDragLeave = (event, card, column = 10000) => {
     console.log("Drag Leave");
     event.target.classList.remove("over");
   };
 
-  handleDrop = event => {
-    // event.preventDefault()
-    // if(event.target.id === "droptarget"){
-    //   const data = event.dataTransfer.getData("Text");
-    //   event.target.appendChild(document.getElementById(data));
-    // }
+  handleDrop = (event, card, column = 10000) => {
     if (event.stopPropagation) {
       event.stopPropagation();
     }
@@ -329,7 +324,7 @@ class App extends Component {
     return false;
   };
 
-  handleDragEnd = () => {
+  handleDragEnd = (event, card, column = 10000) => {
     console.log("Drag End");
     const columns = document.querySelectorAll(".column");
     columns.forEach(column => {
@@ -347,24 +342,6 @@ class App extends Component {
     const last_obj = { last, from: "remainingDeck" }; //  from will be used when using rules if it is not fitting of the rules it will return back to its list it came from.
 
     this.setState({ deck, last_obj, remainingDeckIndex });
-  };
-
-  /* New drag and drop functions trying something different */
-  allowingDrop = event => {
-    console.log(event.target);
-    event.preventDefault();
-  };
-
-  dragging = event => {
-    console.log(event.target);
-    event.dataTransfer.setData("text", event.target.id);
-  };
-
-  dropping = event => {
-    console.log(event.target);
-    event.preventDefault();
-    const data = event.dataTransfer.getData("text");
-    event.target.appendChild(document.getElementById(data));
   };
 
   removeFromColumn = (

@@ -29,13 +29,13 @@ class BottomSection extends Component {
               onDoubleClick={() =>
                 this.props.doubleClick(card, this.props.name)
               }
-              onDragStart = {this.props.handleDragStart}
+              onDragStart = {(event) => this.props.handleDragStart(event, card, this.props.name)}
               // onDrag = {this.props.handleDrag}
-              onDragEnd = {this.props.handleDragEnd} 
-              onDragEnter={this.handleDragEnter}
-              onDragOver={event => this.props.handleDragOver(event, this.props.name)}
-              onDrop={this.props.handleOnDrop}
-              onDragLeave={this.props.handleDragLeave}
+              onDragEnd = {(event) => this.props.handleDragEnd(event, card, this.props.name)} 
+              onDragEnter={(event) => this.handleDragEnter(event, card, this.props.name)}
+              onDragOver={event => this.props.handleDragOver(event, card,  this.props.name)}
+              onDrop={(event) => this.props.handleOnDrop(event, card,  this.props.name)}
+              onDragLeave={(event) => this.props.handleDragLeave(event, card,  this.props.name)}
               draggable="true"
               className={
                 id === this.props.cards.length - 1
