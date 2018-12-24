@@ -1,4 +1,4 @@
-import React, {Component, Proptypes} from 'react'; 
+import React, {Component} from 'react'; 
 
 class Card extends Component {
     state = {

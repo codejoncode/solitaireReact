@@ -1,4 +1,4 @@
-import React, { Component, Proptypes } from "react";
+import React, { Component } from "react";
 import FinalStack from "./FinalStack";
 import back from "./blackCardPicture.PNG";
 class TopRow extends Component {
@@ -54,7 +54,6 @@ class TopRow extends Component {
               <img className="backOfCard" src={back} alt="back of card" />
             </div>
             <div
-              onDoubleClick={this.props.doubleClick}
               draggable="true"
               className="outline scene column"
               onDragStart = {this.props.handleDragStart}

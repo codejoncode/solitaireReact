@@ -1,4 +1,4 @@
-import React, { Component, Proptypes } from "react";
+import React, { Component } from "react";
 import FinalDropZone from "./FinalDropZone";
 class FinalStack extends Component {
   state = {};
@@ -14,7 +14,7 @@ class FinalStack extends Component {
     return (
       <div draggable = "false" className="finalStack">
         <FinalDropZone className = "stack1"
-          stack = "stack1"
+          name = "stack1"
           doubleClick = {this.props.doubleClick}
           handleDragEnter={this.props.handleDragEnter}
           handleDragOver={this.props.handleDragOver}
@@ -26,7 +26,7 @@ class FinalStack extends Component {
           stack = {this.props.stack1}
         />
         <FinalDropZone className = "stack2"
-          stack = "stack2"
+          name = "stack2"
           doubleClick = {this.props.doubleClick}
           handleDragEnter={this.props.handleDragEnter}
           handleDragOver={this.props.handleDragOver}
@@ -38,7 +38,7 @@ class FinalStack extends Component {
           stack = {this.props.stack2}
         />
         <FinalDropZone className = "stack3"
-          stack = "stack3"
+          name = "stack3"
           doubleClick = {this.props.doubleClick}
           handleDragEnter={this.props.handleDragEnter}
           handleDragOver={this.props.handleDragOver}
@@ -50,7 +50,7 @@ class FinalStack extends Component {
           stack = {this.props.stack3}
         />
         <FinalDropZone className = "stack4"
-          stack = "stack4"
+          name = "stack4"
           doubleClick = {this.props.doubleClick}
           handleDragEnter={this.props.handleDragEnter}
           handleDragOver={this.props.handleDragOver}

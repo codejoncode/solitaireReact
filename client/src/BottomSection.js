@@ -1,15 +1,10 @@
-import React, { Component, Proptypes } from "react";
-import DraggableSection from "./DraggableSection";
+import React, { Component } from "react";
 import back from "./blackCardPicture.PNG";
 
-{
-  /* <div className="">
-  <img className = "backOfCard" src= {back} alt="back of card"/>              
-</div> */
-}
-let lastCard = false;
 class BottomSection extends Component {
-  state = {};
+  state = {
+    
+  };
 
   clickingCard = event => {
     // console.log(event.target);
@@ -18,8 +13,7 @@ class BottomSection extends Component {
 
   render() {
     
-    const cards = this.props.cards;
-    
+    const cards = this.props.cards; 
     return (
       <div>
         {cards.map((card, id) => (
@@ -31,8 +25,8 @@ class BottomSection extends Component {
               }
               onDragStart = {(event) => this.props.handleDragStart(event, card, this.props.name)}
               // onDrag = {this.props.handleDrag}
-              onDragEnd = {(event) => this.props.handleDragEnd(event, card, this.props.name)} 
-              onDragEnter={(event) => this.handleDragEnter(event, card, this.props.name)}
+              onDragEnd = {(event) => this.props.handleDragend(event, card, this.props.name)} 
+              onDragEnter={(event) => this.props.handleDragEnter(event, card, this.props.name)}
               onDragOver={event => this.props.handleDragOver(event, card,  this.props.name)}
               onDrop={(event) => this.props.handleOnDrop(event, card,  this.props.name)}
               onDragLeave={(event) => this.props.handleDragLeave(event, card,  this.props.name)}
@@ -47,9 +41,7 @@ class BottomSection extends Component {
               {/* {(card.showBack === true && id !== this.props.cards.length - 1)  ? ( */}
               {(card.connected === false && id !== this.props.cards.length - 1) ? (
                 <img className="backOfCard" src={back} alt="back of card" />
-              ) : (
-                (lastCard = true)
-              )}
+              ) : <div></div>}
               <div className={"top " + card.color}>
                 <span>{card.value}</span>{" "}
                 {card.suit === "hearts" ? (

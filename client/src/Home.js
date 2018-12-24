@@ -1,4 +1,4 @@
-import React, { Component, Proptypes } from "react";
+import React, { Component } from "react";
 import TopRow from "./TopRow";
 import BottomRow from "./BottomRow";
 class Home extends Component {

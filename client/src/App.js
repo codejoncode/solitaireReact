@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import RemainingDeck from "./RemainingDeck";
 import Home from "./Home";
 
 let dragSrc = null;
@@ -25,7 +24,7 @@ class App extends Component {
     remainingDeckIndex: 0,
     from: {},
     to: {},
-    prevState: [],
+    prevState: []
   };
   componentWillMount() {
     this.setDeckUp();
@@ -58,8 +57,10 @@ class App extends Component {
     }
     //because react requires a default case  this can be simplified.
     //2-10 will be the integer version of its string.
-    let x = 0;
-    returning ? (x = 1) : console.log("ISSUE WITH RETURNING", value);
+
+    if (!returning) {
+      console.log("ISSUE WITH RETURNING", value);
+    }
     return returning;
   };
 
@@ -136,10 +137,17 @@ class App extends Component {
         }
       }
     }
+    const finalStack1 = [];
+    const finalStack2 = [];
+    const finalStack3 = [];
+    const finalStack4 = [];
 
-    this.setState({ deck }, () => {
-      this.shuffleDeck();
-    });
+    this.setState(
+      { deck, finalStack1, finalStack2, finalStack3, finalStack4 },
+      () => {
+        this.shuffleDeck();
+      }
+    );
   };
 
   shuffleDeck = () => {
@@ -316,7 +324,7 @@ class App extends Component {
       event.stopPropagation();
     }
     if (dragSrc !== event.target) {
-      console.log(dragSrc.classList);
+      // console.log(dragSrc.classList);
       dragSrc.innerHTML = event.target.innerHTML;
       event.target.innerHTML = event.dataTransfer.getData("text/html");
     }
@@ -359,7 +367,7 @@ class App extends Component {
     finalStack2,
     finalStack3,
     finalStack4,
-    prevState,
+    prevState
   ) => {
     console.log("Column to remove from", column);
     let ix = this.state.index;
@@ -406,6 +414,7 @@ class App extends Component {
         if (colSeven.length) {
           colSeven[colSeven.length - 1].showBack = false;
         }
+        break;
 
       default:
         console.log("no case for this yet", column);
@@ -443,9 +452,13 @@ class App extends Component {
     return true;
   };
 
+  foundCard = (lookingFor, current) => {
+    //using this in the connectedAdd function 
+  }
+
   connectedAdd = (card, column) => {
-    const prevState = this.state.prevState.slice(); 
-    prevState.push(this.state); 
+    const prevState = this.state.prevState.slice();
+    prevState.push(this.state);
     const deck = this.state.deck.slice();
     const colOne = this.state.colOne.slice();
     const colTwo = this.state.colTwo.slice();
@@ -466,6 +479,16 @@ class App extends Component {
     const lastFive = colFive[colFive.length - 1];
     const lastSix = colSix[colSix.length - 1];
     const lastSeven = colSeven[colSeven.length - 1];
+
+    const allLast = [
+      lastOne,
+      lastTwo,
+      lastThree,
+      lastFour,
+      lastFive,
+      lastSix,
+      lastSeven
+    ];
 
     /*if remaining deck is empty we can peform a way to get all the cards added at once */
     if (deck.length === 0) {
@@ -541,95 +564,112 @@ class App extends Component {
         console.log("no case for this yet", column);
     }
     /* Now handle columns lastOne through lastSeven has the card avialble to the last of each column*/
-    if (lastOne) {
-      if (lastOne.actual - 1 === card.actual && lastOne.color !== card.color) {
-        card.connected = true;
-        lastOne.connected = true;
-        card.showBack = false;
-        foundAPlace = true;
-        for (let i = toBeAdded.length - 1; i >= 0; i--) {
-          colOne.push(toBeAdded[i]);
+    let x = 0;
+    const obj = [colOne, colTwo, colThree, colFour, colFive, colSix, colSeven];
+    for (let last of allLast) {
+      if (last) {
+        if (last.actual - 1 === card.actual && last.color !== card.color) {
+          card.connected = true;
+          card.showBack = false;
+          last.connected = true;
+          foundAPlace = true;
+          for (let i = toBeAdded.length - 1; i >= 0; i--) {
+            obj[x].push(toBeAdded[i]);
+          }
+          break;
         }
       }
+      x += 1;
     }
-    if (lastTwo) {
-      if (lastTwo.actual - 1 === card.actual && lastTwo.color !== card.color) {
-        card.connected = true;
-        lastTwo.connected = true;
-        card.showBack = false;
-        foundAPlace = true;
-        for (let i = toBeAdded.length - 1; i >= 0; i--) {
-          colTwo.push(toBeAdded[i]);
-        }
-      }
-    }
-    if (lastThree) {
-      if (
-        lastThree.actual - 1 === card.actual &&
-        lastThree.color !== card.color
-      ) {
-        card.connected = true;
-        lastThree.connected = true;
-        card.showBack = false;
-        foundAPlace = true;
-        for (let i = toBeAdded.length - 1; i >= 0; i--) {
-          colThree.push(toBeAdded[i]);
-        }
-      }
-    }
-    if (lastFour) {
-      if (
-        lastFour.actual - 1 === card.actual &&
-        lastFour.color !== card.color
-      ) {
-        card.connected = true;
-        lastFour.connected = true;
-        card.showBack = false;
-        foundAPlace = true;
-        for (let i = toBeAdded.length - 1; i >= 0; i--) {
-          colFour.push(toBeAdded[i]);
-        }
-      }
-    }
-    if (lastFive) {
-      if (
-        lastFive.actual - 1 === card.actual &&
-        lastFive.color !== card.color
-      ) {
-        card.connected = true;
-        lastFive.connected = true;
-        card.showBack = false;
-        foundAPlace = true;
-        for (let i = toBeAdded.length - 1; i >= 0; i--) {
-          colFive.push(toBeAdded[i]);
-        }
-      }
-    }
-    if (lastSix) {
-      if (lastSix.actual - 1 === card.actual && lastSix.color !== card.color) {
-        card.connected = true;
-        lastSix.connected = true;
-        card.showBack = false;
-        foundAPlace = true;
-        for (let i = toBeAdded.length - 1; i >= 0; i--) {
-          colSix.push(toBeAdded[i]);
-        }
-      }
-    }
-    if (lastSeven) {
-      if (
-        lastSeven.actual - 1 === card.actual &&
-        lastSeven.color !== card.color
-      ) {
-        card.connected = true;
-        lastSeven.connected = true;
-        card.showBack = false;
-        foundAPlace = true;
-        for (let i = toBeAdded.length - 1; i >= 0; i--) {
-          colSeven.push(toBeAdded[i]);
-        }
-      }
-    }
+    // if (lastOne) {
+    //   if (lastOne.actual - 1 === card.actual && lastOne.color !== card.color) {
+    //     card.connected = true;
+    //     lastOne.connected = true;
+    //     card.showBack = false;
+    //     foundAPlace = true;
+    //     for (let i = toBeAdded.length - 1; i >= 0; i--) {
+    //       colOne.push(toBeAdded[i]);
+    //     }
+    //   }
+    // }
+    // if (lastTwo) {
+    //   if (lastTwo.actual - 1 === card.actual && lastTwo.color !== card.color) {
+    //     card.connected = true;
+    //     lastTwo.connected = true;
+    //     card.showBack = false;
+    //     foundAPlace = true;
+    //     for (let i = toBeAdded.length - 1; i >= 0; i--) {
+    //       colTwo.push(toBeAdded[i]);
+    //     }
+    //   }
+    // }
+    // if (lastThree) {
+    //   if (
+    //     lastThree.actual - 1 === card.actual &&
+    //     lastThree.color !== card.color
+    //   ) {
+    //     card.connected = true;
+    //     lastThree.connected = true;
+    //     card.showBack = false;
+    //     foundAPlace = true;
+    //     for (let i = toBeAdded.length - 1; i >= 0; i--) {
+    //       colThree.push(toBeAdded[i]);
+    //     }
+    //   }
+    // }
+    // if (lastFour) {
+    //   if (
+    //     lastFour.actual - 1 === card.actual &&
+    //     lastFour.color !== card.color
+    //   ) {
+    //     card.connected = true;
+    //     lastFour.connected = true;
+    //     card.showBack = false;
+    //     foundAPlace = true;
+    //     for (let i = toBeAdded.length - 1; i >= 0; i--) {
+    //       colFour.push(toBeAdded[i]);
+    //     }
+    //   }
+    // }
+    // if (lastFive) {
+    //   if (
+    //     lastFive.actual - 1 === card.actual &&
+    //     lastFive.color !== card.color
+    //   ) {
+    //     card.connected = true;
+    //     lastFive.connected = true;
+    //     card.showBack = false;
+    //     foundAPlace = true;
+    //     for (let i = toBeAdded.length - 1; i >= 0; i--) {
+    //       colFive.push(toBeAdded[i]);
+    //     }
+    //   }
+    // }
+    // if (lastSix) {
+    //   if (lastSix.actual - 1 === card.actual && lastSix.color !== card.color) {
+    //     card.connected = true;
+    //     lastSix.connected = true;
+    //     card.showBack = false;
+    //     foundAPlace = true;
+    //     for (let i = toBeAdded.length - 1; i >= 0; i--) {
+    //       colSix.push(toBeAdded[i]);
+    //     }
+    //   }
+    // }
+    // if (lastSeven) {
+    //   if (
+    //     lastSeven.actual - 1 === card.actual &&
+    //     lastSeven.color !== card.color
+    //   ) {
+    //     card.connected = true;
+    //     lastSeven.connected = true;
+    //     card.showBack = false;
+    //     foundAPlace = true;
+    //     for (let i = toBeAdded.length - 1; i >= 0; i--) {
+    //       colSeven.push(toBeAdded[i]);
+    //     }
+    //   }
+    // }
 
     /*Need to add card to empty section */
     if (foundAPlace === false) {
@@ -676,6 +716,7 @@ class App extends Component {
         }
       }
     }
+
     if (foundAPlace) {
       const ix = this.state.index % deck.length;
       // const prevState = this.state.prevState.slice();
@@ -704,7 +745,7 @@ class App extends Component {
 
   doubleClick = (card, column, index = 5000) => {
     const prevState = this.state.prevState.slice();
-    prevState.push(this.state); 
+    prevState.push(this.state);
     let foundAPlace = false;
     const deck = this.state.deck.slice();
     const colOne = this.state.colOne.slice();
@@ -714,15 +755,7 @@ class App extends Component {
     const colFive = this.state.colFive.slice();
     const colSix = this.state.colSix.slice();
     const colSeven = this.state.colSeven.slice();
-    const columns = [
-      colOne,
-      colTwo,
-      colThree,
-      colFour,
-      colFive,
-      colSix,
-      colSeven
-    ];
+
     const finalStack1 = this.state.finalStack1.slice();
     const finalStack2 = this.state.finalStack2.slice();
     const finalStack3 = this.state.finalStack3.slice();
@@ -784,8 +817,8 @@ class App extends Component {
           finalStack1,
           finalStack2,
           finalStack3,
-          finalStack4, 
-          prevState, 
+          finalStack4,
+          prevState
         );
         return;
       }
@@ -815,7 +848,7 @@ class App extends Component {
               finalStack2,
               finalStack3,
               finalStack4,
-              prevState, 
+              prevState
             );
             return;
           }
@@ -867,7 +900,7 @@ class App extends Component {
             finalStack2,
             finalStack3,
             finalStack4,
-            prevState, 
+            prevState
           );
           return;
         }
@@ -899,7 +932,7 @@ class App extends Component {
             finalStack2,
             finalStack3,
             finalStack4,
-            prevState, 
+            prevState
           );
           return;
         }
@@ -925,7 +958,7 @@ class App extends Component {
           finalStack2,
           finalStack3,
           finalStack4,
-          prevState, 
+          prevState
         );
         return;
       }
@@ -942,48 +975,15 @@ class App extends Component {
   handleUndo = () => {
     //This function will handle the undo of a move.
     const prevState = this.state.prevState.slice();
-    // deck: [],
-    // index: 0,
-    // shuffled: false,
-    // colOne: [],
-    // colTwo: [],
-    // colThree: [],
-    // colFour: [],
-    // colFive: [],
-    // colSix: [],
-    // colSeven: [],
-    // finalStack1: [],
-    // finalStack2: [],
-    // finalStack3: [],
-    // finalStack4: [],
-    // remainingDeckIndex: 0,
-    // from: {},
-    // to: {},
-    // prevState: [],
-    if (prevState.length) {
+    
+    
+    if (prevState.length > 1) {
+      
       const state = prevState.pop();
-
-      this.setState({
-        deck: state.deck,
-        index: state.index,
-        shuffled: state.shuffled,
-        colOne: [...state.colOne],
-        colTwo: [...state.colTwo],
-        colThree: [...state.colThree],
-        colFour : [...state.colFour], 
-        colFive : [...state.colFive], 
-        colSix: [...state.colSix], 
-        colSeven: [...state.colSeven], 
-        finalStack1 : [...state.finalStack1],
-        finalStack2 : [...state.finalStack2],
-        finalStack3 : [...state.finalStack3],
-        finalStack4: [...state.finalStack4],
-        remainingDeckIndex : state.remainingDeckIndex,
-        // from : {}, 
-        // to : {},
-        prevState: [...state.prevState], 
-      });
+      this.setState(state);
+      
     }
+
   };
   /*
   Building the layout  one card is face up and six cards is face down next to it. 
@@ -991,16 +991,6 @@ class App extends Component {
   */
 
   render() {
-    // console.log("state index")
-    // console.log(this.state.index);
-    // console.log(this.state.colOne);
-    // console.log(this.state.colTwo);
-    // console.log(this.state.colThree);
-    // console.log(this.state.colFour);
-    // console.log(this.state.colFive);
-    // console.log(this.state.colSix);
-    // console.log(this.state.colSeven);
-    // console.log(this.state.prevState);
     return (
       <div className="container">
         <Home
@@ -1028,7 +1018,7 @@ class App extends Component {
           deckIndex={this.state.index}
           startNewGame={this.startNewGame}
           handleUndo={this.handleUndo}
-          numberOfUndos={this.state.prevState.length}
+          numberOfUndos={this.state.prevState.length - 1}
         />
       </div>
     );
