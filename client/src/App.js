@@ -251,13 +251,13 @@ class App extends Component {
     const prevState = [
       {
         deck,
-        colOne,
-        colTwo,
-        colThree,
-        colFour,
-        colFive,
-        colSix,
-        colSeven,
+        colOne : colOne.slice(),
+        colTwo : colTwo.slice(),
+        colThree : colThree.slice(),
+        colFour : colFour.slice(),
+        colFive : colFive.slice(),
+        colSix : colSix.slice(),
+        colSeven : colSeven.slice(),
         remainingDeckIndex: deck.length - 1,
         index: deck.length - 1
       }
@@ -277,7 +277,7 @@ class App extends Component {
     });
   };
 
-  setPrevState = () => {};
+  
 
   /* Drag and drop functions*/
 
@@ -456,9 +456,109 @@ class App extends Component {
     //using this in the connectedAdd function 
   }
 
+  setPrevState = () => {
+    const state = {
+      deck: [],
+      colOne: [],
+      colTwo: [],
+      colThree: [],
+      colFour: [],
+      colFive: [],
+      colSix: [],
+      colSeven: [],
+      finalStack1 : [],
+      finalStack2 : [],
+      finalStack3 : [],
+      finalStack4 : [],
+      from: {},
+      to: {},
+      index: this.state.index,
+      shuffled: this.state.shuffled, 
+      remainingDeckIndex: this.state.remainingDeckIndex,
+      prevState: this.state.prevState.slice(),
+
+
+    }
+    for (let x of this.state.deck){
+      let b = {};
+      Object.assign(b, x);
+      state.deck.push(b);
+    }
+
+    for (let x of this.state.colOne){
+      let b = {};
+      Object.assign(b, x);
+      state.colOne.push(b);
+    }
+
+    for (let x of this.state.colTwo){
+      let b = {};
+      Object.assign(b, x); 
+      state.colTwo.push(b);
+    }
+
+    for (let x of this.state.colThree){
+      let b = {};
+      Object.assign(b, x);
+      state.colThree.push(b);
+    }
+
+    for (let x of this.state.colFour){
+      let b = {};
+      Object.assign(b, x);
+      state.colFour.push(b);
+    }
+
+    for (let x of this.state.colFive){
+      let b = {};
+      Object.assign(b, x);
+      state.colFive.push(b);
+    }
+
+    for (let x of this.state.colSix){
+      let b = {};
+      Object.assign(b, x);
+      state.colSix.push(b); 
+    }
+
+    for (let x of this.state.colSeven){
+      let b = {};
+      Object.assign(b, x);
+      state.colSeven.push(b);
+    }
+
+    for (let x of this.state.finalStack1){
+      let b = {};
+      Object.assign(b, x);
+      state.finalStack1.push(b);
+    }
+
+    for (let x of this.state.finalStack2){
+      let b = {};
+      Object.assign(b, x);
+      state.finalStack2.push(b);
+    }
+
+    for (let x of this.state.finalStack3){
+      let b = {};
+      Object.assign(b, x);
+      state.finalStack3.push(b);
+    }
+
+    for (let x of this.state.finalStack4){
+      let b = {};
+      Object.assign(b, x);
+      state.finalStack4.push(b);
+    }
+
+    const prevState = this.state.prevState.slice(); 
+    prevState.push(state);
+
+    return prevState; 
+  };
+
   connectedAdd = (card, column) => {
-    const prevState = this.state.prevState.slice();
-    prevState.push(this.state);
+    const prevState = this.setPrevState(); 
     const deck = this.state.deck.slice();
     const colOne = this.state.colOne.slice();
     const colTwo = this.state.colTwo.slice();
@@ -471,6 +571,7 @@ class App extends Component {
     const finalStack2 = this.state.finalStack2.slice();
     const finalStack3 = this.state.finalStack3.slice();
     const finalStack4 = this.state.finalStack4.slice();
+    
 
     const lastOne = colOne[colOne.length - 1];
     const lastTwo = colTwo[colTwo.length - 1];
@@ -479,7 +580,7 @@ class App extends Component {
     const lastFive = colFive[colFive.length - 1];
     const lastSix = colSix[colSix.length - 1];
     const lastSeven = colSeven[colSeven.length - 1];
-
+    const obj = [colOne, colTwo, colThree, colFour, colFive, colSix, colSeven];
     const allLast = [
       lastOne,
       lastTwo,
@@ -495,18 +596,9 @@ class App extends Component {
       //I want to check if if all cards are revealed.
       console.log("DECK IS EMPTY");
       let noBlackSideShowing = false;
-      const bottomRow = [
-        colOne,
-        colTwo,
-        colThree,
-        colFour,
-        colFive,
-        colSix,
-        colSeven
-      ];
       let count = 0;
-      while (noBlackSideShowing === false && count !== bottomRow.length) {
-        noBlackSideShowing = this.anyBlackCardsLeft(bottomRow[count]);
+      while (noBlackSideShowing === false && count !== obj.length) {
+        noBlackSideShowing = this.anyBlackCardsLeft(obj[count]);
         count += 1;
       }
       //BELOW IS THE CODE FOR THE END OF THE GAME
@@ -565,7 +657,7 @@ class App extends Component {
     }
     /* Now handle columns lastOne through lastSeven has the card avialble to the last of each column*/
     let x = 0;
-    const obj = [colOne, colTwo, colThree, colFour, colFive, colSix, colSeven];
+    
     for (let last of allLast) {
       if (last) {
         if (last.actual - 1 === card.actual && last.color !== card.color) {
@@ -581,95 +673,7 @@ class App extends Component {
       }
       x += 1;
     }
-    // if (lastOne) {
-    //   if (lastOne.actual - 1 === card.actual && lastOne.color !== card.color) {
-    //     card.connected = true;
-    //     lastOne.connected = true;
-    //     card.showBack = false;
-    //     foundAPlace = true;
-    //     for (let i = toBeAdded.length - 1; i >= 0; i--) {
-    //       colOne.push(toBeAdded[i]);
-    //     }
-    //   }
-    // }
-    // if (lastTwo) {
-    //   if (lastTwo.actual - 1 === card.actual && lastTwo.color !== card.color) {
-    //     card.connected = true;
-    //     lastTwo.connected = true;
-    //     card.showBack = false;
-    //     foundAPlace = true;
-    //     for (let i = toBeAdded.length - 1; i >= 0; i--) {
-    //       colTwo.push(toBeAdded[i]);
-    //     }
-    //   }
-    // }
-    // if (lastThree) {
-    //   if (
-    //     lastThree.actual - 1 === card.actual &&
-    //     lastThree.color !== card.color
-    //   ) {
-    //     card.connected = true;
-    //     lastThree.connected = true;
-    //     card.showBack = false;
-    //     foundAPlace = true;
-    //     for (let i = toBeAdded.length - 1; i >= 0; i--) {
-    //       colThree.push(toBeAdded[i]);
-    //     }
-    //   }
-    // }
-    // if (lastFour) {
-    //   if (
-    //     lastFour.actual - 1 === card.actual &&
-    //     lastFour.color !== card.color
-    //   ) {
-    //     card.connected = true;
-    //     lastFour.connected = true;
-    //     card.showBack = false;
-    //     foundAPlace = true;
-    //     for (let i = toBeAdded.length - 1; i >= 0; i--) {
-    //       colFour.push(toBeAdded[i]);
-    //     }
-    //   }
-    // }
-    // if (lastFive) {
-    //   if (
-    //     lastFive.actual - 1 === card.actual &&
-    //     lastFive.color !== card.color
-    //   ) {
-    //     card.connected = true;
-    //     lastFive.connected = true;
-    //     card.showBack = false;
-    //     foundAPlace = true;
-    //     for (let i = toBeAdded.length - 1; i >= 0; i--) {
-    //       colFive.push(toBeAdded[i]);
-    //     }
-    //   }
-    // }
-    // if (lastSix) {
-    //   if (lastSix.actual - 1 === card.actual && lastSix.color !== card.color) {
-    //     card.connected = true;
-    //     lastSix.connected = true;
-    //     card.showBack = false;
-    //     foundAPlace = true;
-    //     for (let i = toBeAdded.length - 1; i >= 0; i--) {
-    //       colSix.push(toBeAdded[i]);
-    //     }
-    //   }
-    // }
-    // if (lastSeven) {
-    //   if (
-    //     lastSeven.actual - 1 === card.actual &&
-    //     lastSeven.color !== card.color
-    //   ) {
-    //     card.connected = true;
-    //     lastSeven.connected = true;
-    //     card.showBack = false;
-    //     foundAPlace = true;
-    //     for (let i = toBeAdded.length - 1; i >= 0; i--) {
-    //       colSeven.push(toBeAdded[i]);
-    //     }
-    //   }
-    // }
+    
 
     /*Need to add card to empty section */
     if (foundAPlace === false) {
@@ -744,8 +748,7 @@ class App extends Component {
   };
 
   doubleClick = (card, column, index = 5000) => {
-    const prevState = this.state.prevState.slice();
-    prevState.push(this.state);
+    const prevState = this.setPrevState();
     let foundAPlace = false;
     const deck = this.state.deck.slice();
     const colOne = this.state.colOne.slice();
