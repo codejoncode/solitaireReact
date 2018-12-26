@@ -6,10 +6,6 @@ class BottomSection extends Component {
     
   };
 
-  clickingCard = event => {
-    // console.log(event.target);
-    // console.log(event.target.classList);
-  };
 
   render() {
     

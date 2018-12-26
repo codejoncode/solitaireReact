@@ -553,7 +553,7 @@ class App extends Component {
 
     const prevState = this.state.prevState.slice();
     prevState.push(state);
-    
+
     state.prevState = prevState;  
 
     if (usageOnly){
@@ -658,6 +658,7 @@ class App extends Component {
           const toAdd = colSeven.pop();
           toBeAdded.push(toAdd);
         }
+        break;
 
       default:
         console.log("no case for this yet", column);
@@ -990,6 +991,7 @@ class App extends Component {
     
     if (prevState.length > 1) {
       const state = prevState.pop();
+      state.prevState = prevState;
       this.setState(state);
     }
 
