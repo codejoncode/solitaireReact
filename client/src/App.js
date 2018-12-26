@@ -456,7 +456,7 @@ class App extends Component {
     //using this in the connectedAdd function 
   }
 
-  setPrevState = () => {
+  setPrevState = (usageOnly = false) => {
     const state = {
       deck: [],
       colOne: [],
@@ -475,7 +475,7 @@ class App extends Component {
       index: this.state.index,
       shuffled: this.state.shuffled, 
       remainingDeckIndex: this.state.remainingDeckIndex,
-      prevState: this.state.prevState.slice(),
+      prevState: [],
 
 
     }
@@ -551,26 +551,33 @@ class App extends Component {
       state.finalStack4.push(b);
     }
 
-    const prevState = this.state.prevState.slice(); 
+    const prevState = this.state.prevState.slice();
     prevState.push(state);
+    
+    state.prevState = prevState;  
 
-    return prevState; 
+    if (usageOnly){
+      return state; 
+    } else {
+      return prevState; 
+    }
   };
 
   connectedAdd = (card, column) => {
-    const prevState = this.setPrevState(); 
-    const deck = this.state.deck.slice();
-    const colOne = this.state.colOne.slice();
-    const colTwo = this.state.colTwo.slice();
-    const colThree = this.state.colThree.slice();
-    const colFour = this.state.colFour.slice();
-    const colFive = this.state.colFive.slice();
-    const colSix = this.state.colSix.slice();
-    const colSeven = this.state.colSeven.slice();
-    const finalStack1 = this.state.finalStack1.slice();
-    const finalStack2 = this.state.finalStack2.slice();
-    const finalStack3 = this.state.finalStack3.slice();
-    const finalStack4 = this.state.finalStack4.slice();
+    const prevState = this.setPrevState();
+    const state = this.setPrevState(true); 
+    const deck = state.deck.slice();
+    const colOne = state.colOne.slice();
+    const colTwo = state.colTwo.slice();
+    const colThree = state.colThree.slice();
+    const colFour = state.colFour.slice();
+    const colFive = state.colFive.slice();
+    const colSix = state.colSix.slice();
+    const colSeven = state.colSeven.slice();
+    const finalStack1 = state.finalStack1.slice();
+    const finalStack2 = state.finalStack2.slice();
+    const finalStack3 = state.finalStack3.slice();
+    const finalStack4 = state.finalStack4.slice();
     
 
     const lastOne = colOne[colOne.length - 1];
@@ -749,20 +756,21 @@ class App extends Component {
 
   doubleClick = (card, column, index = 5000) => {
     const prevState = this.setPrevState();
+    const state = this.setPrevState(true);
     let foundAPlace = false;
-    const deck = this.state.deck.slice();
-    const colOne = this.state.colOne.slice();
-    const colTwo = this.state.colTwo.slice();
-    const colThree = this.state.colThree.slice();
-    const colFour = this.state.colFour.slice();
-    const colFive = this.state.colFive.slice();
-    const colSix = this.state.colSix.slice();
-    const colSeven = this.state.colSeven.slice();
+    const deck = state.deck.slice();
+    const colOne = state.colOne.slice();
+    const colTwo = state.colTwo.slice();
+    const colThree = state.colThree.slice();
+    const colFour = state.colFour.slice();
+    const colFive = state.colFive.slice();
+    const colSix = state.colSix.slice();
+    const colSeven = state.colSeven.slice();
 
-    const finalStack1 = this.state.finalStack1.slice();
-    const finalStack2 = this.state.finalStack2.slice();
-    const finalStack3 = this.state.finalStack3.slice();
-    const finalStack4 = this.state.finalStack4.slice();
+    const finalStack1 = state.finalStack1.slice();
+    const finalStack2 = state.finalStack2.slice();
+    const finalStack3 = state.finalStack3.slice();
+    const finalStack4 = state.finalStack4.slice();
 
     const lastOne = colOne[colOne.length - 1];
     const lastTwo = colTwo[colTwo.length - 1];
@@ -970,21 +978,19 @@ class App extends Component {
 
   deckClick = () => {
     const ix = (this.state.index + 1) % this.state.deck.length;
-    const prevState = this.state.prevState.slice();
-    prevState.push(this.state);
+    const prevState = this.setPrevState();
     this.setState({ index: ix, prevState });
   };
 
   handleUndo = () => {
     //This function will handle the undo of a move.
     const prevState = this.state.prevState.slice();
+    console.log(prevState);
     
     
     if (prevState.length > 1) {
-      
       const state = prevState.pop();
       this.setState(state);
-      
     }
 
   };
@@ -994,6 +1000,7 @@ class App extends Component {
   */
 
   render() {
+    console.log(this.state.prevState)
     return (
       <div className="container">
         <Home

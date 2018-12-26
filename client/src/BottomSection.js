@@ -30,7 +30,7 @@ class BottomSection extends Component {
               onDragOver={event => this.props.handleDragOver(event, card,  this.props.name)}
               onDrop={(event) => this.props.handleOnDrop(event, card,  this.props.name)}
               onDragLeave={(event) => this.props.handleDragLeave(event, card,  this.props.name)}
-              draggable="true"
+              draggable="false"
               className={
                 id === this.props.cards.length - 1
                   ? "card lastInStack outline scene column"

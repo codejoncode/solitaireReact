@@ -54,7 +54,7 @@ class TopRow extends Component {
               <img className="backOfCard" src={back} alt="back of card" />
             </div>
             <div
-              draggable="true"
+              draggable="false"
               className="outline scene column"
               onDragStart = {this.props.handleDragStart}
               // onDrag = {this.props.handleDrag}
